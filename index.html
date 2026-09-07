@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaxCore - Tax Filing & Accounting Services</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="description"
+        content="Professional tax filing and accounting solutions designed to help individuals and businesses stay compliant, organized, and financially confident.">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Font Awesome (for X icon mostly) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+
+<body>
+
+    <!-- ==============================================
+    Header / Navbar
+    =============================================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-theme fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <i class="bi bi-calculator text-primary-brand"></i>
+                    TaxCore
+                </a>
+
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="bi bi-list fs-1 text-primary-brand"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="index.html" role="button"
+                                aria-expanded="false">
+                                Home
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item active" href="index.html">Home 1</a></li>
+                                <li><a class="dropdown-item" href="index-2.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pricing.html">Pricing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="tax-calendar.html">Tax Calendar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
+                        <button class="theme-toggle-btn" aria-label="Toggle Theme"><i
+                                class="bi bi-moon-stars"></i></button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
+                        <a href="dashboard.html" class="nav-link fw-semibold text-primary-brand" id="navDashboardBtn"
+                            style="display: none;"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+                        <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get
+                            Started</a>
+                        <a href="login.html" class="btn btn-primary-brand btn-sm px-3" id="navLogoutBtn"
+                            style="display: none;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- spacer for fixed top navbar -->
+    <div style="height: 75px;"></div>
+
+    <!-- ==============================================
+    Hero Section
+    =============================================== -->
+    <section class="section-padding bg-secondary-theme" style="padding-top: 2.75rem; padding-bottom: 4.5rem;">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="badge-soft-primary mb-3 d-inline-block">Trusted by 5,000+ Clients</span>
+                    <h1 class="display-4 fw-bold mb-4">Tax Filing Made Simple, Accurate & Stress-Free</h1>
+                    <p class="lead text-secondary mb-5">Professional tax filing and accounting solutions designed to
+                        help individuals and businesses stay compliant, organized, and financially confident.</p>
+
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="tax-calendar.html" class="btn btn-primary-brand btn-lg">Tax Calendar</a>
+                        <a href="services.html" class="btn btn-outline-brand btn-lg">Explore Services</a>
+                    </div>
+
+                    <div class="d-flex gap-4 mt-5 pt-3 border-top border-2">
+                        <div>
+                            <h4 class="fw-bold mb-0">10+</h4>
+                            <span class="text-secondary small">Years Experience</span>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-0">5k+</h4>
+                            <span class="text-secondary small">Happy Clients</span>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-0">99%</h4>
+                            <span class="text-secondary small">Filing Accuracy</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <img src="assets/images/hero.jpg" alt="Tax Accounting Workspace"
+                            class="img-fluid rounded-4 shadow-lg">
+
+                        <!-- Floating Card -->
+                        <div class="position-absolute bottom-0 start-0 translate-middle-x bg-white p-3 rounded-3 shadow d-none d-md-block"
+                            style="margin-bottom: 2rem; margin-left: 2rem;">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="bg-success bg-opacity-10 p-2 rounded text-success">
+                                    <i class="bi bi-check-circle-fill fs-4"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold text-dark">IRS Compliant</h6>
+                                    <small class="text-muted">100% Secure</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Trusted By
+    =============================================== -->
+    <section class="py-4 border-bottom">
+        <div class="container text-center">
+            <p class="text-muted small fw-semibold mb-3">TRUSTED BY LEADING BUSINESSES</p>
+            <div class="d-flex justify-content-center flex-wrap gap-4 gap-md-5 opacity-50">
+                <i class="bi bi-microsoft fs-3"></i>
+                <i class="bi bi-apple fs-3"></i>
+                <i class="bi bi-stripe fs-3"></i>
+                <i class="bi bi-paypal fs-3"></i>
+                <i class="bi bi-google fs-3"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Why Choose TaxCore
+    =============================================== -->
+    <section class="section-padding bg-secondary-theme">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>Why Choose TaxCore?</h2>
+                <p>TaxCore makes tax filing and accounting simpler with reliable support, accurate documentation, and timely financial guidance.</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- 1. Accurate Filing -->
+                <div class="col-md-4">
+                    <div class="card card-theme p-4 h-100 text-center">
+                        <div class="icon-box mx-auto">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5 class="fw-bold">Accurate Filing</h5>
+                        <p class="text-secondary small mb-0">Get reliable support to prepare your tax returns and financial records accurately.</p>
+                    </div>
+                </div>
+
+                <!-- 2. Timely Support -->
+                <div class="col-md-4">
+                    <div class="card card-theme p-4 h-100 text-center">
+                        <div class="icon-box mx-auto">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <h5 class="fw-bold">Timely Support</h5>
+                        <p class="text-secondary small mb-0">Stay on top of tax deadlines, notices, and important filing requirements.</p>
+                    </div>
+                </div>
+
+                <!-- 3. Expert Guidance -->
+                <div class="col-md-4">
+                    <div class="card card-theme p-4 h-100 text-center">
+                        <div class="icon-box mx-auto">
+                            <i class="bi bi-person-check"></i>
+                        </div>
+                        <h5 class="fw-bold">Expert Guidance</h5>
+                        <p class="text-secondary small mb-0">Get practical tax and accounting guidance for your personal or business needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Services Preview
+    =============================================== -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Professional Services</h2>
+                <p>We provide comprehensive tax and accounting solutions tailored to your unique financial needs.</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Service 1 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-theme p-4 h-100">
+                        <div class="icon-box">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h5 class="fw-bold">Income Tax Filing</h5>
+                        <p class="text-secondary small flex-grow-1">Accurate and timely tax return preparation for
+                            individuals and families, maximizing your refunds.</p>
+                        <a href="income-tax.html" class="fw-semibold text-primary-brand mt-3">Learn More <i
+                                class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-theme p-4 h-100">
+                        <div class="icon-box">
+                            <i class="bi bi-briefcase"></i>
+                        </div>
+                        <h5 class="fw-bold">Business Tax Planning</h5>
+                        <p class="text-secondary small flex-grow-1">Strategic tax planning for small to medium
+                            enterprises to minimize liabilities legally.</p>
+                        <a href="business-tax-planning.html" class="fw-semibold text-primary-brand mt-3">Learn More <i
+                                class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-theme p-4 h-100">
+                        <div class="icon-box">
+                            <i class="bi bi-receipt"></i>
+                        </div>
+                        <h5 class="fw-bold">GST Returns</h5>
+                        <p class="text-secondary small flex-grow-1">Hassle-free GST registration and monthly/quarterly
+                            return filings for your business.</p>
+                        <a href="gst-returns.html" class="fw-semibold text-primary-brand mt-3">Learn More <i
+                                class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- Service 4 -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card card-theme p-4 h-100">
+                        <div class="icon-box">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <h5 class="fw-bold">Bookkeeping</h5>
+                        <p class="text-secondary small flex-grow-1">Organized, accurate bookkeeping and accounting
+                            services to keep your financials clear.</p>
+                        <a href="bookkeeping.html" class="fw-semibold text-primary-brand mt-3">Learn More <i
+                                class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="services.html" class="btn btn-primary-brand">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    How It Works
+    =============================================== -->
+    <section class="section-padding bg-secondary-theme">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">How Our Tax Filing Process Works</h2>
+                    <p class="text-secondary mb-4">We've streamlined the entire tax filing process into 5 simple steps.
+                        You don't have to be a tax expert—just follow along.</p>
+
+                    <ul class="list-unstyled d-flex flex-column gap-4">
+                        <li class="d-flex">
+                            <div class="flex-shrink-0 me-3">
+                                <span
+                                    class="bg-primary-brand text-white rounded-circle d-flex align-items-center justify-content-center"
+                                    style="width: 35px; height: 35px; font-weight: bold;">1</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Create an Account</h6>
+                                <p class="text-secondary small mb-0">Sign up on our secure portal in less than 2
+                                    minutes.</p>
+                            </div>
+                        </li>
+                        <li class="d-flex">
+                            <div class="flex-shrink-0 me-3">
+                                <span
+                                    class="bg-primary-brand text-white rounded-circle d-flex align-items-center justify-content-center"
+                                    style="width: 35px; height: 35px; font-weight: bold;">2</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Upload Documents</h6>
+                                <p class="text-secondary small mb-0">Securely upload your W-2s, 1099s, and expense
+                                    receipts.</p>
+                            </div>
+                        </li>
+                        <li class="d-flex">
+                            <div class="flex-shrink-0 me-3">
+                                <span
+                                    class="bg-primary-brand text-white rounded-circle d-flex align-items-center justify-content-center"
+                                    style="width: 35px; height: 35px; font-weight: bold;">3</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Expert Review</h6>
+                                <p class="text-secondary small mb-0">Our certified accountants review your documents for
+                                    deductions.</p>
+                            </div>
+                        </li>
+                        <li class="d-flex">
+                            <div class="flex-shrink-0 me-3">
+                                <span
+                                    class="bg-primary-brand text-white rounded-circle d-flex align-items-center justify-content-center"
+                                    style="width: 35px; height: 35px; font-weight: bold;">4</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">File Your Taxes</h6>
+                                <p class="text-secondary small mb-0">We e-file your returns directly with the tax
+                                    authorities.</p>
+                            </div>
+                        </li>
+                        <li class="d-flex">
+                            <div class="flex-shrink-0 me-3">
+                                <span
+                                    class="bg-primary-brand text-white rounded-circle d-flex align-items-center justify-content-center"
+                                    style="width: 35px; height: 35px; font-weight: bold;">5</span>
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">Track Your Status</h6>
+                                <p class="text-secondary small mb-0">Monitor your refund or payment status directly from
+                                    the dashboard.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="p-4 bg-white rounded-4 shadow-lg border card-theme">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="fw-bold mb-0">Recent Filings</h5>
+                            <span class="badge bg-success bg-opacity-10 text-success">Updated</span>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between border-bottom py-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-file-earmark-check fs-3 text-primary-brand"></i>
+                                <div>
+                                    <h6 class="mb-0 fw-semibold text-dark">Form 1040 (2023)</h6>
+                                    <small class="text-muted">Personal Income Tax</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-success rounded-pill">Filed</span>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between border-bottom py-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-file-earmark-arrow-up fs-3 text-warning"></i>
+                                <div>
+                                    <h6 class="mb-0 fw-semibold text-dark">Q3 GST Return</h6>
+                                    <small class="text-muted">Business Tax</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-warning text-dark rounded-pill">Under Review</span>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between py-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-folder-plus fs-3 text-secondary"></i>
+                                <div>
+                                    <h6 class="mb-0 fw-semibold text-dark">W-2 Uploaded</h6>
+                                    <small class="text-muted">Documents</small>
+                                </div>
+                            </div>
+                            <span class="badge bg-secondary rounded-pill">Draft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Testimonials
+    =============================================== -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Clients Say</h2>
+                <p>Don't just take our word for it. Here's what individuals and businesses have to say about our
+                    services.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card card-theme p-4 h-100">
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="fst-italic text-secondary flex-grow-1">"I used to stress about taxes every single
+                            year. TaxCore made it incredibly easy. I just uploaded my documents to the portal, and they
+                            handled everything else. Highly recommended!"</p>
+                        <div class="d-flex align-items-center gap-3 mt-3">
+                            <img src="assets/images/testimonial-2.jpg" alt="John Doe"
+                                class="rounded-circle object-fit-cover" width="40" height="40">
+                            <div>
+                                <h6 class="mb-0 fw-bold">John Doe</h6>
+                                <small class="text-muted">Freelance Designer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-theme p-4 h-100">
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <p class="fst-italic text-secondary flex-grow-1">"Running a small retail business means I have
+                            very little time for bookkeeping. Their team keeps my financials spotless and files my
+                            quarterly taxes accurately."</p>
+                        <div class="d-flex align-items-center gap-3 mt-3">
+                            <img src="assets/images/testimonial-1.jpg" alt="Client"
+                                class="rounded-circle object-fit-cover" width="40" height="40">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Sarah Jenkins</h6>
+                                <small class="text-muted">Owner, The Daily Grind</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card card-theme p-4 h-100">
+                        <div class="text-warning mb-3">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                        </div>
+                        <p class="fst-italic text-secondary flex-grow-1">"The dashboard is fantastic. I can see exactly
+                            where my return is in the process, and their accountants were very quick to answer my
+                            questions."</p>
+                        <div class="d-flex align-items-center gap-3 mt-3">
+                            <img src="assets/images/testimonial-3.jpg" alt="Michael Klein"
+                                class="rounded-circle object-fit-cover" width="40" height="40">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Michael Klein</h6>
+                                <small class="text-muted">Software Engineer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    CTA Section
+    =============================================== -->
+    <section class="py-5 bg-primary-brand text-white">
+        <div class="container text-center py-4">
+            <h2 class="fw-bold mb-3 text-white">Ready for a Stress-Free Tax Season?</h2>
+            <p class="lead mb-4 mx-auto" style="max-width: 600px; color: rgba(255,255,255,0.9);">Join thousands of
+                satisfied clients who trust us with their financial compliance.</p>
+            <a href="contact.html" class="btn btn-light btn-lg px-5 rounded-pill fw-bold text-primary-brand">Contact
+                Us</a>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Footer
+    =============================================== -->
+    <footer class="footer-theme">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3 text-white fs-4 fw-bold"
+                        href="index.html">
+                        <i class="bi bi-calculator text-success"></i>
+                        TaxCore
+                    </a>
+                    <p class="text-muted mb-4 pe-lg-4">Professional tax filing, bookkeeping, and accounting solutions
+                        designed to help individuals and businesses thrive financially.</p>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i
+                                class="bi bi-linkedin"></i></a>
+                        <a href="https://www.x.com" target="_blank" rel="noopener noreferrer"
+                            aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i
+                                class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i
+                                class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="index.html" class="text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-decoration-none">About Us</a></li>
+                        <li><a href="pricing.html" class="text-decoration-none">Pricing</a></li>
+                        <li><a href="tax-calendar.html" class="text-decoration-none">Tax Calendar</a></li>
+                        <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="income-tax.html" class="text-decoration-none">Income Tax</a></li>
+                        <li><a href="gst-returns.html" class="text-decoration-none">GST Returns</a></li>
+                        <li><a href="bookkeeping.html" class="text-decoration-none">Bookkeeping</a></li>
+                        <li><a href="payroll-accounting.html" class="text-decoration-none">Payroll</a></li>
+                        <li><a href="audit-support.html" class="text-decoration-none">Audit Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-title">Subscribe to Newsletter</h5>
+                    <p class="text-muted mb-3">Get the latest tax tips and updates directly in your inbox.</p>
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control bg-dark border-secondary text-white"
+                            placeholder="Email Address" required>
+                        <button type="submit" class="btn btn-primary-brand">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row border-top border-secondary mt-5 pt-4">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2026 TaxCore. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="privacy-policy.html" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                    <a href="terms.html" class="text-muted text-decoration-none">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+</body>
+
+</html>

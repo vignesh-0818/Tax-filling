@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+<body class="bg-secondary-theme full-height-page overflow-hidden">
+
+    <div class="container d-flex flex-column align-items-center justify-content-center h-100 text-center py-4">
+        
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2 mb-5" href="index.html">
+            <i class="bi bi-calculator text-primary-brand fs-1"></i>
+            <span class="display-6 fw-bold text-dark">TaxCore</span>
+        </a>
+
+        <h1 class="fw-bold mb-3">Something Awesome is Coming</h1>
+        <p class="text-secondary lead mb-5" style="max-width: 600px;">We're currently working hard on launching a revolutionary new tool for tax and accounting. Stay tuned!</p>
+        
+        <!-- Countdown -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4 mb-5">
+            <div class="card card-theme border-0 shadow-sm p-3 p-md-4 text-center rounded-4" style="min-width: 90px;">
+                <h2 class="fw-bold text-primary-brand mb-0" id="days">00</h2>
+                <small class="text-secondary text-uppercase fw-semibold" style="font-size: 0.75rem;">Days</small>
+            </div>
+            <div class="card card-theme border-0 shadow-sm p-3 p-md-4 text-center rounded-4" style="min-width: 90px;">
+                <h2 class="fw-bold text-primary-brand mb-0" id="hours">00</h2>
+                <small class="text-secondary text-uppercase fw-semibold" style="font-size: 0.75rem;">Hours</small>
+            </div>
+            <div class="card card-theme border-0 shadow-sm p-3 p-md-4 text-center rounded-4" style="min-width: 90px;">
+                <h2 class="fw-bold text-primary-brand mb-0" id="minutes">00</h2>
+                <small class="text-secondary text-uppercase fw-semibold" style="font-size: 0.75rem;">Minutes</small>
+            </div>
+            <div class="card card-theme border-0 shadow-sm p-3 p-md-4 text-center rounded-4" style="min-width: 90px;">
+                <h2 class="fw-bold text-primary-brand mb-0" id="seconds">00</h2>
+                <small class="text-secondary text-uppercase fw-semibold" style="font-size: 0.75rem;">Seconds</small>
+            </div>
+        </div>
+        
+        <!-- Email Subscription -->
+        <div class="w-100 mb-5" style="max-width: 500px;">
+            <form class="newsletter-form input-group shadow-sm">
+                <input type="email" class="form-control form-control-theme p-3 border-end-0" placeholder="Enter your email to get notified" required>
+                <button class="btn btn-primary-brand px-4 fw-bold" type="submit">Notify Me</button>
+            </form>
+        </div>
+        
+        <!-- Socials -->
+        <div class="d-flex gap-3 social-icons justify-content-center">
+            <a href="https://linkedin.com" target="_blank" class="text-dark bg-white shadow-sm"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" class="text-dark bg-white shadow-sm"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://facebook.com" target="_blank" class="text-dark bg-white shadow-sm"><i class="bi bi-facebook"></i></a>
+            <a href="https://instagram.com" target="_blank" class="text-dark bg-white shadow-sm"><i class="bi bi-instagram"></i></a>
+        </div>
+    </div>
+
+    <!-- Theme Toggle (Floating) -->
+    <div class="position-fixed bottom-0 end-0 p-3">
+        <button class="btn btn-light rounded-circle shadow-sm theme-toggle-btn border d-flex justify-content-center align-items-center" style="width: 45px; height: 45px;">
+            <i class="bi bi-moon-stars"></i>
+        </button>
+    </div>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Countdown Timer Logic
+        const countDownDate = new Date().getTime() + (15 * 24 * 60 * 60 * 1000); // 15 days from now
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
+

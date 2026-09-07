@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+<body>
+
+    <!-- ==============================================
+    Header / Navbar
+    =============================================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-theme fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <i class="bi bi-calculator text-primary-brand"></i>
+                    TaxCore
+                </a>
+                
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <i class="bi bi-list fs-1 text-primary-brand"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown">Home</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+                                <li><a class="dropdown-item" href="index-2.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                        <li class="nav-item"><a class="nav-link" href="tax-calendar.html">Tax Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                    
+                    <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
+                        <button class="theme-toggle-btn" aria-label="Toggle Theme"><i class="bi bi-moon-stars"></i></button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
+                        <a href="dashboard.html" class="nav-link fw-semibold text-primary-brand" id="navDashboardBtn" style="display: none;"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+                        <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get Started</a>
+                        <a href="login.html" class="btn btn-primary-brand btn-sm px-3" id="navLogoutBtn" style="display: none;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <!-- ==============================================
+    Breadcrumb & Hero
+    =============================================== -->
+    <section class="page-hero hero-income-tax" style="background-image: url('assets/images/hero-income-tax.jpg');">
+        <div class="page-hero-overlay"></div>
+        <div class="container page-hero-content">
+            <h1 id="service-hero-title">Income Tax Filing</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="mx-2">/</span>
+                <a href="services.html">Services</a>
+                <span class="mx-2">/</span>
+                <span class="active" id="service-breadcrumb-active">Income Tax Filing</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Service Details & Features
+    =============================================== -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="service-detail-layout">
+                
+                <!-- Main Service Content -->
+                <div class="service-main-content">
+                    <img id="service-img" src="assets/images/service-income-tax.jpg" alt="Income Tax Filing" class="img-fluid rounded-4 shadow-sm mb-4 w-100" style="max-height: 400px; object-fit: cover;">
+                    
+                    <h2 id="service-title-full" class="fw-bold mb-3">Professional Income Tax Preparation</h2>
+                    <p id="service-desc-lead" class="text-secondary lead mb-3">Our Income Tax Filing service takes the burden of tax season off your shoulders. We ensure your returns are accurate, filed on time, and optimized for maximum refunds.</p>
+                    <p id="service-desc-secondary" class="text-secondary mb-4">Whether you're an individual with a simple W-2, a freelancer with 1099s, or an investor with complex capital gains, our certified accountants know how to navigate the tax code to your advantage.</p>
+                    
+                    <!-- Key Benefits -->
+                    <h4 class="fw-bold mt-5 mb-3">Key Benefits</h4>
+                    <div class="row g-3 mb-5" id="service-benefits-grid">
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3 align-items-start bg-secondary-theme p-3 rounded-3 h-100">
+                                <i class="bi bi-shield-check text-primary-brand fs-4"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">100% Accuracy Guarantee</h6>
+                                    <p class="text-secondary small mb-0">We back our work. If we make an error, we pay the penalty.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3 align-items-start bg-secondary-theme p-3 rounded-3 h-100">
+                                <i class="bi bi-graph-up-arrow text-primary-brand fs-4"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Maximum Refund</h6>
+                                    <p class="text-secondary small mb-0">We scan for hundreds of deductions to get your max refund.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3 align-items-start bg-secondary-theme p-3 rounded-3 h-100">
+                                <i class="bi bi-clock-history text-primary-brand fs-4"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Save Time</h6>
+                                    <p class="text-secondary small mb-0">No appointments needed. Upload files online in minutes.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-3 align-items-start bg-secondary-theme p-3 rounded-3 h-100">
+                                <i class="bi bi-file-earmark-lock text-primary-brand fs-4"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Bank-Level Security</h6>
+                                    <p class="text-secondary small mb-0">Your financial documents are encrypted and secure.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How the Process Works -->
+                    <h4 class="fw-bold mb-3">How the Process Works</h4>
+                    <div class="border-start border-primary-brand border-2 ms-2 ps-4 position-relative mb-5">
+                        <div class="mb-4 position-relative">
+                            <div class="position-absolute bg-primary-brand rounded-circle border border-white border-2" style="width: 16px; height: 16px; left: -1.6rem; top: 0.3rem;"></div>
+                            <h6 class="fw-bold">1. Upload Documents</h6>
+                            <p class="text-secondary small">Securely upload your W-2s, 1099s, receipts, and previous returns to our client dashboard.</p>
+                        </div>
+                        <div class="mb-4 position-relative">
+                            <div class="position-absolute bg-primary-brand rounded-circle border border-white border-2" style="width: 16px; height: 16px; left: -1.6rem; top: 0.3rem;"></div>
+                            <h6 class="fw-bold">2. Expert Preparation</h6>
+                            <p class="text-secondary small">Your dedicated accountant prepares your return and identifies every possible deduction.</p>
+                        </div>
+                        <div class="mb-4 position-relative">
+                            <div class="position-absolute bg-primary-brand rounded-circle border border-white border-2" style="width: 16px; height: 16px; left: -1.6rem; top: 0.3rem;"></div>
+                            <h6 class="fw-bold">3. Your Review & Approval</h6>
+                            <p class="text-secondary small">Review the prepared return. Ask any questions before providing an e-signature.</p>
+                        </div>
+                        <div class="position-relative">
+                            <div class="position-absolute bg-primary-brand rounded-circle border border-white border-2" style="width: 16px; height: 16px; left: -1.6rem; top: 0.3rem;"></div>
+                            <h6 class="fw-bold">4. E-Filing & Status Tracking</h6>
+                            <p class="text-secondary small">We e-file with the IRS/State. You can track your refund status directly from your dashboard.</p>
+                        </div>
+                    </div>
+
+                    <!-- Frequently Asked Questions (Inside Main Service Content) -->
+                    <div class="service-faq-wrapper mt-5 pt-4 border-top">
+                        <h4 class="fw-bold mb-4">Frequently Asked Questions</h4>
+                        <div class="accordion" id="faqAccordion">
+                            <div class="accordion-item faq-item mb-3 border rounded">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+                                        <span class="faq-question">What documents do I need to provide?</span>
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body faq-answer text-secondary">
+                                        Generally, you'll need a government-issued ID, last year's tax return, W-2s, 1099s, records of any deductions or credits, and bank account information for direct deposit.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item faq-item mb-3 border rounded">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                        <span class="faq-question">How long does the process take?</span>
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body faq-answer text-secondary">
+                                        Once all documents are uploaded, our experts typically prepare your return within 48-72 hours.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item faq-item mb-3 border rounded">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                        <span class="faq-question">Can you help if I am being audited?</span>
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body faq-answer text-secondary">
+                                        Yes, we offer complete audit representation. If you are audited for a return we prepared, we will assist you through the entire process.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Service Sidebar (Right Column) -->
+                <aside class="service-sidebar">
+                    
+                    <!-- Pricing Card -->
+                    <div class="card card-theme service-sidebar-card pricing-sidebar-card">
+                        <h5 class="fw-bold mb-3">Pricing</h5>
+                        <div class="mb-3">
+                            <span class="text-secondary small d-block">Starting from</span>
+                            <span class="fs-2 fw-bold text-primary-brand" id="sidebar-price">$99</span>
+                            <span class="text-secondary small">/ service</span>
+                        </div>
+                        <p class="text-secondary small mb-4" id="sidebar-pricing-desc">
+                            For individuals, businesses and startups looking for accurate, compliant, and stress-free filings.
+                        </p>
+                        <a href="pricing.html" class="btn btn-primary-brand w-100">View Full Pricing</a>
+                    </div>
+                    
+                    <!-- Related Services Card -->
+                    <div class="card card-theme service-sidebar-card related-services-card">
+                        <h5 class="fw-bold mb-4">Related Services</h5>
+                        <div class="related-services-list" id="related-services-list">
+                            <a href="service-details.html?service=bookkeeping" class="related-service-link" data-service="bookkeeping">
+                                <span class="related-service-arrow">→</span>
+                                <span class="related-service-text">Bookkeeping</span>
+                            </a>
+                            <a href="service-details.html?service=audit-support" class="related-service-link" data-service="audit-support">
+                                <span class="related-service-arrow">→</span>
+                                <span class="related-service-text">Audit Support</span>
+                            </a>
+                            <a href="service-details.html?service=business-tax-planning" class="related-service-link" data-service="business-tax-planning">
+                                <span class="related-service-arrow">→</span>
+                                <span class="related-service-text">Business Tax Planning</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    CTA Section
+    =============================================== -->
+    <section class="py-5 bg-primary-brand text-white">
+        <div class="container text-center py-4">
+            <h2 class="fw-bold mb-3 text-white">Ready to File Your Taxes?</h2>
+            <p class="lead mb-4 mx-auto" style="max-width: 600px; color: rgba(255,255,255,0.9);">Create your account today and let our experts handle the rest.</p>
+            <a href="register.html" class="btn btn-light btn-lg px-5 rounded-pill fw-bold text-primary-brand">Get Started</a>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Footer
+    =============================================== -->
+    <footer class="footer-theme">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3 text-white fs-4 fw-bold" href="index.html">
+                        <i class="bi bi-calculator text-success"></i>
+                        TaxCore
+                    </a>
+                    <p class="text-muted mb-4 pe-lg-4">Professional tax filing, bookkeeping, and accounting solutions designed to help individuals and businesses thrive financially.</p>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="index.html" class="text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-decoration-none">About Us</a></li>
+                        <li><a href="pricing.html" class="text-decoration-none">Pricing</a></li>
+                        <li><a href="tax-calendar.html" class="text-decoration-none">Tax Calendar</a></li>
+                        <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="income-tax.html" class="text-decoration-none">Income Tax</a></li>
+                        <li><a href="gst-returns.html" class="text-decoration-none">GST Returns</a></li>
+                        <li><a href="bookkeeping.html" class="text-decoration-none">Bookkeeping</a></li>
+                        <li><a href="payroll-accounting.html" class="text-decoration-none">Payroll</a></li>
+                        <li><a href="audit-support.html" class="text-decoration-none">Audit Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-title">Subscribe to Newsletter</h5>
+                    <p class="text-muted mb-3">Get the latest tax tips and updates directly in your inbox.</p>
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control bg-dark border-secondary text-white" placeholder="Email Address" required>
+                        <button type="submit" class="btn btn-primary-brand">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="row border-top border-secondary mt-5 pt-4">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2026 TaxCore. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="privacy-policy.html" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                    <a href="terms.html" class="text-muted text-decoration-none">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/services-data.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+<body>
+
+    <!-- ==============================================
+    Header / Navbar
+    =============================================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-theme fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <i class="bi bi-calculator text-primary-brand"></i>
+                    TaxCore
+                </a>
+                
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <i class="bi bi-list fs-1 text-primary-brand"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown">Home</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+                                <li><a class="dropdown-item" href="index-2.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="pricing.html">Pricing</a></li>
+                        <li class="nav-item"><a class="nav-link" href="tax-calendar.html">Tax Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                    
+                    <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
+                        <button class="theme-toggle-btn" aria-label="Toggle Theme"><i class="bi bi-moon-stars"></i></button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
+                        <a href="dashboard.html" class="nav-link fw-semibold text-primary-brand" id="navDashboardBtn" style="display: none;"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+                        <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get Started</a>
+                        <a href="login.html" class="btn btn-primary-brand btn-sm px-3" id="navLogoutBtn" style="display: none;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==============================================
+    Breadcrumb & Hero
+    =============================================== -->
+    <section class="page-hero pricing-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="container page-hero-content">
+            <h1>Transparent Pricing</h1>
+            <div class="breadcrumb mb-4">
+                <a href="index.html">Home</a>
+                <span class="mx-2">/</span>
+                <span>Pricing</span>
+            </div>
+            
+            <div class="d-flex justify-content-center align-items-center gap-3 text-white">
+                <span class="fw-bold">Monthly</span>
+                <div class="form-check form-switch fs-4 mb-0">
+                    <input class="form-check-input" type="checkbox" role="switch" id="pricing-toggle">
+                </div>
+                <span class="fw-bold">Yearly <span class="badge bg-success ms-1 small fs-6">-20%</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Pricing Cards
+    =============================================== -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                
+                <!-- Plan 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-theme p-4 h-100 position-relative text-center">
+                        <h4 class="fw-bold mt-2">BASIC</h4>
+                        <p class="text-secondary small mb-4">For Individuals (W-2)</p>
+                        
+                        <div class="mb-4">
+                            <span class="fs-1 fw-bold">$<span class="price-amount" data-monthly="99" data-yearly="950">99</span></span>
+                            <span class="text-secondary price-period">/month</span>
+                        </div>
+                        
+                        <ul class="list-unstyled text-start mb-4 flex-grow-1">
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Federal & State Filing</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Max Refund Guarantee</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> W-2 & Standard Deductions</li>
+                            <li class="mb-3 text-muted"><i class="bi bi-x-circle me-2"></i> <del>Audit Support</del></li>
+                            <li class="mb-3 text-muted"><i class="bi bi-x-circle me-2"></i> <del>Priority Email Support</del></li>
+                        </ul>
+                        
+                        <a href="contact.html" class="btn btn-outline-brand w-100">Choose Basic</a>
+                    </div>
+                </div>
+                
+                <!-- Plan 2 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-theme p-4 h-100 position-relative text-center border-primary-brand border-2">
+                        <div class="badge bg-primary-brand text-white position-absolute top-0 start-50 translate-middle px-3 py-2 rounded-pill">Most Popular</div>
+                        <h4 class="fw-bold mt-2">PROFESSIONAL</h4>
+                        <p class="text-secondary small mb-4">For Freelancers (1099)</p>
+                        
+                        <div class="mb-4">
+                            <span class="fs-1 fw-bold">$<span class="price-amount" data-monthly="199" data-yearly="1900">199</span></span>
+                            <span class="text-secondary price-period">/month</span>
+                        </div>
+                        
+                        <ul class="list-unstyled text-start mb-4 flex-grow-1">
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Everything in Basic</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> 1099 & Schedule C</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Freelance Expense Optimization</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Basic Audit Support</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Priority Email Support</li>
+                        </ul>
+                        
+                        <a href="contact.html" class="btn btn-primary-brand w-100">Choose Professional</a>
+                    </div>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="card card-theme p-4 h-100 position-relative text-center">
+                        <h4 class="fw-bold mt-2">BUSINESS</h4>
+                        <p class="text-secondary small mb-4">For Small Businesses</p>
+                        
+                        <div class="mb-4">
+                            <span class="fs-1 fw-bold">$<span class="price-amount" data-monthly="399" data-yearly="3830">399</span></span>
+                            <span class="text-secondary price-period">/month</span>
+                        </div>
+                        
+                        <ul class="list-unstyled text-start mb-4 flex-grow-1">
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Everything in Professional</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> LLC, S-Corp, C-Corp</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Monthly Bookkeeping</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Full Audit Defense</li>
+                            <li class="mb-3"><i class="bi bi-check-circle-fill text-primary-brand me-2"></i> Dedicated Account Manager</li>
+                        </ul>
+                        
+                        <a href="contact.html" class="btn btn-outline-brand w-100">Choose Business</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Comparison Table
+    =============================================== -->
+    <section class="section-padding bg-secondary-theme">
+        <div class="container">
+            <div class="section-title">
+                <h2>Compare Plans</h2>
+                <p>See exactly what's included in each package.</p>
+            </div>
+            
+            <div class="table-responsive rounded shadow bg-white dark-mode-table-wrapper border">
+                <table class="table table-hover align-middle mb-0 text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="text-start p-4 w-25">Features</th>
+                            <th class="p-4">Basic</th>
+                            <th class="p-4 border-start border-end border-primary-brand bg-primary-brand text-white">Professional</th>
+                            <th class="p-4">Business</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-start p-3 fw-semibold">Federal Tax Return</td>
+                            <td><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                            <td class="border-start border-end border-primary-brand bg-primary bg-opacity-10"><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                            <td><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start p-3 fw-semibold">State Tax Return</td>
+                            <td><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                            <td class="border-start border-end border-primary-brand bg-primary bg-opacity-10"><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                            <td><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start p-3 fw-semibold">W-2 Income</td>
+                            <td><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                            <td class="border-start border-end border-primary-brand bg-primary bg-opacity-10"><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                            <td><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start p-3 fw-semibold">1099 / Freelance Income</td>
+                            <td><i class="bi bi-dash text-muted fs-4"></i></td>
+                            <td class="border-start border-end border-primary-brand bg-primary bg-opacity-10"><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                            <td><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start p-3 fw-semibold">Corporate Filings</td>
+                            <td><i class="bi bi-dash text-muted fs-4"></i></td>
+                            <td class="border-start border-end border-primary-brand bg-primary bg-opacity-10"><i class="bi bi-dash text-muted fs-4"></i></td>
+                            <td><i class="bi bi-check text-primary-brand fs-4"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start p-3 fw-semibold">Audit Support</td>
+                            <td><i class="bi bi-dash text-muted fs-4"></i></td>
+                            <td class="border-start border-end border-primary-brand bg-primary bg-opacity-10">Basic</td>
+                            <td>Full Defense</td>
+                        </tr>
+                        <tr>
+                            <td class="text-start p-3 fw-semibold">Bookkeeping</td>
+                            <td><i class="bi bi-dash text-muted fs-4"></i></td>
+                            <td class="border-start border-end border-primary-brand bg-primary bg-opacity-10"><i class="bi bi-dash text-muted fs-4"></i></td>
+                            <td>Included</td>
+                        </tr>
+                        <tr>
+                            <td class="text-start p-4 border-bottom-0"></td>
+                            <td class="p-4 border-bottom-0"><a href="contact.html" class="btn btn-outline-brand btn-sm w-100">Select</a></td>
+                            <td class="p-4 border-start border-end border-bottom-0 border-primary-brand bg-primary-brand"><a href="contact.html" class="btn btn-light btn-sm w-100 text-primary-brand fw-bold">Select</a></td>
+                            <td class="p-4 border-bottom-0"><a href="contact.html" class="btn btn-outline-brand btn-sm w-100">Select</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pricing page dark mode fixes -->
+            <style>
+                /* ===== TABLE: kill all white backgrounds ===== */
+                .dark-mode .dark-mode-table-wrapper {
+                    background-color: var(--card-bg) !important;
+                    border-color: var(--border-color) !important;
+                }
+                /* table itself */
+                .dark-mode .dark-mode-table-wrapper .table {
+                    --bs-table-bg: transparent;
+                    --bs-table-color: var(--text-primary);
+                    --bs-table-hover-bg: rgba(255,255,255,0.04);
+                    color: var(--text-primary);
+                    background-color: transparent;
+                }
+                /* thead light row */
+                .dark-mode .dark-mode-table-wrapper .table-light,
+                .dark-mode .dark-mode-table-wrapper thead tr,
+                .dark-mode .dark-mode-table-wrapper thead th {
+                    --bs-table-bg: var(--bg-tertiary) !important;
+                    background-color: var(--bg-tertiary) !important;
+                    color: var(--text-primary) !important;
+                    border-color: var(--border-color) !important;
+                }
+                /* tbody rows and cells */
+                .dark-mode .dark-mode-table-wrapper tbody tr,
+                .dark-mode .dark-mode-table-wrapper tbody td {
+                    background-color: var(--card-bg) !important;
+                    color: var(--text-primary) !important;
+                    border-color: var(--border-color) !important;
+                }
+                /* alternating hover rows — kill Bootstrap's white flash */
+                .dark-mode .dark-mode-table-wrapper .table-hover tbody tr:hover td {
+                    background-color: rgba(255,255,255,0.05) !important;
+                }
+                /* Professional column mid-green tint */
+                .dark-mode .dark-mode-table-wrapper .bg-primary.bg-opacity-10 {
+                    background-color: rgba(34, 197, 94, 0.10) !important;
+                }
+                /* bg-white on the wrapper div itself */
+                .dark-mode .bg-white {
+                    background-color: var(--card-bg) !important;
+                }
+
+                /* ===== PRICING CARDS: make list text visible in dark mode ===== */
+                .dark-mode .card-theme .list-unstyled li {
+                    color: var(--text-secondary) !important;
+                }
+                /* keep crossed-out items clearly muted */
+                .dark-mode .card-theme .list-unstyled li.text-muted {
+                    color: var(--text-muted) !important;
+                    opacity: 0.75;
+                }
+                /* price number visible */
+                .dark-mode .card-theme .fs-1.fw-bold {
+                    color: var(--text-primary) !important;
+                }
+                /* card headings */
+                .dark-mode .card-theme h4.fw-bold {
+                    color: var(--text-primary) !important;
+                }
+            </style>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Custom Plan CTA
+    =============================================== -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card card-theme p-5 text-center">
+                        <i class="bi bi-buildings text-primary-brand display-4 mb-3"></i>
+                        <h3 class="fw-bold">Need a Custom Enterprise Plan?</h3>
+                        <p class="text-secondary mb-4">If you have a large corporation, multiple entities, or complex trust and estate needs, we can create a custom package tailored specifically for you.</p>
+                        <a href="contact.html" class="btn btn-primary-brand btn-lg">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Footer
+    =============================================== -->
+    <footer class="footer-theme">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3 text-white fs-4 fw-bold" href="index.html">
+                        <i class="bi bi-calculator text-success"></i>
+                        TaxCore
+                    </a>
+                    <p class="text-muted mb-4 pe-lg-4">Professional tax filing, bookkeeping, and accounting solutions designed to help individuals and businesses thrive financially.</p>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="index.html" class="text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-decoration-none">About Us</a></li>
+                        <li><a href="pricing.html" class="text-decoration-none text-white fw-bold">Pricing</a></li>
+                        <li><a href="tax-calendar.html" class="text-decoration-none">Tax Calendar</a></li>
+                        <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="income-tax.html" class="text-decoration-none">Income Tax</a></li>
+                        <li><a href="gst-returns.html" class="text-decoration-none">GST Returns</a></li>
+                        <li><a href="bookkeeping.html" class="text-decoration-none">Bookkeeping</a></li>
+                        <li><a href="payroll-accounting.html" class="text-decoration-none">Payroll</a></li>
+                        <li><a href="audit-support.html" class="text-decoration-none">Audit Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-title">Subscribe to Newsletter</h5>
+                    <p class="text-muted mb-3">Get the latest tax tips and updates directly in your inbox.</p>
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control bg-dark border-secondary text-white" placeholder="Email Address" required>
+                        <button type="submit" class="btn btn-primary-brand">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="row border-top border-secondary mt-5 pt-4">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2026 TaxCore. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="privacy-policy.html" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                    <a href="terms.html" class="text-muted text-decoration-none">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+</body>
+</html>
+

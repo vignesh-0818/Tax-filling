@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/dark-mode.css">
+<link rel="stylesheet" href="css/rtl.css">
+
+<style>
+/* ===== LOGIN PAGE DEDICATED STYLES ===== */
+
+.login-page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+    background: var(--bg-secondary, #f1f5f9);
+}
+
+/* Logo */
+.login-logo-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 28px;
+}
+
+.login-logo-link i {
+    font-size: 2rem;
+    color: var(--primary-brand, #22c55e);
+}
+
+.login-logo-link span {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--text-primary, #0f172a);
+    line-height: 1;
+}
+
+/* Card */
+.login-card {
+    background: var(--bg-primary, #ffffff);
+    border-radius: 20px;
+    padding: 40px 40px 32px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    border: 1px solid var(--border-color, #e2e8f0);
+}
+
+/* Heading */
+.login-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 800;
+    color: var(--text-primary, #0f172a);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.login-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #64748b);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* Tabs */
+.auth-tab-row {
+    display: flex;
+    background: var(--bg-secondary, #f1f5f9);
+    border-radius: 10px;
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 28px;
+}
+
+.auth-tab-btn {
+    flex: 1;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-secondary, #64748b);
+    transition: all 0.2s;
+}
+
+.auth-tab-btn.active {
+    background: var(--primary-brand, #22c55e);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(34,197,94,0.3);
+}
+
+.auth-tab-btn:not(.active):hover {
+    background: var(--bg-primary, #fff);
+    color: var(--text-primary, #0f172a);
+}
+
+/* Form labels */
+.login-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary, #0f172a);
+    margin-bottom: 7px;
+}
+
+/* Input wrapper — single unified container */
+.lf-input-wrap {
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.lf-input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    color: var(--text-secondary, #64748b);
+    font-size: 0.95rem;
+    z-index: 2;
+}
+
+.lf-input {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px 0 44px;
+    box-sizing: border-box;
+    border: 1.5px solid var(--border-color, #e2e8f0);
+    border-radius: 10px;
+    font-size: 0.925rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary, #0f172a);
+    background: var(--bg-primary, #ffffff);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lf-input::placeholder {
+    color: var(--text-secondary, #94a3b8);
+}
+
+.lf-input:focus {
+    border-color: var(--primary-brand, #22c55e);
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.12);
+}
+
+.lf-input.is-invalid {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.10);
+}
+
+/* password input needs right padding for eye icon */
+.lf-input.has-toggle {
+    padding-right: 46px;
+}
+
+/* Eye toggle button */
+.lf-eye-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary, #64748b);
+    font-size: 1rem;
+    padding: 0;
+    border-radius: 4px;
+    transition: color 0.2s;
+    z-index: 2;
+}
+
+.lf-eye-btn:hover { color: var(--primary-brand, #22c55e); }
+
+/* Error text */
+.lf-error {
+    font-size: 0.78rem;
+    color: #ef4444;
+    margin-top: -10px;
+    margin-bottom: 12px;
+    display: none;
+}
+
+.lf-error.show { display: block; }
+
+/* Remember Me + Forgot */
+.lf-row-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.lf-check-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.85rem;
+    color: var(--text-secondary, #64748b);
+    cursor: pointer;
+    user-select: none;
+}
+
+.lf-check-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-brand, #22c55e);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.lf-forgot {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-brand, #22c55e);
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.lf-forgot:hover { text-decoration: underline; }
+
+/* Login button */
+.lf-submit-btn {
+    display: block;
+    width: 100%;
+    height: 52px;
+    background: var(--primary-brand, #22c55e);
+    color: #ffffff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.3px;
+    margin-bottom: 24px;
+}
+
+.lf-submit-btn:hover { background: #16a34a; }
+.lf-submit-btn:active { transform: scale(0.99); }
+
+/* Divider */
+.lf-divider {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lf-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--border-color, #e2e8f0);
+}
+
+.lf-divider span {
+    position: relative;
+    background: var(--bg-primary, #fff);
+    padding: 0 12px;
+    font-size: 0.8rem;
+    color: var(--text-secondary, #94a3b8);
+    font-weight: 500;
+}
+
+/* Social buttons */
+.lf-social-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.lf-social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 46px;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lf-google-btn {
+    background: #ffffff;
+    border: 1.5px solid var(--border-color, #e2e8f0);
+    color: var(--text-primary, #374151);
+}
+
+.lf-google-btn:hover { background: #f8fafc; border-color: #cbd5e1; }
+
+.lf-apple-btn {
+    background: #0f172a;
+    border: 1.5px solid #0f172a;
+    color: #ffffff;
+}
+
+.lf-apple-btn:hover { background: #1e293b; border-color: #1e293b; }
+
+/* Sign Up area */
+.lf-signup-area {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color, #e2e8f0);
+    font-size: 0.875rem;
+    color: var(--text-secondary, #64748b);
+}
+
+.lf-signup-area a {
+    color: var(--primary-brand, #22c55e);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.lf-signup-area a:hover { text-decoration: underline; }
+
+/* Forgot Password Modal */
+.lf-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    display: none;
+}
+
+.lf-modal-backdrop.show { display: flex; }
+
+.lf-modal {
+    background: var(--bg-primary, #fff);
+    border-radius: 16px;
+    padding: 32px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+    animation: lfModalIn 0.2s ease;
+}
+
+@keyframes lfModalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.lf-modal h5 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary, #0f172a);
+    margin-bottom: 8px;
+}
+
+.lf-modal p {
+    font-size: 0.875rem;
+    color: var(--text-secondary, #64748b);
+    margin-bottom: 20px;
+}
+
+.lf-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+/* Toast */
+.lf-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #0f172a;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-left: 4px solid #22c55e;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    z-index: 9999;
+    display: none;
+    max-width: 320px;
+}
+
+.lf-toast.show { display: block; animation: lfToastIn 0.3s ease; }
+
+@keyframes lfToastIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Top controls handled by .auth-top-controls in style.css */
+
+/* DARK MODE OVERRIDES FOR LOGIN */
+body.dark-mode .login-logo-link span { color: #f1f5f9; }
+body.dark-mode .login-card { background: #1e293b; border-color: rgba(255,255,255,0.08); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+body.dark-mode .login-title { color: #f1f5f9; }
+body.dark-mode .login-subtitle { color: #94a3b8; }
+body.dark-mode .auth-tab-row { background: #0f172a; }
+body.dark-mode .auth-tab-btn:not(.active) { color: #94a3b8; }
+body.dark-mode .auth-tab-btn:not(.active):hover { background: #334155; color: #f1f5f9; }
+body.dark-mode .login-label { color: #cbd5e1; }
+body.dark-mode .lf-input { background: #0f172a; border-color: #334155; color: #f1f5f9; }
+body.dark-mode .lf-input::placeholder { color: #475569; }
+body.dark-mode .lf-input:focus { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.15); }
+body.dark-mode .lf-input-icon { color: #64748b; }
+body.dark-mode .lf-eye-btn { color: #64748b; }
+body.dark-mode .lf-eye-btn:hover { color: #22c55e; }
+body.dark-mode .lf-check-label { color: #94a3b8; }
+body.dark-mode .lf-divider::before { background: rgba(255,255,255,0.1); }
+body.dark-mode .lf-divider span { background: #1e293b; color: #64748b; }
+body.dark-mode .lf-google-btn { background: #0f172a; border-color: #334155; color: #cbd5e1; }
+body.dark-mode .lf-google-btn:hover { background: #334155; }
+body.dark-mode .lf-apple-btn { background: #334155; border-color: #475569; }
+body.dark-mode .lf-signup-area { border-color: rgba(255,255,255,0.08); color: #94a3b8; }
+body.dark-mode .lf-modal { background: #1e293b; }
+body.dark-mode .lf-modal h5 { color: #f1f5f9; }
+body.dark-mode .lf-modal p { color: #94a3b8; }
+
+/* Responsive */
+@media (max-width: 520px) {
+    .login-card { padding: 28px 20px 24px; }
+    .lf-social-row { flex-direction: column; }
+}
+
+@media (max-width: 360px) {
+    .login-logo-link span { font-size: 1.4rem; }
+    .login-card { padding: 24px 16px 20px; }
+}
+</style>
+</head>
+<body class="bg-secondary-theme">
+
+<!-- Forgot Password Modal -->
+<div class="lf-modal-backdrop" id="forgotModal">
+  <div class="lf-modal">
+    <h5><i class="bi bi-key-fill me-2" style="color:#22c55e;"></i>Reset Password</h5>
+    <p>Enter your email address and we will send you a reset link.</p>
+    <label class="login-label" for="forgotEmail">Email Address</label>
+    <div class="lf-input-wrap">
+      <span class="lf-input-icon"><i class="bi bi-envelope"></i></span>
+      <input type="email" class="lf-input" id="forgotEmail" placeholder="name@example.com">
+    </div>
+    <div class="lf-modal-actions">
+      <button type="button" class="lf-submit-btn" style="margin:0;height:44px;font-size:0.9rem;" onclick="sendResetLink()"><i class="bi bi-send me-2"></i>Send Reset Link</button>
+      <button type="button" style="flex-shrink:0;padding:0 20px;height:44px;border-radius:30px;border:1.5px solid #e2e8f0;background:transparent;color:#64748b;font-weight:600;cursor:pointer;" onclick="closeForgotModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="lf-toast" id="lfToast"></div>
+
+<!-- Top Controls: Theme & RTL Toggle (Above) -->
+<div class="auth-top-controls">
+  <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark/light mode" title="Toggle Theme">
+    <i class="bi bi-moon-stars" id="themeToggleIcon"></i>
+  </button>
+  <button class="rtl-toggle-btn" aria-label="Toggle RTL direction" title="Toggle RTL">
+    RTL
+  </button>
+</div>
+
+<!-- Page Wrapper -->
+<div class="login-page-wrapper">
+
+  <!-- Logo -->
+  <a class="login-logo-link" href="index.html">
+    <i class="bi bi-calculator-fill"></i>
+    <span>TaxCore</span>
+  </a>
+
+  <!-- Login Card -->
+  <div class="login-card">
+
+    <!-- Heading -->
+    <h1 class="login-title" id="loginTitle">Customer Login</h1>
+    <p class="login-subtitle" id="loginSubtitle">Access your account dashboard</p>
+
+    <!-- Tabs -->
+    <div class="auth-tab-row">
+      <button type="button" class="auth-tab-btn active" id="customerTab" aria-label="Customer Login tab">Customer Login</button>
+      <button type="button" class="auth-tab-btn" id="adminTab" aria-label="Admin Login tab">Admin Login</button>
+    </div>
+
+    <!-- Form -->
+    <form id="loginForm" novalidate autocomplete="off">
+
+      <!-- Email -->
+      <label class="login-label" for="emailInput">Email Address <span style="color:#ef4444;">*</span></label>
+      <div class="lf-input-wrap">
+        <span class="lf-input-icon"><i class="bi bi-envelope"></i></span>
+        <input type="email" class="lf-input" id="emailInput" placeholder="name@example.com" autocomplete="off" aria-label="Email address" value="">
+      </div>
+      <div class="lf-error" id="emailError">Please enter a valid email address.</div>
+
+      <!-- Password -->
+      <label class="login-label" for="passwordInput">Password <span style="color:#ef4444;">*</span></label>
+      <div class="lf-input-wrap">
+        <span class="lf-input-icon"><i class="bi bi-lock-fill"></i></span>
+        <input type="password" class="lf-input has-toggle" id="passwordInput" placeholder="Enter your password" autocomplete="new-password" aria-label="Password" value="">
+        <button type="button" class="lf-eye-btn" id="eyeToggleBtn" aria-label="Toggle password visibility">
+          <i class="bi bi-eye" id="eyeIcon"></i>
+        </button>
+      </div>
+      <div class="lf-error" id="passwordError">Password must be at least 8 characters.</div>
+
+      <!-- Remember + Forgot -->
+      <div class="lf-row-flex">
+        <label class="lf-check-label" for="rememberMe">
+          <input type="checkbox" id="rememberMe"> Remember Me
+        </label>
+        <a href="forgot-password.html" class="lf-forgot" id="forgotPasswordLink">Forgot Password?</a>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="lf-submit-btn" id="loginSubmitBtn">Login</button>
+    </form>
+
+    <!-- Social -->
+    <div class="lf-divider"><span>or continue with</span></div>
+
+    <div class="lf-social-row">
+      <button type="button" class="lf-social-btn lf-google-btn" id="googleBtn" aria-label="Continue with Google">
+        <i class="bi bi-google" style="color:#ea4335;"></i>
+        <span>Google</span>
+      </button>
+      <button type="button" class="lf-social-btn lf-apple-btn" id="appleBtn" aria-label="Continue with Apple">
+        <i class="bi bi-apple"></i>
+        <span>Apple</span>
+      </button>
+    </div>
+
+    <!-- Sign Up area — shown only in Customer mode -->
+    <div class="lf-signup-area" id="signupArea">
+      Don't have an account? <a href="register.html">Sign Up</a>
+    </div>
+
+  </div><!-- end login-card -->
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/theme.js"></script>
+<script>
+(function () {
+  // ---- DOM READY ----
+  document.addEventListener('DOMContentLoaded', function () {
+    var currentMode = 'customer';
+    var customerTab = document.getElementById('customerTab');
+    var adminTab = document.getElementById('adminTab');
+    var loginTitle = document.getElementById('loginTitle');
+    var loginSubtitle = document.getElementById('loginSubtitle');
+    var signupArea = document.getElementById('signupArea');
+    var loginForm = document.getElementById('loginForm');
+    var emailInput = document.getElementById('emailInput');
+    var passwordInput = document.getElementById('passwordInput');
+    var emailError = document.getElementById('emailError');
+    var passwordError = document.getElementById('passwordError');
+
+    // ---- TABS ----
+    function setMode(mode) {
+      currentMode = mode;
+      if (mode === 'customer') {
+        customerTab.classList.add('active');
+        adminTab.classList.remove('active');
+        loginTitle.textContent = 'Customer Login';
+        loginSubtitle.textContent = 'Access your account dashboard';
+        signupArea.style.display = '';
+      } else {
+        adminTab.classList.add('active');
+        customerTab.classList.remove('active');
+        loginTitle.textContent = 'Admin Login';
+        loginSubtitle.textContent = 'Access your administration dashboard';
+        signupArea.style.display = '';
+      }
+      clearErrors();
+    }
+
+    customerTab.addEventListener('click', function () { setMode('customer'); });
+    adminTab.addEventListener('click', function () { setMode('admin'); });
+
+    // ---- PASSWORD TOGGLE ----
+    var eyeBtn = document.getElementById('eyeToggleBtn');
+    var eyeIcon = document.getElementById('eyeIcon');
+
+    if (eyeBtn) {
+      eyeBtn.addEventListener('click', function () {
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          eyeIcon.className = 'bi bi-eye-slash';
+        } else {
+          passwordInput.type = 'password';
+          eyeIcon.className = 'bi bi-eye';
+        }
+      });
+    }
+
+    // ---- VALIDATION ----
+    function validateEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+    }
+
+    function clearErrors() {
+      emailInput.classList.remove('is-invalid');
+      passwordInput.classList.remove('is-invalid');
+      emailError.classList.remove('show');
+      passwordError.classList.remove('show');
+    }
+
+    emailInput.addEventListener('input', function () {
+      emailInput.classList.remove('is-invalid');
+      emailError.classList.remove('show');
+    });
+
+    passwordInput.addEventListener('input', function () {
+      passwordInput.classList.remove('is-invalid');
+      passwordError.classList.remove('show');
+    });
+
+    // ---- SHOW REGISTRATION SUCCESS TOAST IF REDIRECTED FROM REGISTER ----
+    var regMsg = sessionStorage.getItem('regSuccessMsg');
+    if (regMsg) {
+      showToast(regMsg);
+      sessionStorage.removeItem('regSuccessMsg');
+    }
+
+    // ---- FORM SUBMIT ----
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ok = true;
+      clearErrors();
+
+      var emailVal = emailInput.value.trim();
+      var passwordVal = passwordInput.value;
+
+      if (!emailVal) {
+        emailInput.classList.add('is-invalid');
+        emailError.textContent = 'Email address is required.';
+        emailError.classList.add('show');
+        ok = false;
+      } else if (!validateEmail(emailVal)) {
+        emailInput.classList.add('is-invalid');
+        emailError.textContent = 'Please enter a valid email address.';
+        emailError.classList.add('show');
+        ok = false;
+      }
+
+      if (!passwordVal) {
+        passwordInput.classList.add('is-invalid');
+        passwordError.textContent = 'Password is required.';
+        passwordError.classList.add('show');
+        ok = false;
+      } else if (passwordVal.length < 8) {
+        passwordInput.classList.add('is-invalid');
+        passwordError.textContent = 'Password must be at least 8 characters.';
+        passwordError.classList.add('show');
+        ok = false;
+      }
+
+      if (ok) {
+        // Authenticate against registered accounts
+        var users = window.TaxCoreAuth ? TaxCoreAuth.getUsers() : JSON.parse(localStorage.getItem('taxcoreUsers') || '[]');
+        var normalizedEmail = emailVal.toLowerCase();
+
+        var matchedUser = users.find(function (u) {
+          return u.email && u.email.trim().toLowerCase() === normalizedEmail;
+        });
+
+        if (!matchedUser) {
+          emailInput.classList.add('is-invalid');
+          emailError.textContent = 'No registered account found with this email. Please register first.';
+          emailError.classList.add('show');
+          return;
+        }
+
+        // Verify password
+        if (matchedUser.password && matchedUser.password !== passwordVal) {
+          passwordInput.classList.add('is-invalid');
+          passwordError.textContent = 'Incorrect password. Please try again.';
+          passwordError.classList.add('show');
+          return;
+        }
+
+        // Verify role match
+        if (currentMode === 'customer' && matchedUser.role === 'admin') {
+          emailInput.classList.add('is-invalid');
+          emailError.textContent = 'This email is registered as an Admin. Please select the Admin Login tab.';
+          emailError.classList.add('show');
+          return;
+        }
+
+        if (currentMode === 'admin' && matchedUser.role !== 'admin') {
+          emailInput.classList.add('is-invalid');
+          emailError.textContent = 'This email is registered as a Customer. Please select the Customer Login tab.';
+          emailError.classList.add('show');
+          return;
+        }
+
+        // Remember Me option
+        if (document.getElementById('rememberMe').checked) {
+          localStorage.setItem('tcRememberEmail', emailVal);
+        } else {
+          localStorage.removeItem('tcRememberEmail');
+        }
+
+        // Save authenticated session in currentUser
+        if (window.TaxCoreAuth) {
+          TaxCoreAuth.setCurrentUser(matchedUser);
+        } else {
+          localStorage.setItem('currentUser', JSON.stringify({
+            name: matchedUser.name,
+            email: matchedUser.email,
+            phone: matchedUser.phone || '',
+            role: matchedUser.role
+          }));
+          if (matchedUser.role === 'admin') {
+            localStorage.setItem('taxcoreAdminLoggedIn', 'true');
+            localStorage.removeItem('customerLoggedIn');
+          } else {
+            localStorage.setItem('customerLoggedIn', 'true');
+            localStorage.removeItem('taxcoreAdminLoggedIn');
+          }
+        }
+
+        // Redirect to appropriate dashboard
+        if (matchedUser.role === 'admin') {
+          window.location.href = 'admin-dashboard.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      }
+    });
+
+    // Ensure inputs are completely empty on load/logout so only the placeholder is displayed
+    function clearLoginInputs() {
+      if (loginForm) loginForm.reset();
+      if (emailInput) emailInput.value = '';
+      if (passwordInput) passwordInput.value = '';
+      var remMe = document.getElementById('rememberMe');
+      if (remMe) remMe.checked = false;
+    }
+
+    clearLoginInputs();
+    window.addEventListener('pageshow', clearLoginInputs);
+
+    // ---- SOCIAL BUTTONS ----
+    document.getElementById('googleBtn').addEventListener('click', function () {
+      showToast('Google sign-in is not configured yet.');
+    });
+
+    document.getElementById('appleBtn').addEventListener('click', function () {
+      showToast('Apple sign-in is not configured yet.');
+    });
+
+  }); // end DOMContentLoaded
+
+  // ---- FORGOT MODAL FUNCTIONS (global) ----
+  window.closeForgotModal = function () {
+    document.getElementById('forgotModal').classList.remove('show');
+  };
+
+  window.sendResetLink = function () {
+    var email = document.getElementById('forgotEmail').value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      document.getElementById('forgotEmail').style.borderColor = '#ef4444';
+      document.getElementById('forgotEmail').focus();
+      return;
+    }
+    document.getElementById('forgotEmail').style.borderColor = '';
+    closeForgotModal();
+    showToast('Password reset link sent to ' + email + '!');
+  };
+
+  // ---- TOAST ----
+  window.showToast = function (msg) {
+    var el = document.getElementById('lfToast');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('show');
+    setTimeout(function () { el.classList.remove('show'); }, 4000);
+  };
+
+})();
+</script>
+</body>
+</html>

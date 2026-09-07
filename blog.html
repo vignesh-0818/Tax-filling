@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+<body>
+
+    <!-- ==============================================
+    Header / Navbar
+    =============================================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-theme fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <i class="bi bi-calculator text-primary-brand"></i>
+                    TaxCore
+                </a>
+                
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <i class="bi bi-list fs-1 text-primary-brand"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown">Home</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+                                <li><a class="dropdown-item" href="index-2.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                        <li class="nav-item"><a class="nav-link" href="tax-calendar.html">Tax Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                    
+                    <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
+                        <button class="theme-toggle-btn" aria-label="Toggle Theme"><i class="bi bi-moon-stars"></i></button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
+                        <a href="dashboard.html" class="nav-link fw-semibold text-primary-brand" id="navDashboardBtn" style="display: none;"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+                        <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get Started</a>
+                        <a href="login.html" class="btn btn-primary-brand btn-sm px-3" id="navLogoutBtn" style="display: none;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==============================================
+    Breadcrumb & Hero
+    =============================================== -->
+    <section class="page-hero blog-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="container page-hero-content">
+            <h1>Our Blog</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="mx-2">/</span>
+                <span>Blog</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Blog Content
+    =============================================== -->
+    <section class="section-padding">
+        <div class="container" style="max-width: 1440px;">
+            
+            <div class="blog-layout">
+                <!-- Main Blog Content -->
+                <div class="blog-main-content">
+                    <!-- Category Filters -->
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <button class="btn btn-primary-brand active category-filter-btn rounded-pill px-4" data-category="all">All</button>
+                        <button class="btn btn-outline-brand category-filter-btn rounded-pill px-4" data-category="tax tips">Tax Tips</button>
+                        <button class="btn btn-outline-brand category-filter-btn rounded-pill px-4" data-category="gst">GST</button>
+                        <button class="btn btn-outline-brand category-filter-btn rounded-pill px-4" data-category="bookkeeping">Bookkeeping</button>
+                        <button class="btn btn-outline-brand category-filter-btn rounded-pill px-4" data-category="tax planning">Tax Planning</button>
+                        <button class="btn btn-outline-brand category-filter-btn rounded-pill px-4" data-category="tax calendar">Tax Calendar</button>
+                        <button class="btn btn-outline-brand category-filter-btn rounded-pill px-4" data-category="business finance">Business Finance</button>
+                    </div>
+
+                    <!-- Blog 6-Card Grid (Row 1: Cards 1-3 | Row 2: Cards 4-6) -->
+                    <div class="blog-grid" id="blog-grid">
+                
+                <!-- Blog Card 1: Tax Tips -->
+                <article class="blog-card blog-card-item" data-category="tax tips" data-author="Sarah Jenkins" data-tags="tax tips, small business, deductions, accounting">
+                    <div class="blog-card-img-wrapper">
+                        <img src="assets/images/blog-tax-deductions.jpg" class="blog-card-img" alt="Small business owner and accountant reviewing tax deduction documents with calculator" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-category">
+                            <span class="category-tag">Tax Tips</span>
+                        </div>
+                        <h2 class="blog-card-title blog-title">
+                            <a href="blog-details.html?id=tax-deductions">10 Essential Tax Deductions Every Small Business Owner Should Know</a>
+                        </h2>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-author"><i class="bi bi-person"></i> Sarah Jenkins</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-date"><i class="bi bi-calendar3"></i> Oct 12, 2026</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-readtime"><i class="bi bi-clock"></i> 6 min read</span>
+                        </div>
+                        <p class="blog-card-desc blog-desc">Discover common tax deductions that small business owners often overlook and learn how to properly document eligible expenses.</p>
+                        <div class="blog-card-button">
+                            <a href="blog-details.html?id=tax-deductions" class="btn-read-article">
+                                Read Article <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 2: GST -->
+                <article class="blog-card blog-card-item" data-category="gst" data-author="Michael Chen" data-tags="gst, tax compliance, invoicing, business regulations">
+                    <div class="blog-card-img-wrapper">
+                        <img src="assets/images/services-hero.jpg" class="blog-card-img" alt="GST tax filing documentation, business invoices, and tax compliance paperwork" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-category">
+                            <span class="category-tag">GST</span>
+                        </div>
+                        <h2 class="blog-card-title blog-title">
+                            <a href="blog-details.html?id=gst-filing-guide">GST Filing Guide: Everything Your Business Needs to Know</a>
+                        </h2>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-author"><i class="bi bi-person"></i> Michael Chen</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-date"><i class="bi bi-calendar3"></i> Oct 8, 2026</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-readtime"><i class="bi bi-clock"></i> 5 min read</span>
+                        </div>
+                        <p class="blog-card-desc blog-desc">Understand GST filing requirements, important deadlines, common mistakes, and practical ways to keep your business compliant.</p>
+                        <div class="blog-card-button">
+                            <a href="blog-details.html?id=gst-filing-guide" class="btn-read-article">
+                                Read Article <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 3: Bookkeeping -->
+                <article class="blog-card blog-card-item" data-category="bookkeeping" data-author="Sarah Jenkins" data-tags="bookkeeping, financial visibility, cash flow, small business, organization">
+                    <div class="blog-card-img-wrapper">
+                        <img src="assets/images/hero.jpg" class="blog-card-img" alt="Organized bookkeeping spreadsheets, accounting ledgers, and financial reports" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-category">
+                            <span class="category-tag">Bookkeeping</span>
+                        </div>
+                        <h2 class="blog-card-title blog-title">
+                            <a href="blog-details.html?id=bookkeeping">Why Accurate Bookkeeping Is Essential for Business Growth</a>
+                        </h2>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-author"><i class="bi bi-person"></i> Sarah Jenkins</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-date"><i class="bi bi-calendar3"></i> Oct 3, 2026</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-readtime"><i class="bi bi-clock"></i> 7 min read</span>
+                        </div>
+                        <p class="blog-card-desc blog-desc">Learn how organized bookkeeping can improve financial visibility, simplify tax preparation, and help business owners make better decisions.</p>
+                        <div class="blog-card-button">
+                            <a href="blog-details.html?id=bookkeeping" class="btn-read-article">
+                                Read Article <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 4: Tax Planning -->
+                <article class="blog-card blog-card-item" data-category="tax planning" data-author="David Wilson" data-tags="tax planning, corporate strategy, capital investment, finance">
+                    <div class="blog-card-img-wrapper">
+                        <img src="assets/images/about-hero.jpg" class="blog-card-img" alt="Financial planning advisors discussing tax strategy charts and business investment" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-category">
+                            <span class="category-tag">Tax Planning</span>
+                        </div>
+                        <h2 class="blog-card-title blog-title">
+                            <a href="blog-details.html?id=tax-planning">Smart Tax Planning Strategies for Growing Businesses</a>
+                        </h2>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-author"><i class="bi bi-person"></i> David Wilson</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-date"><i class="bi bi-calendar3"></i> Sep 28, 2026</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-readtime"><i class="bi bi-clock"></i> 6 min read</span>
+                        </div>
+                        <p class="blog-card-desc blog-desc">Explore practical tax planning strategies that can help businesses manage expenses, prepare for filing season, and plan ahead.</p>
+                        <div class="blog-card-button">
+                            <a href="blog-details.html?id=tax-planning" class="btn-read-article">
+                                Read Article <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 5: Tax Calendar -->
+                <article class="blog-card blog-card-item" data-category="tax calendar" data-author="Priya Sharma" data-tags="tax calendar, deadlines, compliance, filing dates, organization">
+                    <div class="blog-card-img-wrapper">
+                        <img src="assets/images/calendar-hero.jpg" class="blog-card-img" alt="Tax calendar showing important tax deadlines and compliance reminder dates" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-category">
+                            <span class="category-tag">Tax Calendar</span>
+                        </div>
+                        <h2 class="blog-card-title blog-title">
+                            <a href="blog-details.html?id=tax-calendar">Important Tax Deadlines You Should Never Miss</a>
+                        </h2>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-author"><i class="bi bi-person"></i> Priya Sharma</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-date"><i class="bi bi-calendar3"></i> Sep 20, 2026</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-readtime"><i class="bi bi-clock"></i> 4 min read</span>
+                        </div>
+                        <p class="blog-card-desc blog-desc">Keep your business organized with a simple overview of important tax filing dates, payment deadlines, and compliance reminders.</p>
+                        <div class="blog-card-button">
+                            <a href="blog-details.html?id=tax-calendar" class="btn-read-article">
+                                Read Article <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Card 6: Business Finance -->
+                <article class="blog-card blog-card-item" data-category="business finance" data-author="James Anderson" data-tags="business finance, tax prep, organization, accounting">
+                    <div class="blog-card-img-wrapper">
+                        <img src="assets/images/pricing-hero.jpg" class="blog-card-img" alt="Business finance documents, financial records, and tax season preparation workspace" loading="lazy">
+                    </div>
+                    <div class="blog-card-content">
+                        <div class="blog-card-category">
+                            <span class="category-tag">Business Finance</span>
+                        </div>
+                        <h2 class="blog-card-title blog-title">
+                            <a href="blog-details.html?id=stress-free-tax-season">How to Prepare Your Business for a Stress-Free Tax Season</a>
+                        </h2>
+                        <div class="blog-card-meta">
+                            <span class="blog-card-author"><i class="bi bi-person"></i> James Anderson</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-date"><i class="bi bi-calendar3"></i> Sep 15, 2026</span>
+                            <span class="blog-meta-divider">|</span>
+                            <span class="blog-card-readtime"><i class="bi bi-clock"></i> 5 min read</span>
+                        </div>
+                        <p class="blog-card-desc blog-desc">Follow these practical steps to organize financial documents, review expenses, and prepare everything before tax filing begins.</p>
+                        <div class="blog-card-button">
+                            <a href="blog-details.html?id=stress-free-tax-season" class="btn-read-article">
+                                Read Article <i class="bi bi-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- No Results Message (Hidden by default) -->
+            <div id="no-blog-results" class="text-center py-5" style="display: none;">
+                <div class="mb-3">
+                    <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+                </div>
+                <h4 class="fw-bold mb-2">No articles found</h4>
+                <p class="text-secondary mb-4">We couldn't find any articles matching your search criteria. Try a different keyword or category.</p>
+                <button type="button" class="btn btn-outline-brand rounded-pill px-4" onclick="document.getElementById('blog-search').value=''; if(document.getElementById('sidebar-blog-search')) document.getElementById('sidebar-blog-search').value=''; document.querySelector('.category-filter-btn[data-category=\'all\']').click();">Clear Filters</button>
+            </div>
+
+        </div>
+        <!-- End .blog-main-content -->
+
+        <!-- Right: Blog Sidebar (Natural height, no vertical stretch) -->
+        <aside class="blog-sidebar">
+            <!-- 1. Search Box -->
+            <div class="card card-theme blog-sidebar-card search-widget">
+                <h5 class="fw-bold mb-3">Search</h5>
+                <form class="d-flex w-100" onsubmit="event.preventDefault();">
+                    <div class="input-group">
+                        <input type="text" id="sidebar-blog-search" class="form-control form-control-theme search-input" placeholder="Search blog...">
+                        <button class="btn btn-primary-brand search-button" id="sidebar-blog-search-btn" type="button" aria-label="Search">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 2. Categories Box -->
+            <div class="card card-theme blog-sidebar-card categories-widget">
+                <h5 class="fw-bold mb-3">Categories</h5>
+                <ul class="category-list">
+                    <li class="category-item">
+                        <a href="#" class="sidebar-cat-link" data-category="tax tips">
+                            <span>Tax Tips</span>
+                            <span class="badge bg-secondary-theme text-dark">1</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="sidebar-cat-link" data-category="gst">
+                            <span>GST</span>
+                            <span class="badge bg-secondary-theme text-dark">1</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="sidebar-cat-link" data-category="bookkeeping">
+                            <span>Bookkeeping</span>
+                            <span class="badge bg-secondary-theme text-dark">1</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="sidebar-cat-link" data-category="tax planning">
+                            <span>Tax Planning</span>
+                            <span class="badge bg-secondary-theme text-dark">1</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="sidebar-cat-link" data-category="tax calendar">
+                            <span>Tax Calendar</span>
+                            <span class="badge bg-secondary-theme text-dark">1</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="sidebar-cat-link" data-category="business finance">
+                            <span>Business Finance</span>
+                            <span class="badge bg-secondary-theme text-dark">1</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 3. Recent Posts Box -->
+            <div class="card card-theme blog-sidebar-card recent-posts-widget mb-4">
+                <h5 class="fw-bold mb-3">Recent Posts</h5>
+                <div class="recent-posts">
+                    <div class="recent-post">
+                        <img src="assets/images/blog-tax-deductions.jpg" alt="10 Essential Tax Deductions Every Small Business Owner Should Know">
+                        <div class="recent-post-content">
+                            <h6 class="recent-post-title">
+                                <a href="blog-details.html?id=tax-deductions">10 Essential Tax Deductions Every Small Business Owner Should Know</a>
+                            </h6>
+                            <p class="recent-post-date">Oct 12, 2026</p>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <img src="assets/images/services-hero.jpg" alt="GST Filing Guide: Everything Your Business Needs to Know">
+                        <div class="recent-post-content">
+                            <h6 class="recent-post-title">
+                                <a href="blog-details.html?id=gst-filing-guide">GST Filing Guide: Everything Your Business Needs to Know</a>
+                            </h6>
+                            <p class="recent-post-date">Oct 8, 2026</p>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <img src="assets/images/hero.jpg" alt="Why Accurate Bookkeeping Is Essential for Business Growth">
+                        <div class="recent-post-content">
+                            <h6 class="recent-post-title">
+                                <a href="blog-details.html?id=bookkeeping">Why Accurate Bookkeeping Is Essential for Business Growth</a>
+                            </h6>
+                            <p class="recent-post-date">Oct 3, 2026</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Tags Box -->
+            <div class="card card-theme blog-sidebar-card tags-widget">
+                <h5 class="fw-bold mb-3">Tags</h5>
+                <div class="d-flex flex-wrap gap-2" id="blog-sidebar-tags">
+                    <a href="income-tax.html" class="sidebar-tag-badge">Income Tax Filing</a>
+                    <a href="business-tax-planning.html" class="sidebar-tag-badge">Business Tax Planning</a>
+                    <a href="gst-returns.html" class="sidebar-tag-badge">GST Returns</a>
+                    <a href="bookkeeping.html" class="sidebar-tag-badge">Bookkeeping</a>
+                </div>
+            </div>
+        </aside>
+        <!-- End .blog-sidebar -->
+
+    </div>
+    <!-- End .blog-layout -->
+
+</div>
+</section>
+
+    <!-- ==============================================
+    Footer
+    =============================================== -->
+    <footer class="footer-theme">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3 text-white fs-4 fw-bold" href="index.html">
+                        <i class="bi bi-calculator text-success"></i>
+                        TaxCore
+                    </a>
+                    <p class="text-muted mb-4 pe-lg-4">Professional tax filing, bookkeeping, and accounting solutions designed to help individuals and businesses thrive financially.</p>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="index.html" class="text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-decoration-none">About Us</a></li>
+                        <li><a href="pricing.html" class="text-decoration-none">Pricing</a></li>
+                        <li><a href="tax-calendar.html" class="text-decoration-none">Tax Calendar</a></li>
+                        <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="income-tax.html" class="text-decoration-none">Income Tax</a></li>
+                        <li><a href="gst-returns.html" class="text-decoration-none">GST Returns</a></li>
+                        <li><a href="bookkeeping.html" class="text-decoration-none">Bookkeeping</a></li>
+                        <li><a href="payroll-accounting.html" class="text-decoration-none">Payroll</a></li>
+                        <li><a href="audit-support.html" class="text-decoration-none">Audit Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-title">Subscribe to Newsletter</h5>
+                    <p class="text-muted mb-3">Get the latest tax tips and updates directly in your inbox.</p>
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control bg-dark border-secondary text-white" placeholder="Email Address" required>
+                        <button type="submit" class="btn btn-primary-brand">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="row border-top border-secondary mt-5 pt-4">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2026 TaxCore. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="privacy-policy.html" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                    <a href="terms.html" class="text-muted text-decoration-none">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/blog-data.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html>
+

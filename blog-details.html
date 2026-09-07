@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Details - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+<body>
+
+    <!-- ==============================================
+    Header / Navbar
+    =============================================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-theme fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <i class="bi bi-calculator text-primary-brand"></i>
+                    TaxCore
+                </a>
+                
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <i class="bi bi-list fs-1 text-primary-brand"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown">Home</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+                                <li><a class="dropdown-item" href="index-2.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                        <li class="nav-item"><a class="nav-link" href="tax-calendar.html">Tax Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="blog.html">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                    
+                    <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
+                        <button class="theme-toggle-btn" aria-label="Toggle Theme"><i class="bi bi-moon-stars"></i></button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
+                        <a href="dashboard.html" class="nav-link fw-semibold text-primary-brand" id="navDashboardBtn" style="display: none;"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+                        <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get Started</a>
+                        <a href="login.html" class="btn btn-primary-brand btn-sm px-3" id="navLogoutBtn" style="display: none;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==============================================
+    Breadcrumb
+    =============================================== -->
+    <section class="page-hero blog-details-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="container page-hero-content">
+            <h1>Blog Details</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="mx-2">/</span>
+                <a href="blog.html">Blog</a>
+                <span class="mx-2">/</span>
+                <span id="breadcrumb-current">Article</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Article Content
+    =============================================== -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row g-5 align-items-start">
+                
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <!-- Header -->
+                    <div class="mb-4">
+                        <span class="badge bg-primary-brand mb-3 px-3 py-2 rounded-pill" id="detail-category">Tax Tips</span>
+                        <h1 class="fw-bold mb-4 text-dark" id="detail-title">10 Essential Tax Deductions Every Small Business Owner Should Know</h1>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="assets/images/team-sarah.jpg" alt="Sarah Jenkins" class="rounded-circle object-fit-cover" width="48" height="48" id="detail-author-img">
+                            <div>
+                                <p class="mb-0 fw-bold" id="detail-author-name">Sarah Jenkins</p>
+                                <p class="text-secondary small mb-0" id="detail-meta-info">Oct 12, 2026 &bull; 6 min read</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Featured Image -->
+                    <img src="assets/images/blog-tax-deductions.jpg" alt="Tax Tips" id="detail-image" class="img-fluid rounded-4 shadow-sm mb-5 w-100" style="max-height: 420px; object-fit: cover;">
+                    
+                    <!-- Content -->
+                    <div class="blog-content" id="detail-content">
+                        <p class="lead text-secondary mb-4">Discover common tax deductions that small business owners often overlook and learn how to properly document eligible expenses.</p>
+                        
+                        <p>Running a small business requires you to wear many hats. Between managing operations, dealing with clients, and overseeing your team, taxes often take a back seat until the deadline looms. However, understanding your tax deductions is crucial for maximizing your profitability and ensuring your hard-earned money stays within your business.</p>
+
+                        <h3 class="fw-bold mt-5 mb-3">1. Home Office Deduction</h3>
+                        <p>If you use a part of your home exclusively and regularly for conducting business, you may be able to deduct expenses such as mortgage interest, insurance, utilities, repairs, and depreciation. The IRS offers two methods for claiming this deduction:</p>
+                        <ul>
+                            <li><strong>Simplified Option:</strong> A standard deduction of $5 per square foot of home used for business (up to 300 square feet).</li>
+                            <li><strong>Regular Method:</strong> Determining the actual expenses of your home office based on the percentage of your home used for business.</li>
+                        </ul>
+
+                        <div class="p-4 rounded-3 border-start border-4 border-success my-4" style="background: rgba(16, 185, 129, 0.08);">
+                            <div class="d-flex gap-3">
+                                <i class="bi bi-info-circle-fill fs-3 text-success mt-1"></i>
+                                <div>
+                                    <h5 class="fw-bold text-dark mb-1">Important Tip</h5>
+                                    <p class="mb-0 text-secondary">To qualify for the home office deduction, the space must be used <strong>exclusively</strong> for business. A corner of your dining room table where you occasionally eat dinner does not qualify.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="fw-bold mt-5 mb-3">2. Vehicle Use</h3>
+                        <p>If you use your car for business, you can deduct the costs. Like the home office deduction, there are two ways to calculate this:</p>
+                        <ol>
+                            <li><strong>Standard Mileage Rate:</strong> A specific rate multiplied by the business miles driven.</li>
+                            <li><strong>Actual Expenses:</strong> The business portion of actual expenses (gas, oil, repairs, insurance, depreciation).</li>
+                        </ol>
+                        <p>Remember to keep a detailed log of your business miles, including the date, destination, purpose, and total miles driven.</p>
+                        
+                        <h3 class="fw-bold mt-5 mb-3">Conclusion</h3>
+                        <p>Tax preparation doesn't have to be a nightmare if you keep organized records throughout the year. By taking advantage of these deductions, you can significantly lower your taxable income.</p>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="d-flex flex-wrap justify-content-end align-items-center mt-5 pt-4 border-top">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="fw-bold me-2">Share:</span>
+                            <a href="https://www.facebook.com/sharer/sharer.php" id="share-fb" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; padding: 0;" title="Share on Facebook" aria-label="Share on Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="https://twitter.com/intent/tweet" id="share-x" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; padding: 0;" title="Share on X" aria-label="Share on X"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/" id="share-in" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 34px; height: 34px; padding: 0;" title="Share on LinkedIn" aria-label="Share on LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Prev / Next -->
+                    <div class="row mt-5">
+                        <div class="col-6">
+                            <a href="blog-details.html?id=stress-free-tax-season" class="text-decoration-none text-dark d-block p-3 border rounded card-theme" id="detail-prev-link">
+                                <small class="text-muted d-block mb-1"><i class="bi bi-arrow-left me-1"></i> Previous Article</small>
+                                <span class="fw-semibold text-truncate d-block" id="detail-prev-title">How to Prepare Your Business for a Stress-Free Tax Season</span>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="blog-details.html?id=gst-filing-guide" class="text-decoration-none text-dark d-block p-3 border rounded text-end card-theme" id="detail-next-link">
+                                <small class="text-muted d-block mb-1">Next Article <i class="bi bi-arrow-right ms-1"></i></small>
+                                <span class="fw-semibold text-truncate d-block" id="detail-next-title">GST Filing Guide: Everything Your Business Needs to Know</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar (Compact, natural height) -->
+                <aside class="col-lg-4 blog-sidebar">
+                    
+                    <!-- Search Widget -->
+                    <div class="card card-theme blog-sidebar-card search-widget mb-4">
+                        <h5 class="fw-bold mb-3">Search</h5>
+                        <form class="d-flex w-100 flex-column position-relative" id="sidebar-search-form" action="blog.html" method="GET" onsubmit="executeBlogDetailsSearch(event);">
+                            <div class="input-group">
+                                <input type="text" name="search" id="sidebar-blog-search" class="form-control form-control-theme search-input" placeholder="Search blog..." autocomplete="off">
+                                <button class="btn btn-primary-brand search-button" id="sidebar-blog-search-btn" type="submit" aria-label="Search" onclick="executeBlogDetailsSearch(event);"><i class="bi bi-search"></i></button>
+                            </div>
+                            <!-- Live search results dropdown/panel -->
+                            <div id="sidebar-search-results" class="sidebar-search-results mt-3" style="display: none;"></div>
+                        </form>
+                    </div>
+
+                    <!-- Categories Widget -->
+                    <div class="card card-theme blog-sidebar-card categories-widget mb-4">
+                        <h5 class="fw-bold mb-3">Categories</h5>
+                        <ul class="category-list" id="detail-categories">
+                            <li class="category-item"><a href="blog.html?category=tax%20tips"><span>Tax Tips</span> <span class="badge bg-secondary-theme text-dark">1</span></a></li>
+                            <li class="category-item"><a href="blog.html?category=gst"><span>GST</span> <span class="badge bg-secondary-theme text-dark">1</span></a></li>
+                            <li class="category-item"><a href="blog.html?category=bookkeeping"><span>Bookkeeping</span> <span class="badge bg-secondary-theme text-dark">1</span></a></li>
+                            <li class="category-item"><a href="blog.html?category=tax%20planning"><span>Tax Planning</span> <span class="badge bg-secondary-theme text-dark">1</span></a></li>
+                            <li class="category-item"><a href="blog.html?category=tax%20calendar"><span>Tax Calendar</span> <span class="badge bg-secondary-theme text-dark">1</span></a></li>
+                            <li class="category-item"><a href="blog.html?category=business%20finance"><span>Business Finance</span> <span class="badge bg-secondary-theme text-dark">1</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Posts Widget -->
+                    <div class="card card-theme blog-sidebar-card recent-posts-widget mb-4">
+                        <h5 class="fw-bold mb-3">Recent Posts</h5>
+                        <div class="recent-posts" id="detail-recent-posts">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Tags Widget -->
+                    <div class="card card-theme blog-sidebar-card tags-widget">
+                        <h5 class="fw-bold mb-3">Tags</h5>
+                        <div class="d-flex flex-wrap gap-2" id="detail-sidebar-tags">
+                            <a href="income-tax.html" class="sidebar-tag-badge">Income Tax Filing</a>
+                            <a href="business-tax-planning.html" class="sidebar-tag-badge">Business Tax Planning</a>
+                            <a href="gst-returns.html" class="sidebar-tag-badge">GST Returns</a>
+                            <a href="bookkeeping.html" class="sidebar-tag-badge">Bookkeeping</a>
+                        </div>
+                    </div>
+                    
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Footer
+    =============================================== -->
+    <footer class="footer-theme mt-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3 text-white fs-4 fw-bold" href="index.html">
+                        <i class="bi bi-calculator text-success"></i>
+                        TaxCore
+                    </a>
+                    <p class="text-muted mb-4 pe-lg-4">Professional tax filing, bookkeeping, and accounting solutions designed to help individuals and businesses thrive financially.</p>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="index.html" class="text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-decoration-none">About Us</a></li>
+                        <li><a href="pricing.html" class="text-decoration-none">Pricing</a></li>
+                        <li><a href="tax-calendar.html" class="text-decoration-none">Tax Calendar</a></li>
+                        <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="income-tax.html" class="text-decoration-none">Income Tax</a></li>
+                        <li><a href="gst-returns.html" class="text-decoration-none">GST Returns</a></li>
+                        <li><a href="bookkeeping.html" class="text-decoration-none">Bookkeeping</a></li>
+                        <li><a href="payroll-accounting.html" class="text-decoration-none">Payroll</a></li>
+                        <li><a href="audit-support.html" class="text-decoration-none">Audit Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-title">Subscribe to Newsletter</h5>
+                    <p class="text-muted mb-3">Get the latest tax tips and updates directly in your inbox.</p>
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control bg-dark border-secondary text-white" placeholder="Email Address" required>
+                        <button type="submit" class="btn btn-primary-brand">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="row border-top border-secondary mt-5 pt-4">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2026 TaxCore. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="privacy-policy.html" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                    <a href="terms.html" class="text-muted text-decoration-none">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/blog-data.js"></script>
+    <script src="js/blog-details.js"></script>
+</body>
+</html>
+

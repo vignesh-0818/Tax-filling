@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+<body class="bg-secondary-theme full-height-page py-4 py-md-0 position-relative">
+
+    <!-- Top Controls: Theme & RTL Toggle (Above) -->
+    <div class="auth-top-controls">
+        <button class="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle dark/light mode">
+            <i class="bi bi-moon-stars"></i>
+        </button>
+        <button class="rtl-toggle-btn" aria-label="Toggle RTL direction" title="Toggle RTL">
+            RTL
+        </button>
+    </div>
+
+    <div class="container d-flex flex-column align-items-center justify-content-center min-vh-100">
+        
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2 mb-4 mt-3" href="index.html">
+            <i class="bi bi-calculator text-primary-brand fs-3"></i>
+            <span class="fs-3 fw-bold text-dark">TaxCore</span>
+        </a>
+
+        <!-- Register Card -->
+        <div class="card card-theme p-4 p-md-5 border-0 shadow-lg w-100" style="max-width: 550px;">
+            <h4 class="fw-bold text-center mb-1">Create an Account</h4>
+            <p class="text-secondary text-center small mb-4">Start your stress-free tax journey today.</p>
+            
+            <form class="needs-validation" id="registerForm" novalidate>
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label class="form-label fw-semibold" for="regFullName">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control form-control-theme" id="regFullName" required placeholder="John Doe">
+                        <div class="invalid-feedback" id="nameFeedback">Please enter your full name.</div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" for="regEmail">Email Address <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control form-control-theme" id="regEmail" required placeholder="name@example.com">
+                        <div class="invalid-feedback" id="emailFeedback">Please enter a valid email address.</div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold" for="regPhone">Phone Number <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control form-control-theme phone-validation" id="regPhone" required placeholder="10-digit number" maxlength="10">
+                        <div class="invalid-feedback" id="phoneFeedback">Please enter exactly 10 digits.</div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label fw-semibold" for="regRole">Account Type / Role <span class="text-danger">*</span></label>
+                        <select class="form-select form-control-theme" id="regRole" required>
+                            <option value="customer" selected>Customer</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        <div class="invalid-feedback">Please select an account type.</div>
+                    </div>
+                    
+                    <div class="col-md-6 auth-password-col align-self-start">
+                        <label class="form-label fw-semibold text-nowrap" for="regPassword">Password <span class="text-danger">*</span></label>
+                        <div class="auth-password-wrap">
+                            <input type="password" name="password" class="form-control form-control-theme" required minlength="8" placeholder="Min. 8 characters" id="regPassword">
+                            <button type="button" class="auth-eye-btn" onclick="togglePassword('regPassword', this)" aria-label="Toggle password visibility">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback" id="passFeedback">Password must be at least 8 characters.</div>
+                    </div>
+                    
+                    <div class="col-md-6 auth-password-col align-self-start">
+                        <label class="form-label fw-semibold text-nowrap" for="regConfirmPassword">Confirm Password <span class="text-danger">*</span></label>
+                        <div class="auth-password-wrap">
+                            <input type="password" name="confirm_password" class="form-control form-control-theme" required placeholder="Repeat password" id="regConfirmPassword">
+                            <button type="button" class="auth-eye-btn" onclick="togglePassword('regConfirmPassword', this)" aria-label="Toggle confirm password visibility">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        <div class="invalid-feedback" id="confirmFeedback">Passwords do not match.</div>
+                    </div>
+                </div>
+                
+                <div class="mb-4 mt-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="terms" required>
+                    <label class="form-check-label small text-secondary" for="terms">I agree to the <a href="terms.html" class="text-primary-brand text-decoration-none">Terms & Conditions</a> and <a href="privacy-policy.html" class="text-primary-brand text-decoration-none">Privacy Policy</a>. <span class="text-danger">*</span></label>
+                    <div class="invalid-feedback">You must agree to the terms to continue.</div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary-brand w-100 py-2 mb-4 fw-bold" id="createAccountBtn">Create Account</button>
+            </form>
+            
+            <div class="position-relative mb-4 text-center">
+                <hr class="text-secondary opacity-25">
+                <span class="position-absolute top-50 start-50 translate-middle px-3 small text-muted card-theme" style="margin-top:-10px; border:none; box-shadow:none;">or sign up with</span>
+            </div>
+            
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-light border d-flex align-items-center justify-content-center gap-2 py-2 w-100" id="googleBtn">
+                        <i class="bi bi-google text-danger fs-6"></i>
+                        <span class="fw-semibold small">Google</span>
+                    </button>
+                </div>
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-dark d-flex align-items-center justify-content-center gap-2 py-2 w-100" id="appleBtn">
+                        <i class="bi bi-apple fs-5"></i>
+                        <span class="fw-semibold small">Apple</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 pt-3 border-top">
+                <p class="text-secondary small mb-0">Already have an account? <a href="login.html" class="text-primary-brand fw-bold text-decoration-none">Login</a></p>
+            </div>
+        </div>
+
+        <!-- Toast for Register -->
+        <div class="position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index: 9999;">
+            <div id="regToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body" id="regToastBody"></div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        function togglePassword(inputId, buttonElement) {
+            const input = document.getElementById(inputId);
+            const icon = buttonElement.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
+
+        function showRegToast(message) {
+            const toastEl = document.getElementById('regToast');
+            const bodyEl = document.getElementById('regToastBody');
+            if (toastEl && bodyEl) {
+                bodyEl.textContent = message;
+                const bsToast = new bootstrap.Toast(toastEl, { delay: 3500 });
+                bsToast.show();
+            } else {
+                alert(message);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            const fullName = document.getElementById('regFullName');
+            const email = document.getElementById('regEmail');
+            const phone = document.getElementById('regPhone');
+            const regRole = document.getElementById('regRole');
+            const password = document.getElementById('regPassword');
+            const confirmPassword = document.getElementById('regConfirmPassword');
+            const terms = document.getElementById('terms');
+            const googleBtn = document.getElementById('googleBtn');
+            const appleBtn = document.getElementById('appleBtn');
+
+            // Restrict phone to digits
+            phone.addEventListener('keypress', function(e) {
+                if (e.key < '0' || e.key > '9') e.preventDefault();
+            });
+
+            // Social Buttons
+            if (googleBtn) {
+                googleBtn.addEventListener('click', function() {
+                    showRegToast('Google sign-up is not configured yet.');
+                });
+            }
+            if (appleBtn) {
+                appleBtn.addEventListener('click', function() {
+                    showRegToast('Apple sign-up is not configured yet.');
+                });
+            }
+
+            // Live password match & confirmation listener
+            function validatePasswordMatch() {
+                if (form.classList.contains('was-validated') || confirmPassword.value.length > 0) {
+                    if (confirmPassword.value && confirmPassword.value !== password.value) {
+                        confirmPassword.classList.add('is-invalid');
+                        confirmPassword.classList.remove('is-valid');
+                        const cf = document.getElementById('confirmFeedback');
+                        if (cf) cf.style.display = 'block';
+                    } else if (confirmPassword.value && confirmPassword.value === password.value) {
+                        confirmPassword.classList.remove('is-invalid');
+                        confirmPassword.classList.add('is-valid');
+                        const cf = document.getElementById('confirmFeedback');
+                        if (cf) cf.style.display = 'none';
+                    }
+                }
+            }
+            password.addEventListener('input', validatePasswordMatch);
+            confirmPassword.addEventListener('input', validatePasswordMatch);
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                let valid = true;
+
+                // 1. Full Name
+                if (!fullName.value.trim()) {
+                    fullName.classList.add('is-invalid');
+                    valid = false;
+                } else {
+                    fullName.classList.remove('is-invalid');
+                    fullName.classList.add('is-valid');
+                }
+
+                // 2. Email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+                if (!emailRegex.test(email.value.trim())) {
+                    email.classList.add('is-invalid');
+                    valid = false;
+                } else {
+                    email.classList.remove('is-invalid');
+                    email.classList.add('is-valid');
+                }
+
+                // 3. Phone (10 digits)
+                const phoneDigits = phone.value.replace(/\D/g, '');
+                if (phoneDigits.length !== 10) {
+                    phone.classList.add('is-invalid');
+                    valid = false;
+                } else {
+                    phone.classList.remove('is-invalid');
+                    phone.classList.add('is-valid');
+                }
+
+                // 4. Password (min 8 chars)
+                const passFeedback = document.getElementById('passFeedback');
+                if (password.value.length < 8) {
+                    password.classList.add('is-invalid');
+                    if (passFeedback) passFeedback.style.display = 'block';
+                    valid = false;
+                } else {
+                    password.classList.remove('is-invalid');
+                    password.classList.add('is-valid');
+                    if (passFeedback) passFeedback.style.display = '';
+                }
+
+                // 5. Confirm Password (matches)
+                const confirmFeedback = document.getElementById('confirmFeedback');
+                if (!confirmPassword.value || confirmPassword.value !== password.value) {
+                    confirmPassword.classList.add('is-invalid');
+                    if (confirmFeedback) confirmFeedback.style.display = 'block';
+                    valid = false;
+                } else {
+                    confirmPassword.classList.remove('is-invalid');
+                    confirmPassword.classList.add('is-valid');
+                    if (confirmFeedback) confirmFeedback.style.display = '';
+                }
+
+                // 6. Terms
+                if (!terms.checked) {
+                    terms.classList.add('is-invalid');
+                    valid = false;
+                } else {
+                    terms.classList.remove('is-invalid');
+                    terms.classList.add('is-valid');
+                }
+
+                if (!valid) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                // Construct structured user registration object
+                const roleValue = regRole && regRole.value === 'admin' ? 'admin' : 'customer';
+                const newUser = {
+                    name: fullName.value.trim(),
+                    email: email.value.trim().toLowerCase(),
+                    phone: phoneDigits,
+                    password: password.value,
+                    role: roleValue
+                };
+
+                // Store in localStorage via TaxCoreAuth
+                if (window.TaxCoreAuth) {
+                    TaxCoreAuth.saveUser(newUser);
+                    // Do NOT auto-login on registration
+                    TaxCoreAuth.clearCurrentUser();
+                } else {
+                    var users = JSON.parse(localStorage.getItem('taxcoreUsers') || '[]');
+                    users.push(newUser);
+                    localStorage.setItem('taxcoreUsers', JSON.stringify(users));
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('customerLoggedIn');
+                    localStorage.removeItem('taxcoreAdminLoggedIn');
+                }
+
+                // Set success message for login page
+                sessionStorage.setItem('regSuccessMsg', 'Account created successfully! Please log in with your credentials.');
+
+                // Show quick toast and redirect to login.html
+                showRegToast('Account created successfully. Redirecting to login...');
+                setTimeout(function() {
+                    window.location.href = 'login.html';
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html>
+

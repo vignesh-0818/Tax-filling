@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Documents - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+<body class="bg-secondary-theme">
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ==============================================
+    Sidebar
+    =============================================== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="p-4 d-flex justify-content-between align-items-center border-bottom">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <i class="bi bi-calculator text-primary-brand fs-4"></i>
+                <span class="fs-5 fw-bold text-dark">TaxCore</span>
+            </a>
+            <button class="btn btn-link text-dark d-lg-none p-0" id="sidebarClose"><i class="bi bi-x-lg"></i></button>
+        </div>
+        
+        <div class="p-3">
+            <p class="text-uppercase text-muted small fw-bold mb-2 px-2">Customer Menu</p>
+            <ul class="nav flex-column gap-1 mb-4 customer-sidebar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-secondary fw-semibold rounded" href="dashboard.html"><i class="bi bi-grid me-2"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active fw-semibold text-primary-brand bg-primary bg-opacity-10 rounded" href="tax-documents.html"><i class="bi bi-file-earmark-arrow-up me-2"></i> Tax Documents</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary fw-semibold rounded" href="filing-status.html"><i class="bi bi-clock-history me-2"></i> Filing Status</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary fw-semibold rounded" href="orders-billing.html"><i class="bi bi-receipt me-2"></i> Orders / Billing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary fw-semibold rounded" href="profile.html"><i class="bi bi-person me-2"></i> Profile</a>
+                </li>
+            </ul>
+
+            <p class="text-uppercase text-muted small fw-bold mb-2 px-2">Account</p>
+            <ul class="nav flex-column gap-1">
+                <li class="nav-item">
+                    <a class="nav-link text-danger fw-semibold rounded" href="login.html" onclick="logoutCustomer(event)"><i class="bi bi-box-arrow-left me-2"></i> Logout</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- ==============================================
+    Main Content
+    =============================================== -->
+    <main class="main-content">
+        
+        <!-- Topbar -->
+        <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-light border d-lg-none" id="sidebarToggle" aria-label="Toggle sidebar"><i class="bi bi-list fs-5"></i></button>
+                <a href="index.html" class="btn btn-outline-brand d-inline-flex align-items-center gap-2 fw-semibold px-3 py-2 rounded-pill back-to-website-btn">
+                    <i class="bi bi-arrow-left"></i> Back to Website
+                </a>
+            </div>
+            
+            <div class="d-flex align-items-center gap-2 gap-sm-3">
+                <button class="theme-toggle-btn border card-theme bg-white shadow-sm" aria-label="Toggle theme"><i class="bi bi-moon-stars"></i></button>
+                <button class="rtl-toggle-btn fs-6 fw-bold border card-theme bg-white shadow-sm" aria-label="Toggle RTL">RTL</button>
+                <a href="login.html" class="btn btn-outline-danger btn-sm d-none d-sm-inline-flex align-items-center gap-1 rounded-pill px-3" onclick="logoutCustomer(event)">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+                <div class="dropdown">
+                    <button class="nav-profile-btn" data-bs-toggle="dropdown" aria-expanded="false" type="button" id="customerNavProfileBtn">
+                        <div class="user-avatar-circle" id="navUserAvatar">VR</div>
+                        <div class="nav-user-meta">
+                            <span class="nav-user-name" id="navUserName">Customer</span>
+                            <span class="nav-user-role" id="navUserRole">Customer</span>
+                        </div>
+                        <i class="bi bi-chevron-down nav-profile-chevron"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end nav-profile-dropdown shadow border-0 py-2" aria-labelledby="customerNavProfileBtn">
+                        <li class="px-3 py-2 border-bottom d-flex align-items-center gap-2 mb-1">
+                            <div class="user-avatar-circle small-avatar" id="dropUserAvatar">VR</div>
+                            <div class="overflow-hidden">
+                                <div class="drop-user-name fw-bold text-dark text-truncate">Customer</div>
+                                <div class="drop-user-role text-secondary small text-truncate">Customer</div>
+                            </div>
+                        </li>
+                        <li><a class="dropdown-item py-2" href="dashboard.html"><i class="bi bi-house-door me-2 text-primary-brand"></i> Dashboard</a></li>
+                        <li><a class="dropdown-item py-2" href="profile.html"><i class="bi bi-person me-2 text-primary-brand"></i> Profile</a></li>
+                        <li><a class="dropdown-item py-2" href="index.html"><i class="bi bi-globe me-2 text-primary-brand"></i> Public Website</a></li>
+                        <li><hr class="dropdown-divider my-2"></li>
+                        <li><a class="dropdown-item text-danger py-2" href="login.html" onclick="logoutCustomer(event)"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+            <div>
+                <h2 class="fw-bold mb-1 text-dark">Tax Documents Portal</h2>
+                <p class="text-secondary mb-0">Securely upload and manage your W-2s, 1099s, expense receipts, and financial tax records.</p>
+            </div>
+            <a href="#uploadCard" class="btn btn-primary-brand d-inline-flex align-items-center gap-2 px-4 py-2 fw-bold">
+                <i class="bi bi-cloud-arrow-up"></i> Upload New Document
+            </a>
+        </div>
+
+        <!-- Metrics Overview Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-sm-6 col-xl-3">
+                <div class="card card-theme p-3 p-md-4 border-0 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-secondary small fw-semibold">Total Documents</span>
+                        <div class="bg-primary bg-opacity-10 text-primary-brand rounded p-2"><i class="bi bi-files fs-5"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-1 text-dark" id="statTotalDocs">6 Files</h3>
+                    <small class="text-secondary">Tax Years 2023 - 2024</small>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="card card-theme p-3 p-md-4 border-0 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-secondary small fw-semibold">Verified by CPA</span>
+                        <div class="bg-success bg-opacity-10 text-success rounded p-2"><i class="bi bi-patch-check-fill fs-5"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-1 text-success" id="statVerifiedDocs">4 Verified</h3>
+                    <small class="text-secondary">Ready for filing</small>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="card card-theme p-3 p-md-4 border-0 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-secondary small fw-semibold">Under CPA Review</span>
+                        <div class="bg-warning bg-opacity-10 text-warning rounded p-2"><i class="bi bi-hourglass-split fs-5"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-1 text-warning" id="statReviewDocs">2 In Review</h3>
+                    <small class="text-secondary">Assigned to CPA Elena R.</small>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xl-3">
+                <div class="card card-theme p-3 p-md-4 border-0 h-100">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-secondary small fw-semibold">Action Required</span>
+                        <div class="bg-danger bg-opacity-10 text-danger rounded p-2"><i class="bi bi-exclamation-triangle-fill fs-5"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-1 text-danger">1 Pending</h3>
+                    <small class="text-danger fw-semibold">Form 1098 missing</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Upload Card -->
+        <div class="card card-theme border-0 mb-4" id="uploadCard">
+            <div class="card-header bg-transparent border-bottom p-4">
+                <h5 class="fw-bold mb-1"><i class="bi bi-cloud-arrow-up text-primary-brand me-2"></i>Upload Financial Tax Documents</h5>
+                <p class="text-secondary small mb-0">Supported file formats: PDF, PNG, JPG, CSV, XLSX (Up to 25MB per file). Encrypted with 256-bit bank-grade SSL.</p>
+            </div>
+            <div class="card-body p-4">
+                <form id="docUploadForm" onsubmit="handleDocUpload(event)">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-5">
+                            <label class="form-label fw-semibold small" for="docCategorySelect">Document Category <span class="text-danger">*</span></label>
+                            <select class="form-select form-control-theme" id="docCategorySelect" required>
+                                <option value="W-2 Wage Statement" selected>W-2 Wage & Tax Statement</option>
+                                <option value="1099 Income (NEC/MISC/INT)">1099 Non-Employee / Misc / Interest</option>
+                                <option value="1098 Mortgage Interest">1098 Mortgage / Property Tax Statement</option>
+                                <option value="Business Deductions & Receipts">Business Deductions &amp; Expense Receipts</option>
+                                <option value="P&L / Balance Sheet">Profit &amp; Loss / Ledger Balance Sheet</option>
+                                <option value="Prior Year Tax Return">Prior Year Tax Return (Federal / State)</option>
+                                <option value="Bank / Brokerage Statement">Bank / Investment Brokerage Statement</option>
+                                <option value="Other Tax Record">Other Supporting Document</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold small" for="docTaxYearSelect">Tax Year <span class="text-danger">*</span></label>
+                            <select class="form-select form-control-theme" id="docTaxYearSelect" required>
+                                <option value="2023" selected>Tax Year 2023</option>
+                                <option value="2024">Tax Year 2024</option>
+                                <option value="2025">Tax Year 2025</option>
+                                <option value="2022">Tax Year 2022 (Amendment)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold small" for="docNotesInput">Notes for Your CPA (Optional)</label>
+                            <input type="text" class="form-control form-control-theme" id="docNotesInput" placeholder="e.g. Primary employer W-2">
+                        </div>
+                    </div>
+
+                    <!-- Drag & Drop Zone -->
+                    <div class="p-4 p-md-5 border-2 border-dashed rounded text-center mb-3" style="border-style: dashed !important; border-color: var(--primary-brand); background-color: var(--bg-secondary);">
+                        <i class="bi bi-file-earmark-arrow-up display-4 text-primary-brand mb-2"></i>
+                        <h6 class="fw-bold mb-1">Drag and drop tax files here, or click to browse</h6>
+                        <p class="text-secondary small mb-3">Upload your Form W-2, 1099, 1098, or receipt statements</p>
+                        <input type="file" id="realFileInput" class="d-none" multiple onchange="handleFileSelection(event)">
+                        <button type="button" class="btn btn-outline-brand px-4 py-2 fw-semibold" onclick="document.getElementById('realFileInput').click()">
+                            <i class="bi bi-folder2-open me-2"></i>Choose Files
+                        </button>
+                        <div id="selectedFilesBadge" class="mt-3 text-primary-brand fw-semibold small" style="display: none;"></div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary-brand px-4 py-2 fw-bold" id="uploadSubmitBtn">
+                            <i class="bi bi-shield-check me-2"></i>Submit Document to CPA
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Required Tax Documents Checklist -->
+        <div class="card card-theme border-0 mb-4">
+            <div class="card-header bg-transparent border-bottom p-4">
+                <h5 class="fw-bold mb-1"><i class="bi bi-check2-square text-primary-brand me-2"></i>Required Documents Checklist for Tax Filing</h5>
+                <p class="text-secondary small mb-0">Ensure all mandatory forms are submitted so your accountant can complete your return on schedule.</p>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-3">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-3 rounded border bg-light h-100 card-theme">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="badge bg-success bg-opacity-10 text-success fw-bold"><i class="bi bi-check-circle me-1"></i> Uploaded</span>
+                                <i class="bi bi-file-earmark-text text-secondary fs-5"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1">Form W-2</h6>
+                            <p class="small text-secondary mb-0">Wage &amp; salary tax statement from employers.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-3 rounded border bg-light h-100 card-theme">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="badge bg-success bg-opacity-10 text-success fw-bold"><i class="bi bi-check-circle me-1"></i> Uploaded</span>
+                                <i class="bi bi-cash-stack text-secondary fs-5"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1">1099-NEC / MISC</h6>
+                            <p class="small text-secondary mb-0">Freelance, contract, or non-employee income.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-3 rounded border border-warning bg-light h-100 card-theme">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="badge bg-danger bg-opacity-10 text-danger fw-bold"><i class="bi bi-exclamation-circle me-1"></i> Action Needed</span>
+                                <i class="bi bi-house-door text-warning fs-5"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1 text-danger">Form 1098 Mortgage</h6>
+                            <p class="small text-secondary mb-0">Mortgage interest statement for property tax deduction.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="p-3 rounded border bg-light h-100 card-theme">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="badge bg-success bg-opacity-10 text-success fw-bold"><i class="bi bi-check-circle me-1"></i> Uploaded</span>
+                                <i class="bi bi-receipt text-secondary fs-5"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1">Business Receipts</h6>
+                            <p class="small text-secondary mb-0">Supplies, vehicle mileage, and utility expenses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Uploaded Documents Table -->
+        <div class="card card-theme border-0 mb-4">
+            <div class="card-header bg-transparent border-bottom p-4 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h5 class="fw-bold mb-0">Uploaded Tax Files</h5>
+                    <small class="text-secondary">All files submitted to your assigned CPA Elena Rostova</small>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary active" onclick="filterDocs('all', this)">All</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="filterDocs('W-2', this)">W-2s</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="filterDocs('1099', this)">1099s</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" onclick="filterDocs('Receipts', this)">Receipts</button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0" style="min-width: 620px;">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Document Name</th>
+                                <th>Category</th>
+                                <th>Tax Year</th>
+                                <th>Upload Date</th>
+                                <th>File Size</th>
+                                <th>CPA Review Status</th>
+                                <th class="pe-4 text-end">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="documentsTableBody">
+                            <!-- Populated dynamically from storage -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Document Preview / Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+        <div id="docToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body" id="docToastBody">Document uploaded successfully!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/customer-dashboard.js"></script>
+
+    <script>
+        // Seed tax documents if not already in localStorage
+        function getDocuments() {
+            var stored = localStorage.getItem('taxcore_uploaded_docs');
+            if (stored) {
+                try { return JSON.parse(stored); } catch (e) { return []; }
+            }
+            var initialDocs = [
+                { id: 'DOC-101', name: '2023_W2_Employer_Corp.pdf', category: 'W-2 Wage Statement', year: '2023', date: 'Feb 12, 2024', size: '1.4 MB', status: 'Verified' },
+                { id: 'DOC-102', name: '1099_NEC_Contract_Income.pdf', category: '1099 Income (NEC/MISC/INT)', year: '2023', date: 'Feb 15, 2024', size: '890 KB', status: 'Verified' },
+                { id: 'DOC-103', name: '1099_INT_HighYieldSavings.pdf', category: '1099 Income (NEC/MISC/INT)', year: '2023', date: 'Feb 20, 2024', size: '540 KB', status: 'Verified' },
+                { id: 'DOC-104', name: 'Annual_Equipment_Deduction_Receipts.pdf', category: 'Business Deductions & Receipts', year: '2023', date: 'Mar 02, 2024', size: '3.8 MB', status: 'Under Review' },
+                { id: 'DOC-105', name: 'Vehicle_Mileage_Log_2023.xlsx', category: 'Business Deductions & Receipts', year: '2023', date: 'Mar 05, 2024', size: '720 KB', status: 'Under Review' },
+                { id: 'DOC-106', name: 'Prior_Year_Federal_Tax_Return_2022.pdf', category: 'Prior Year Tax Return', year: '2022', date: 'Jan 10, 2024', size: '4.2 MB', status: 'Verified' }
+            ];
+            localStorage.setItem('taxcore_uploaded_docs', JSON.stringify(initialDocs));
+            return initialDocs;
+        }
+
+        function renderDocs(filter) {
+            var docs = getDocuments();
+            var tbody = document.getElementById('documentsTableBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            var filtered = docs.filter(function(d) {
+                if (!filter || filter === 'all') return true;
+                return d.category.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-secondary">No tax documents found in this category.</td></tr>';
+                return;
+            }
+
+            filtered.forEach(function(doc) {
+                var badgeClass = 'bg-success bg-opacity-10 text-success';
+                var iconClass = 'bi-check-circle-fill';
+                if (doc.status === 'Under Review') {
+                    badgeClass = 'bg-warning bg-opacity-10 text-warning';
+                    iconClass = 'bi-hourglass-split';
+                } else if (doc.status === 'Action Needed') {
+                    badgeClass = 'bg-danger bg-opacity-10 text-danger';
+                    iconClass = 'bi-exclamation-circle-fill';
+                }
+
+                var tr = document.createElement('tr');
+                tr.innerHTML = 
+                    '<td class="ps-4 fw-semibold">' +
+                        '<div class="d-flex align-items-center gap-2">' +
+                            '<i class="bi bi-file-earmark-pdf-fill text-danger fs-5"></i>' +
+                            '<span>' + doc.name + '</span>' +
+                        '</div>' +
+                    '</td>' +
+                    '<td><span class="badge bg-light text-dark border">' + doc.category + '</span></td>' +
+                    '<td><span class="fw-semibold">' + doc.year + '</span></td>' +
+                    '<td class="text-secondary">' + doc.date + '</td>' +
+                    '<td class="text-secondary">' + doc.size + '</td>' +
+                    '<td><span class="badge ' + badgeClass + ' rounded-pill px-3 py-1"><i class="bi ' + iconClass + ' me-1"></i>' + doc.status + '</span></td>' +
+                    '<td class="pe-4 text-end">' +
+                        '<button type="button" class="btn btn-sm btn-light border me-1 text-primary" title="Download Document" onclick="downloadDoc(\'' + doc.name + '\')"><i class="bi bi-download"></i></button>' +
+                        '<button type="button" class="btn btn-sm btn-light border text-danger" title="Delete Document" onclick="deleteDoc(\'' + doc.id + '\')"><i class="bi bi-trash"></i></button>' +
+                    '</td>';
+                tbody.appendChild(tr);
+            });
+
+            // Update stats
+            var verifiedCount = docs.filter(function(d){ return d.status === 'Verified'; }).length;
+            var reviewCount = docs.filter(function(d){ return d.status === 'Under Review'; }).length;
+            document.getElementById('statTotalDocs').textContent = docs.length + ' Files';
+            document.getElementById('statVerifiedDocs').textContent = verifiedCount + ' Verified';
+            document.getElementById('statReviewDocs').textContent = reviewCount + ' In Review';
+        }
+
+        function filterDocs(cat, btn) {
+            document.querySelectorAll('.card-header .btn-outline-secondary').forEach(function(b){ b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+            renderDocs(cat);
+        }
+
+        var selectedFileNames = [];
+        function handleFileSelection(e) {
+            var files = e.target.files;
+            selectedFileNames = [];
+            for (var i = 0; i < files.length; i++) {
+                selectedFileNames.push(files[i].name);
+            }
+            var badge = document.getElementById('selectedFilesBadge');
+            if (selectedFileNames.length > 0) {
+                badge.textContent = selectedFileNames.length + ' file(s) selected: ' + selectedFileNames.join(', ');
+                badge.style.display = 'block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function handleDocUpload(e) {
+            e.preventDefault();
+            var category = document.getElementById('docCategorySelect').value;
+            var year = document.getElementById('docTaxYearSelect').value;
+            var notes = document.getElementById('docNotesInput').value;
+
+            var fileName = selectedFileNames.length > 0 ? selectedFileNames[0] : (year + '_' + category.split(' ')[0] + '_Statement.pdf');
+            
+            var docs = getDocuments();
+            var newDoc = {
+                id: 'DOC-' + Date.now(),
+                name: fileName,
+                category: category,
+                year: year,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+                size: '1.2 MB',
+                status: 'Under Review'
+            };
+
+            docs.unshift(newDoc);
+            localStorage.setItem('taxcore_uploaded_docs', JSON.stringify(docs));
+
+            // Reset upload UI
+            document.getElementById('docUploadForm').reset();
+            document.getElementById('selectedFilesBadge').style.display = 'none';
+            selectedFileNames = [];
+
+            renderDocs('all');
+            showToast('Document "' + fileName + '" uploaded and assigned to your CPA Elena Rostova for review.');
+        }
+
+        function downloadDoc(name) {
+            showToast('Initiating encrypted download for ' + name + '...');
+        }
+
+        function deleteDoc(id) {
+            if (!confirm('Are you sure you want to remove this tax document?')) return;
+            var docs = getDocuments().filter(function(d){ return d.id !== id; });
+            localStorage.setItem('taxcore_uploaded_docs', JSON.stringify(docs));
+            renderDocs('all');
+            showToast('Tax document deleted.');
+        }
+
+        function showToast(msg) {
+            var toastEl = document.getElementById('docToast');
+            var bodyEl = document.getElementById('docToastBody');
+            if (toastEl && bodyEl) {
+                bodyEl.textContent = msg;
+                var bsToast = new bootstrap.Toast(toastEl, { delay: 3500 });
+                bsToast.show();
+            } else {
+                alert(msg);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderDocs('all');
+        });
+    </script>
+</body>
+</html>

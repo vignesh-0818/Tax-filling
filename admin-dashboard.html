@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/admin-dashboard.css">
+</head>
+<body class="admin-page">
+
+<div class="toast-area" id="toastArea"></div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- LOGOUT MODAL -->
+<div class="modal-backdrop-custom" id="logoutModal">
+  <div class="modal-box modal-sm">
+    <div class="modal-box-body" style="text-align:center;padding:32px 24px;">
+      <div class="delete-confirm-icon"><i class="bi bi-box-arrow-right"></i></div>
+      <div class="delete-confirm-title">Confirm Logout</div>
+      <p class="delete-confirm-text">Are you sure you want to logout?</p>
+    </div>
+    <div class="modal-box-footer" style="justify-content:center;">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('logoutModal')">Cancel</button>
+      <button type="button" class="btn-action btn-delete" onclick="doLogout()"><i class="bi bi-box-arrow-right"></i> Logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- DELETE MODAL -->
+<div class="modal-backdrop-custom" id="deleteModal">
+  <div class="modal-box modal-sm">
+    <div class="modal-box-body" style="padding:28px 24px 0;">
+      <div class="delete-confirm-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+      <div class="delete-confirm-title" id="deleteTitleText">Delete Item?</div>
+      <p class="delete-confirm-text" id="deleteBodyText">This action cannot be undone.</p>
+    </div>
+    <div class="modal-box-footer" style="justify-content:center;">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('deleteModal')">Cancel</button>
+      <button type="button" class="btn-action btn-delete" id="deleteConfirmBtn"><i class="bi bi-trash"></i> Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW MODAL -->
+<div class="modal-backdrop-custom" id="viewModal">
+  <div class="modal-box modal-lg">
+    <div class="modal-box-header">
+      <h5 id="viewModalTitle">View Details</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('viewModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-box-body" id="viewModalBody"></div>
+    <div class="modal-box-footer" id="viewModalFooter">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('viewModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-backdrop-custom" id="editModal">
+  <div class="modal-box modal-md">
+    <div class="modal-box-header">
+      <h5 id="editModalTitle">Edit Item</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('editModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-box-body" id="editModalBody"></div>
+    <div class="modal-box-footer">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('editModal')">Cancel</button>
+      <button type="button" class="btn-primary-brand" onclick="saveEdit()"><i class="bi bi-check-lg"></i> Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD CLIENT MODAL -->
+<div class="modal-backdrop-custom" id="addClientModal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <h5>Add New Client</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('addClientModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-box-body">
+      <form id="addClientForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name <span style="color:#ef4444">*</span></label>
+            <input type="text" class="dash-form-control" id="cf_name" placeholder="Raj Kumar">
+            <div class="form-error" id="err_cf_name">Full name is required.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email <span style="color:#ef4444">*</span></label>
+            <input type="email" class="dash-form-control" id="cf_email" placeholder="raj@example.com">
+            <div class="form-error" id="err_cf_email">Enter a valid email.</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Phone (10 digits) <span style="color:#ef4444">*</span></label>
+            <input type="tel" class="dash-form-control" id="cf_phone" placeholder="9876543210" maxlength="10">
+            <div class="form-error" id="err_cf_phone">Phone must be exactly 10 digits (numbers only).</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Company</label>
+            <input type="text" class="dash-form-control" id="cf_company" placeholder="TaxCore Inc.">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service <span style="color:#ef4444">*</span></label>
+          <select class="dash-form-control" id="cf_service">
+            <option value="">Select a service...</option>
+            <option>Income Tax Filing</option><option>GST Returns</option><option>Bookkeeping</option>
+            <option>Audit Support</option><option>Corporate Tax</option><option>TDS Filing</option>
+          </select>
+          <div class="form-error" id="err_cf_service">Please select a service.</div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-box-footer">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('addClientModal')">Cancel</button>
+      <button type="button" class="btn-primary-brand" onclick="submitAddClient()"><i class="bi bi-person-plus"></i> Add Client</button>
+    </div>
+  </div>
+</div>
+
+<!-- UPLOAD DOC MODAL -->
+<div class="modal-backdrop-custom" id="uploadDocModal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <h5>Upload Document</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('uploadDocModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <form id="uploadDocForm" novalidate onsubmit="event.preventDefault(); submitUpload();">
+      <div class="modal-box-body">
+        <div class="form-group">
+          <label class="form-label" for="docClientSelect">Select Client</label>
+          <select class="dash-form-control" id="docClientSelect">
+            <option>Raj Kumar</option>
+            <option>Priya Sharma</option>
+            <option>Arun Kumar</option>
+            <option>Meena Patel</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="docTypeSelect">Document Type</label>
+          <select class="dash-form-control" id="docTypeSelect">
+            <option>PAN Card</option>
+            <option>Aadhaar Card</option>
+            <option>Bank Statement</option>
+            <option>ITR</option>
+            <option>GST Certificate</option>
+            <option>Payment Receipt</option>
+            <option>Form 16</option>
+            <option>Other Document</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="docFileInput">Select File</label>
+          <input type="file" class="dash-form-control" id="docFileInput" accept=".pdf,.jpg,.jpeg,.png,.txt,.doc,.docx,.xls,.xlsx,.csv">
+          <div class="form-error" id="err_doc_file">Please select a file to upload.</div>
+        </div>
+        <div id="docFileDetailsPreview" class="doc-file-preview-card" style="display:none;">
+          <div class="doc-file-preview-icon" id="previewDocIconBox"><i id="previewDocIcon" class="bi bi-file-earmark-text-fill"></i></div>
+          <div class="doc-file-preview-info">
+            <div class="doc-file-preview-name" id="previewDocName">Receipt_TXN-88492.txt</div>
+            <div class="doc-file-preview-meta">
+              <span id="previewDocSize">124 B</span> &bull; 
+              <span id="previewDocType">Plain Text Document</span> &bull; 
+              <span class="preview-ready-badge"><i class="bi bi-check-circle-fill"></i> Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-box-footer">
+        <button type="button" class="btn-secondary-dash" onclick="closeModal('uploadDocModal')">Cancel</button>
+        <button type="submit" class="btn-primary-brand"><i class="bi bi-cloud-arrow-up"></i> Upload</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ADD FILING MODAL -->
+<div class="modal-backdrop-custom" id="addFilingModal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <h5>Add Tax Filing</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('addFilingModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-box-body">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label" for="addFilingClient">Client</label>
+          <select class="dash-form-control" id="addFilingClient"><option>Raj Kumar</option><option>Priya Sharma</option><option>Arun Kumar</option><option>Meena Patel</option></select>
+        </div>
+        <div class="form-group"><label class="form-label" for="addFilingType">Filing Type</label>
+          <select class="dash-form-control" id="addFilingType"><option>Income Tax</option><option>GST Return</option><option>Bookkeeping</option><option>Corporate Tax</option><option>TDS</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label" for="addFilingSubType">Sub-Type</label><input type="text" class="dash-form-control" id="addFilingSubType" placeholder="e.g. Individual ITR"></div>
+        <div class="form-group"><label class="form-label" for="addFilingStatus">Status</label>
+          <select class="dash-form-control" id="addFilingStatus">
+            <option value="In Progress" selected>In Progress</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label" for="addFilingDate">Due Date</label><input type="date" class="dash-form-control" id="addFilingDate"></div>
+        <div class="form-group"><label class="form-label" for="addFilingAmount">Amount (Rs.)</label><input type="number" class="dash-form-control" id="addFilingAmount" placeholder="5000"></div>
+      </div>
+    </div>
+    <div class="modal-box-footer">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('addFilingModal')">Cancel</button>
+      <button type="button" class="btn-primary-brand" onclick="submitFiling()"><i class="bi bi-plus-lg"></i> Add Filing</button>
+    </div>
+  </div>
+</div>
+
+<!-- CALENDAR EVENT MODAL -->
+<div class="modal-backdrop-custom" id="calEventModal">
+  <div class="modal-box modal-sm">
+    <div class="modal-box-header">
+      <h5 id="calEventTitle">Event Details</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('calEventModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-box-body" id="calEventBody"></div>
+    <div class="modal-box-footer">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('calEventModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PLAN MODAL -->
+<div class="modal-backdrop-custom" id="addPlanModal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <h5><i class="bi bi-tags-fill me-2" style="color:#22c55e;"></i>Add New Pricing Plan</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('addPlanModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-box-body">
+      <form id="addPlanForm" novalidate onsubmit="event.preventDefault(); submitAddPlan();">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="pl_name">Plan Name <span style="color:#ef4444">*</span></label>
+            <input type="text" class="dash-form-control" id="pl_name" placeholder="e.g. Premium Growth" required>
+            <div class="form-error" id="err_pl_name">Plan name is required.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pl_price">Price <span style="color:#ef4444">*</span></label>
+            <input type="text" class="dash-form-control" id="pl_price" placeholder="e.g. Rs.9,999 or Custom" required>
+            <div class="form-error" id="err_pl_price">Price is required.</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="pl_billing">Billing Cycle <span style="color:#ef4444">*</span></label>
+            <select class="dash-form-control" id="pl_billing">
+              <option value="Monthly">Monthly</option>
+              <option value="Quarterly">Quarterly</option>
+              <option value="Annual">Annual</option>
+              <option value="One-time">One-time</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pl_subscribers">Subscribers</label>
+            <input type="number" class="dash-form-control" id="pl_subscribers" placeholder="0" min="0" value="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="pl_features">Features Included <span style="color:#ef4444">*</span></label>
+            <input type="text" class="dash-form-control" id="pl_features" placeholder="e.g. 5 Services, Priority Support" required>
+            <div class="form-error" id="err_pl_features">Features description is required.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="pl_status">Status</label>
+            <select class="dash-form-control" id="pl_status">
+              <option value="Active" selected>Active</option>
+              <option value="Pending">Pending</option>
+              <option value="On Request">On Request</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-box-footer">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('addPlanModal')">Cancel</button>
+      <button type="button" class="btn-primary-brand" onclick="submitAddPlan()"><i class="bi bi-plus-lg"></i> Add Plan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD SERVICE MODAL -->
+<div class="modal-backdrop-custom" id="addServiceModal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <h5><i class="bi bi-briefcase-fill me-2" style="color:#22c55e;"></i>Add New Service</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('addServiceModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-box-body">
+      <form id="addServiceForm" novalidate onsubmit="event.preventDefault(); submitAddService();">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="sv_name">Service Name <span style="color:#ef4444">*</span></label>
+            <input type="text" class="dash-form-control" id="sv_name" placeholder="e.g. Payroll Management" required>
+            <div class="form-error" id="err_sv_name">Service name is required.</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="sv_price">Base Price <span style="color:#ef4444">*</span></label>
+            <input type="text" class="dash-form-control" id="sv_price" placeholder="e.g. Rs.2,500" required>
+            <div class="form-error" id="err_sv_price">Base price is required.</div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="sv_icon">Category Icon</label>
+            <select class="dash-form-control" id="sv_icon">
+              <option value="bi-receipt-cutoff">Receipt / Tax</option>
+              <option value="bi-calculator-fill">Calculator / GST</option>
+              <option value="bi-journal-text">Journal / Bookkeeping</option>
+              <option value="bi-shield-check">Shield / Audit</option>
+              <option value="bi-building">Building / Corporate</option>
+              <option value="bi-percent">Percent / TDS</option>
+              <option value="bi-cash-coin">Coin / Finance</option>
+              <option value="bi-briefcase-fill" selected>Briefcase / General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="sv_status">Status</label>
+            <select class="dash-form-control" id="sv_status">
+              <option value="Active" selected>Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="sv_desc">Description <span style="color:#ef4444">*</span></label>
+          <textarea class="dash-form-control" id="sv_desc" rows="3" placeholder="Describe this service offering and deliverables..." required style="resize:vertical;"></textarea>
+          <div class="form-error" id="err_sv_desc">Description is required.</div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-box-footer">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('addServiceModal')">Cancel</button>
+      <button type="button" class="btn-primary-brand" onclick="submitAddService()"><i class="bi bi-plus-lg"></i> Add Service</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESPOND NOTICE MODAL -->
+<div class="modal-backdrop-custom" id="respondNoticeModal">
+  <div class="modal-box">
+    <div class="modal-box-header">
+      <h5><i class="bi bi-reply-fill me-2" style="color:#22c55e;"></i>Respond to Tax Notice</h5>
+      <button type="button" class="modal-close-btn" aria-label="Close" onclick="closeModal('respondNoticeModal')"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="modal-box-body">
+      <form id="respondNoticeForm" novalidate onsubmit="event.preventDefault(); submitNoticeResponse();">
+        <input type="hidden" id="resp_notice_id">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Client</label>
+            <input type="text" class="dash-form-control" id="resp_client_name" readonly style="opacity:0.85;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Notice Type</label>
+            <input type="text" class="dash-form-control" id="resp_notice_type" readonly style="opacity:0.85;">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Notice Date</label>
+            <input type="text" class="dash-form-control" id="resp_notice_date" readonly style="opacity:0.85;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Compliance Deadline</label>
+            <input type="text" class="dash-form-control" id="resp_notice_deadline" readonly style="opacity:0.85;">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="resp_action_type">Response Action <span style="color:#ef4444">*</span></label>
+            <select class="dash-form-control" id="resp_action_type">
+              <option value="Clarification Submitted">Clarification Submitted</option>
+              <option value="Rectification Request Filed">Rectification Request Filed</option>
+              <option value="Revised Return Submitted">Revised Return Submitted</option>
+              <option value="Appeal Lodged">Appeal Lodged</option>
+              <option value="Demand Accepted & Paid">Demand Accepted & Paid</option>
+              <option value="Response Sent to Department">Response Sent to Department</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="resp_status">Updated Status</label>
+            <select class="dash-form-control" id="resp_status">
+              <option value="Responded" selected>Responded</option>
+              <option value="Completed">Completed</option>
+              <option value="Under Review">Under Review</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="resp_ref_no">Acknowledgment / Reference No. <span style="color:#ef4444">*</span></label>
+          <input type="text" class="dash-form-control" id="resp_ref_no" placeholder="e.g. ACK-ITR-2026-98241" required>
+          <div class="form-error" id="err_resp_ref_no">Acknowledgment number is required.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="resp_remarks">Response Details / Submission Notes <span style="color:#ef4444">*</span></label>
+          <textarea class="dash-form-control" id="resp_remarks" rows="3" placeholder="Enter explanation, rectification details, or notes submitted to the tax authority..." required style="resize:vertical;"></textarea>
+          <div class="form-error" id="err_resp_remarks">Response details are required.</div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-box-footer">
+      <button type="button" class="btn-secondary-dash" onclick="closeModal('respondNoticeModal')">Cancel</button>
+      <button type="button" class="btn-primary-brand" onclick="submitNoticeResponse()"><i class="bi bi-send-check"></i> Submit Response</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="admin-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <a class="sidebar-logo" href="index.html">
+      <i class="bi bi-calculator-fill"></i>
+      <span>TaxCore Admin</span>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-label">Menu</div>
+      <a class="sidebar-nav-link active" data-section="section-overview" tabindex="0"><i class="bi bi-speedometer2"></i> Dashboard</a>
+      <a class="sidebar-nav-link" data-section="section-clients" tabindex="0"><i class="bi bi-people-fill"></i> Clients</a>
+      <a class="sidebar-nav-link" data-section="section-filings" tabindex="0"><i class="bi bi-file-earmark-text-fill"></i> Tax Filings</a>
+      <a class="sidebar-nav-link" data-section="section-documents" tabindex="0"><i class="bi bi-folder2-open"></i> Documents</a>
+      <a class="sidebar-nav-link" data-section="section-notices" tabindex="0"><i class="bi bi-exclamation-triangle-fill"></i> Tax Notices</a>
+      <a class="sidebar-nav-link" data-section="section-payments" tabindex="0"><i class="bi bi-credit-card-fill"></i> Payments</a>
+      <a class="sidebar-nav-link" data-section="section-services" tabindex="0"><i class="bi bi-briefcase-fill"></i> Services</a>
+      <a class="sidebar-nav-link" data-section="section-plans" tabindex="0"><i class="bi bi-tags-fill"></i> Pricing Plans</a>
+      <a class="sidebar-nav-link" data-section="section-calendar" tabindex="0"><i class="bi bi-calendar3"></i> Tax Calendar</a>
+      <div class="sidebar-label" style="margin-top:4px;">Communication</div>
+      <a class="sidebar-nav-link" data-section="section-messages" tabindex="0"><i class="bi bi-chat-dots-fill"></i> Messages <span style="background:#ef4444;color:#fff;padding:2px 7px;border-radius:12px;font-size:0.7rem;margin-left:auto;">3</span></a>
+      <div class="sidebar-label" style="margin-top:4px;">System</div>
+      <a class="sidebar-nav-link" data-section="section-reports" tabindex="0"><i class="bi bi-bar-chart-fill"></i> Reports</a>
+      <a class="sidebar-nav-link" data-section="section-settings" tabindex="0"><i class="bi bi-gear-fill"></i> Settings</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar-circle" style="width:36px;height:36px;font-size:0.85rem;">VR</div>
+        <div class="user-info"><div class="name p-name nav-user-name">Admin</div><div class="role p-role">Administrator</div></div>
+      </div>
+      <a class="sidebar-nav-link" style="color:#ef4444;" onclick="openModal('logoutModal')" tabindex="0"><i class="bi bi-box-arrow-left"></i> Logout</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="dash-main">
+
+    <!-- TOPBAR -->
+    <header class="dash-topbar">
+      <div class="topbar-left">
+        <button type="button" class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle sidebar"><i class="bi bi-list" style="font-size:1.2rem;"></i></button>
+        <h1 id="adminPageTitle">Dashboard</h1>
+        <a href="index.html" class="btn-secondary-dash back-to-website-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:0.82rem;font-weight:600;margin-left:8px;">
+          <i class="bi bi-arrow-left"></i> Back to Website
+        </a>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-search">
+          <button type="button" class="topbar-search-btn" id="globalSearchBtn" aria-label="Search" title="Search dashboard">
+            <i class="bi bi-search"></i>
+          </button>
+          <input type="text" id="globalSearch" placeholder="Search..." autocomplete="off" aria-label="Global search">
+          <button type="button" class="topbar-search-clear" id="globalSearchClear" aria-label="Clear search" title="Clear" style="display:none;">
+            <i class="bi bi-x-lg"></i>
+          </button>
+          <div class="search-dropdown" id="searchDropdown"></div>
+        </div>
+        <div style="position:relative;">
+          <button type="button" class="topbar-icon-btn" id="notifBtn" aria-label="Notifications">
+            <i class="bi bi-bell-fill"></i>
+            <span class="notif-badge" id="notifBadge">5</span>
+          </button>
+          <div class="notif-dropdown" id="notifDropdown">
+            <div class="notif-header">
+              <span>Notifications</span>
+              <button type="button" onclick="markAllRead()" style="background:none;border:none;color:#22c55e;font-size:0.78rem;font-weight:600;cursor:pointer;">Mark all read</button>
+            </div>
+            <div class="notif-item unread" onclick="switchSection('section-clients');closeDropdowns()"><div class="notif-title"><i class="bi bi-person-plus" style="color:#22c55e;margin-right:4px;"></i> New client registered</div><div class="notif-time">2 minutes ago</div></div>
+            <div class="notif-item unread" onclick="switchSection('section-filings');closeDropdowns()"><div class="notif-title"><i class="bi bi-clock-fill" style="color:#f97316;margin-right:4px;"></i> Tax filing deadline approaching</div><div class="notif-time">1 hour ago</div></div>
+            <div class="notif-item unread" onclick="switchSection('section-payments');closeDropdowns()"><div class="notif-title"><i class="bi bi-check-circle-fill" style="color:#22c55e;margin-right:4px;"></i> Payment received</div><div class="notif-time">3 hours ago</div></div>
+            <div class="notif-item unread" onclick="switchSection('section-notices');closeDropdowns()"><div class="notif-title"><i class="bi bi-exclamation-triangle-fill" style="color:#ef4444;margin-right:4px;"></i> New tax notice issued</div><div class="notif-time">Yesterday</div></div>
+            <div class="notif-item unread" onclick="switchSection('section-documents');closeDropdowns()"><div class="notif-title"><i class="bi bi-file-earmark-arrow-up-fill" style="color:#3b82f6;margin-right:4px;"></i> Document uploaded</div><div class="notif-time">2 days ago</div></div>
+          </div>
+        </div>
+        <button type="button" class="topbar-icon-btn" id="themeToggleBtn" aria-label="Toggle theme" title="Dark/Light Mode"><i class="bi bi-moon-stars-fill" id="themeIcon"></i></button>
+        <button type="button" class="topbar-icon-btn topbar-rtl-btn" id="rtlToggleBtn" aria-label="Toggle RTL">RTL</button>
+        <div style="position:relative;">
+          <div class="admin-profile-btn" id="profileBtn" tabindex="0" role="button" aria-label="Profile menu" aria-haspopup="true">
+            <div class="user-avatar-circle profile-avatar" id="navUserAvatar">VR</div>
+            <div class="admin-nav-meta">
+              <span class="p-name nav-user-name" id="navUserName">Admin</span>
+              <span class="p-role nav-user-role" id="navUserRole">Admin</span>
+            </div>
+            <i class="bi bi-chevron-down arrow-icon"></i>
+          </div>
+          <div class="profile-dropdown" id="profileDropdown">
+            <div class="profile-header">
+              <div class="p-name nav-user-name">Admin</div>
+              <div class="p-role nav-user-role">Admin</div>
+              <div class="p-email nav-user-email">admin@taxcore.com</div>
+            </div>
+            <a class="profile-menu-item" href="admin-dashboard.html" onclick="switchSection('section-overview');closeDropdowns();return false;"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a class="profile-menu-item" href="#profile" onclick="openAdminProfile();closeDropdowns();return false;"><i class="bi bi-person"></i> Profile</a>
+            <a class="profile-menu-item" href="index.html"><i class="bi bi-globe"></i> Public Website</a>
+            <div class="profile-menu-divider"></div>
+            <a class="profile-menu-item danger" href="login.html" onclick="TaxCoreAuth.logout(event)"><i class="bi bi-box-arrow-right"></i> Logout</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT AREA -->
+    <div class="dash-content" id="dashContent">
+
+<!-- ===== OVERVIEW SECTION ===== -->
+<section id="section-overview" class="dash-section active">
+  <div class="stat-cards-grid">
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-people-fill"></i></div><div class="stat-card-body"><div class="stat-value">1,248</div><div class="stat-label">Total Clients</div><div class="stat-trend up"><i class="bi bi-arrow-up-right"></i> +12% this month</div></div></div>
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#dcfce7;color:#16a34a;"><i class="bi bi-file-earmark-text-fill"></i></div><div class="stat-card-body"><div class="stat-value">386</div><div class="stat-label">Active Filings</div><div class="stat-trend up"><i class="bi bi-arrow-up-right"></i> +8% this month</div></div></div>
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#fef9c3;color:#ca8a04;"><i class="bi bi-folder2-open"></i></div><div class="stat-card-body"><div class="stat-value">74</div><div class="stat-label">Pending Docs</div><div class="stat-trend down"><i class="bi bi-arrow-down-right"></i> -3 this week</div></div></div>
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#dcfce7;color:#16a34a;"><i class="bi bi-currency-rupee"></i></div><div class="stat-card-body"><div class="stat-value">Rs.12.8M</div><div class="stat-label">Total Revenue</div><div class="stat-trend up"><i class="bi bi-arrow-up-right"></i> +22% this year</div></div></div>
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#fee2e2;color:#dc2626;"><i class="bi bi-exclamation-triangle-fill"></i></div><div class="stat-card-body"><div class="stat-value">18</div><div class="stat-label">Tax Notices</div><div class="stat-trend down"><i class="bi bi-arrow-down-right"></i> -2 resolved</div></div></div>
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#e0f2fe;color:#0369a1;"><i class="bi bi-hourglass-split"></i></div><div class="stat-card-body"><div class="stat-value">Rs.2.4M</div><div class="stat-label">Pending Payments</div><div class="stat-trend down"><i class="bi bi-arrow-down-right"></i> -5% collected</div></div></div>
+  </div>
+
+  <div class="analytics-grid mb-20">
+    <div class="dash-card">
+      <div class="dash-card-header"><h5><i class="bi bi-graph-up me-2" style="color:#22c55e;"></i>Revenue Overview</h5><span style="font-size:0.78rem;color:#64748b;">12 months 2026</span></div>
+      <div class="dash-card-body"><div class="chart-container"><canvas id="revenueChart"></canvas></div></div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-card-header"><h5><i class="bi bi-pie-chart-fill me-2" style="color:#22c55e;"></i>Filing Status</h5></div>
+      <div class="dash-card-body"><div class="chart-container"><canvas id="filingStatusChart"></canvas></div></div>
+    </div>
+  </div>
+
+  <div class="dash-card mb-20">
+    <div class="dash-card-header"><h5><i class="bi bi-person-plus-fill me-2" style="color:#22c55e;"></i>Client Growth</h5><span style="font-size:0.78rem;color:#64748b;">Monthly</span></div>
+    <div class="dash-card-body"><div class="chart-container" style="height:220px;"><canvas id="clientGrowthChart"></canvas></div></div>
+  </div>
+
+  <div class="dash-card">
+    <div class="dash-card-header">
+      <h5><i class="bi bi-clock-history me-2" style="color:#22c55e;"></i>Recent Tax Filings</h5>
+      <button type="button" class="btn-outline-brand" onclick="switchSection('section-filings')" style="font-size:0.78rem;padding:5px 14px;">View All</button>
+    </div>
+    <div class="dash-card-body no-pad">
+      <div class="dash-table-wrapper">
+        <table class="dash-table">
+          <thead><tr><th>Client</th><th>Service</th><th>Filing Type</th><th>Due Date</th><th>Status</th><th>Amount</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr data-id="of1"><td><div class="cell-primary">Raj Kumar</div></td><td>Income Tax Filing</td><td>Individual ITR</td><td>15 Sep 2026</td><td><span class="status-badge badge-success">Completed</span></td><td class="cell-primary">Rs.4,500</td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Raj Kumar','Income Tax Filing','Individual ITR','15 Sep 2026','Completed','Rs.4,500')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('of1','Raj Kumar - ITR')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Filing: Raj Kumar ITR')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="of2"><td><div class="cell-primary">Priya Sharma</div></td><td>GST Return</td><td>Monthly GST</td><td>20 Sep 2026</td><td><span class="status-badge badge-primary">In Progress</span></td><td class="cell-primary">Rs.3,500</td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Priya Sharma','GST Return','Monthly GST','20 Sep 2026','In Progress','Rs.3,500')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('of2','Priya Sharma - GST')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Filing: Priya Sharma GST')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="of3"><td><div class="cell-primary">Arun Kumar</div></td><td>Bookkeeping</td><td>Monthly</td><td>25 Sep 2026</td><td><span class="status-badge badge-warning">Pending</span></td><td class="cell-primary">Rs.6,000</td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Arun Kumar','Bookkeeping','Monthly','25 Sep 2026','Pending','Rs.6,000')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('of3','Arun Kumar - Bookkeeping')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Filing: Arun Kumar Bookkeeping')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="of4"><td><div class="cell-primary">Meena Patel</div></td><td>Corporate Tax</td><td>Corporate Filing</td><td>30 Sep 2026</td><td><span class="status-badge badge-danger">Rejected</span></td><td class="cell-primary">Rs.8,500</td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Meena Patel','Corporate Tax','Corporate Filing','30 Sep 2026','Rejected','Rs.8,500')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('of4','Meena Patel - Corporate')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Filing: Meena Patel Corporate')"><i class="bi bi-trash"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLIENTS ===== -->
+<section id="section-clients" class="dash-section">
+  <div class="section-heading">
+    <h2><i class="bi bi-people-fill me-2" style="color:#22c55e;"></i>Clients</h2>
+    <div class="flex-gap-8">
+      <button type="button" class="btn-secondary-dash" onclick="exportCSV('clients')"><i class="bi bi-download"></i> Export</button>
+      <button type="button" class="btn-primary-brand" onclick="openModal('addClientModal')"><i class="bi bi-person-plus"></i> Add Client</button>
+    </div>
+  </div>
+  <div class="dash-card">
+    <div class="dash-card-header">
+      <div class="flex-gap-8">
+        <div class="table-search-box">
+          <i class="bi bi-search"></i>
+          <input type="text" placeholder="Search clients..." onkeyup="filterTable('clientsTable',this.value)" aria-label="Search clients">
+        </div>
+        <button type="button" class="btn-secondary-dash"><i class="bi bi-funnel"></i> Filter</button>
+      </div>
+    </div>
+    <div class="dash-card-body no-pad">
+      <div class="dash-table-wrapper">
+        <table class="dash-table" id="clientsTable">
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Service</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr data-id="c1"><td><div class="cell-primary">Raj Kumar</div></td><td>raj@example.com</td><td>9876543210</td><td>Kumar Enterprises</td><td>Income Tax Filing</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Raj Kumar','raj@example.com','9876543210','Kumar Enterprises','Income Tax Filing','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('c1','Raj Kumar')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Client: Raj Kumar')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="c2"><td><div class="cell-primary">Priya Sharma</div></td><td>priya@example.com</td><td>9988776655</td><td>Sharma and Co.</td><td>GST Returns</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Priya Sharma','priya@example.com','9988776655','Sharma and Co.','GST Returns','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('c2','Priya Sharma')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Client: Priya Sharma')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="c3"><td><div class="cell-primary">Arun Kumar</div></td><td>arun@example.com</td><td>9123456789</td><td>AK Solutions</td><td>Bookkeeping</td><td><span class="status-badge badge-warning">Pending</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Arun Kumar','arun@example.com','9123456789','AK Solutions','Bookkeeping','Pending')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('c3','Arun Kumar')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Client: Arun Kumar')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="c4"><td><div class="cell-primary">Meena Patel</div></td><td>meena@example.com</td><td>9765432109</td><td>Patel Industries</td><td>Corporate Tax</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Meena Patel','meena@example.com','9765432109','Patel Industries','Corporate Tax','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('c4','Meena Patel')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Client: Meena Patel')"><i class="bi bi-trash"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TAX FILINGS ===== -->
+<section id="section-filings" class="dash-section">
+  <div class="section-heading">
+    <h2><i class="bi bi-file-earmark-text-fill me-2" style="color:#22c55e;"></i>Tax Filings</h2>
+    <div class="flex-gap-8">
+      <button type="button" class="btn-secondary-dash" onclick="exportCSV('filings')"><i class="bi bi-download"></i> Export</button>
+      <button type="button" class="btn-primary-brand" onclick="openModal('addFilingModal')"><i class="bi bi-plus-lg"></i> Add Filing</button>
+    </div>
+  </div>
+  <div class="dash-card">
+    <div class="dash-card-header">
+      <div class="flex-gap-8" style="flex-wrap:wrap;">
+        <div class="table-search-box">
+          <i class="bi bi-search"></i>
+          <input type="text" id="filingSearchInput" placeholder="Search filings..." oninput="filterFilingsTable()" onkeyup="filterFilingsTable()" aria-label="Search filings">
+        </div>
+        <select class="dash-form-control" id="filingTypeFilter" style="width:auto;" onchange="filterFilingsTable()" aria-label="Filter by filing type"><option value="">All Types</option><option value="Income Tax">Income Tax</option><option value="GST Return">GST Return</option><option value="Bookkeeping">Bookkeeping</option><option value="Corporate Tax">Corporate Tax</option><option value="TDS">TDS</option></select>
+        <select class="dash-form-control" id="filingStatusFilter" style="width:auto;" onchange="filterFilingsTable()" aria-label="Filter by filing status"><option value="">All Status</option><option value="Completed">Completed</option><option value="In Progress">In Progress</option><option value="Pending">Pending</option><option value="Rejected">Rejected</option></select>
+      </div>
+    </div>
+    <div class="dash-card-body no-pad">
+      <div class="dash-table-wrapper">
+        <table class="dash-table" id="filingsTable">
+          <thead><tr><th>Client</th><th>Type</th><th>Sub-Type</th><th>Due Date</th><th>Status</th><th>Amount</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr data-id="f1" data-client="Raj Kumar" data-type="Income Tax" data-status="Completed"><td class="cell-primary">Raj Kumar</td><td>Income Tax</td><td>Individual ITR</td><td>15 Sep 2026</td><td><span class="status-badge badge-success">Completed</span></td><td>Rs.4,500</td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Raj Kumar','Income Tax','Individual ITR','15 Sep 2026','Completed','Rs.4,500')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('f1','Raj Kumar ITR')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Filing: Raj Kumar ITR')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="f2" data-client="Priya Sharma" data-type="GST Return" data-status="In Progress"><td class="cell-primary">Priya Sharma</td><td>GST Return</td><td>Monthly GST</td><td>20 Sep 2026</td><td><span class="status-badge badge-primary">In Progress</span></td><td>Rs.3,500</td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Priya Sharma','GST Return','Monthly GST','20 Sep 2026','In Progress','Rs.3,500')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('f2','Priya Sharma GST')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Filing: Priya Sharma GST')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="f3" data-client="Arun Kumar" data-type="Bookkeeping" data-status="Pending"><td class="cell-primary">Arun Kumar</td><td>Bookkeeping</td><td>Monthly</td><td>25 Sep 2026</td><td><span class="status-badge badge-warning">Pending</span></td><td>Rs.6,000</td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Arun Kumar','Bookkeeping','Monthly','25 Sep 2026','Pending','Rs.6,000')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('f3','Arun Kumar Bookkeeping')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Filing: Arun Kumar Bookkeeping')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="f4" data-client="Meena Patel" data-type="Corporate Tax" data-status="Rejected"><td class="cell-primary">Meena Patel</td><td>Corporate Tax</td><td>Corporate Filing</td><td>30 Sep 2026</td><td><span class="status-badge badge-danger">Rejected</span></td><td>Rs.8,500</td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Meena Patel','Corporate Tax','Corporate Filing','30 Sep 2026','Rejected','Rs.8,500')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('f4','Meena Patel Corporate')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Filing: Meena Patel Corporate')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr id="noFilingsRow" class="no-records-row" style="display:none;"><td colspan="7"><div class="empty-table-state"><i class="bi bi-inbox empty-state-icon"></i><div class="empty-state-title">No filings found</div><div class="empty-state-subtitle">No tax filings match the selected filters or search criteria.</div></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DOCUMENTS ===== -->
+<section id="section-documents" class="dash-section">
+  <div class="section-heading"><h2><i class="bi bi-folder2-open me-2" style="color:#22c55e;"></i>Documents</h2><button type="button" class="btn-primary-brand" onclick="openModal('uploadDocModal')"><i class="bi bi-cloud-arrow-up"></i> Upload Document</button></div>
+  <div class="dash-card">
+    <div class="dash-card-body no-pad">
+      <div class="dash-table-wrapper">
+        <table class="dash-table" id="docsTable">
+          <thead><tr><th>Document Name</th><th>Client</th><th>Type</th><th>Uploaded Date</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr data-id="d1"><td><i class="bi bi-file-pdf-fill" style="color:#ef4444;margin-right:6px;"></i>PAN_Card_Raj.pdf</td><td class="cell-primary">Raj Kumar</td><td>PAN Card</td><td>01 Sep 2026</td><td><span class="status-badge badge-success">Verified</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openDocViewModal('d1','PAN_Card_Raj.pdf','Raj Kumar','PAN Card','01 Sep 2026','Verified','1.2 MB')"><i class="bi bi-eye"></i> View</button><button type="button" class="btn-action" onclick="downloadDemo('PAN_Card_Raj.pdf')"><i class="bi bi-download"></i> Download</button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Document: PAN_Card_Raj.pdf')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="d2"><td><i class="bi bi-file-pdf-fill" style="color:#ef4444;margin-right:6px;"></i>GST_Cert_Priya.pdf</td><td class="cell-primary">Priya Sharma</td><td>GST Certificate</td><td>28 Aug 2026</td><td><span class="status-badge badge-primary">Under Review</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openDocViewModal('d2','GST_Cert_Priya.pdf','Priya Sharma','GST Certificate','28 Aug 2026','Under Review','840 KB')"><i class="bi bi-eye"></i> View</button><button type="button" class="btn-action" onclick="downloadDemo('GST_Cert_Priya.pdf')"><i class="bi bi-download"></i> Download</button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Document: GST_Cert_Priya.pdf')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="d3"><td><i class="bi bi-file-image-fill" style="color:#3b82f6;margin-right:6px;"></i>Aadhaar_Arun.jpg</td><td class="cell-primary">Arun Kumar</td><td>Aadhaar Card</td><td>15 Aug 2026</td><td><span class="status-badge badge-success">Verified</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openDocViewModal('d3','Aadhaar_Arun.jpg','Arun Kumar','Aadhaar Card','15 Aug 2026','Verified','2.4 MB')"><i class="bi bi-eye"></i> View</button><button type="button" class="btn-action" onclick="downloadDemo('Aadhaar_Arun.jpg')"><i class="bi bi-download"></i> Download</button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Document: Aadhaar_Arun.jpg')"><i class="bi bi-trash"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TAX NOTICES ===== -->
+<section id="section-notices" class="dash-section">
+  <div class="section-heading"><h2><i class="bi bi-exclamation-triangle-fill me-2" style="color:#22c55e;"></i>Tax Notices</h2></div>
+  <div class="dash-card">
+    <div class="dash-card-body no-pad">
+      <div class="dash-table-wrapper">
+        <table class="dash-table" id="noticesTable">
+          <thead><tr><th>Client</th><th>Notice Type</th><th>Notice Date</th><th>Deadline</th><th>Priority</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr data-id="n1"><td class="cell-primary">TaxCore Inc.</td><td>Section 143(1)</td><td>25 Aug 2026</td><td style="color:#ef4444;font-weight:600;">10 Sep 2026</td><td><span class="status-badge badge-danger">High</span></td><td><span class="status-badge badge-warning">Under Review</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('TaxCore Inc.','Section 143(1)','25 Aug 2026','10 Sep 2026','High','Under Review')"><i class="bi bi-eye"></i> View</button><button type="button" class="btn-action btn-green" onclick="openRespondNoticeModal('n1','TaxCore Inc.','Section 143(1)','25 Aug 2026','10 Sep 2026')"><i class="bi bi-reply-fill"></i> Respond</button><button type="button" class="btn-action btn-edit" onclick="openEditModal('n1','Notice TaxCore Inc.')"><i class="bi bi-pencil"></i> Update</button></td></tr>
+            <tr data-id="n2"><td class="cell-primary">Raj Kumar</td><td>Section 139(9)</td><td>10 Aug 2026</td><td style="color:#f97316;font-weight:600;">30 Sep 2026</td><td><span class="status-badge badge-warning">Medium</span></td><td><span class="status-badge badge-primary">Responded</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Raj Kumar','Section 139(9)','10 Aug 2026','30 Sep 2026','Medium','Responded')"><i class="bi bi-eye"></i> View</button><button type="button" class="btn-action btn-green" onclick="openRespondNoticeModal('n2','Raj Kumar','Section 139(9)','10 Aug 2026','30 Sep 2026')"><i class="bi bi-reply-fill"></i> Respond</button><button type="button" class="btn-action btn-edit" onclick="openEditModal('n2','Notice Raj Kumar')"><i class="bi bi-pencil"></i> Update</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PAYMENTS ===== -->
+<section id="section-payments" class="dash-section">
+  <div class="section-heading"><h2><i class="bi bi-credit-card-fill me-2" style="color:#22c55e;"></i>Payments</h2></div>
+  <div class="stat-cards-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#dcfce7;color:#16a34a;"><i class="bi bi-currency-rupee"></i></div><div class="stat-card-body"><div class="stat-value">Rs.12.8M</div><div class="stat-label">Total Revenue</div></div></div>
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="bi bi-check-circle-fill"></i></div><div class="stat-card-body"><div class="stat-value">Rs.10.4M</div><div class="stat-label">Paid</div></div></div>
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#fef9c3;color:#ca8a04;"><i class="bi bi-hourglass-split"></i></div><div class="stat-card-body"><div class="stat-value">Rs.2.4M</div><div class="stat-label">Pending</div></div></div>
+    <div class="stat-card-new"><div class="stat-card-icon" style="background:#fee2e2;color:#dc2626;"><i class="bi bi-arrow-counterclockwise"></i></div><div class="stat-card-body"><div class="stat-value">Rs.45K</div><div class="stat-label">Refunded</div></div></div>
+  </div>
+  <div class="dash-card">
+    <div class="dash-card-body no-pad">
+      <div class="dash-table-wrapper">
+        <table class="dash-table" id="paymentsTable">
+          <thead><tr><th>Txn ID</th><th>Client</th><th>Amount</th><th>Date</th><th>Method</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr data-id="p1"><td style="font-family:monospace;">#TXN-88492</td><td class="cell-primary">Arun Kumar</td><td>Rs.6,000</td><td>01 Sep 2026</td><td>UPI</td><td><span class="status-badge badge-success">Paid</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('#TXN-88492','Arun Kumar','Rs.6,000','01 Sep 2026','UPI','Paid')"><i class="bi bi-eye"></i> View</button><button type="button" class="btn-action" onclick="downloadReceipt('TXN-88492')"><i class="bi bi-receipt"></i> Receipt</button></td></tr>
+            <tr data-id="p2"><td style="font-family:monospace;">#TXN-88491</td><td class="cell-primary">Raj Kumar</td><td>Rs.4,500</td><td>28 Aug 2026</td><td>Net Banking</td><td><span class="status-badge badge-success">Paid</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('#TXN-88491','Raj Kumar','Rs.4,500','28 Aug 2026','Net Banking','Paid')"><i class="bi bi-eye"></i> View</button><button type="button" class="btn-action" onclick="downloadReceipt('TXN-88491')"><i class="bi bi-receipt"></i> Receipt</button></td></tr>
+            <tr data-id="p3"><td style="font-family:monospace;">#TXN-88490</td><td class="cell-primary">Priya Sharma</td><td>Rs.3,500</td><td>25 Aug 2026</td><td>Card</td><td><span class="status-badge badge-warning">Pending</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('#TXN-88490','Priya Sharma','Rs.3,500','25 Aug 2026','Card','Pending')"><i class="bi bi-eye"></i> View</button><button type="button" class="btn-action" onclick="downloadReceipt('TXN-88490')"><i class="bi bi-receipt"></i> Receipt</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="section-services" class="dash-section">
+  <div class="section-heading"><h2><i class="bi bi-briefcase-fill me-2" style="color:#22c55e;"></i>Services</h2><button type="button" class="btn-primary-brand" onclick="openModal('addServiceModal')"><i class="bi bi-plus-lg"></i> Add Service</button></div>
+  <div class="dash-card">
+    <div class="dash-card-body no-pad">
+      <div class="dash-table-wrapper">
+        <table class="dash-table" id="servicesTable">
+          <thead><tr><th>Service</th><th>Description</th><th>Base Price</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr data-id="s1"><td class="cell-primary"><i class="bi bi-receipt-cutoff me-2" style="color:#22c55e;"></i>Income Tax Filing</td><td>Standard individual ITR filing</td><td>Rs.1,500</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Income Tax Filing','Standard individual ITR filing','Rs.1,500','','','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('s1','Income Tax Filing')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Service: Income Tax Filing')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="s2"><td class="cell-primary"><i class="bi bi-calculator-fill me-2" style="color:#22c55e;"></i>GST Returns</td><td>Monthly/Quarterly GST filing</td><td>Rs.2,000</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('GST Returns','Monthly/Quarterly GST filing','Rs.2,000','','','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('s2','GST Returns')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Service: GST Returns')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="s3"><td class="cell-primary"><i class="bi bi-journal-text me-2" style="color:#22c55e;"></i>Bookkeeping</td><td>Monthly bookkeeping services</td><td>Rs.3,500</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Bookkeeping','Monthly bookkeeping services','Rs.3,500','','','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('s3','Bookkeeping')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Service: Bookkeeping')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="s4"><td class="cell-primary"><i class="bi bi-shield-check me-2" style="color:#22c55e;"></i>Audit Support</td><td>Full audit assistance and filing</td><td>Rs.8,000</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Audit Support','Full audit assistance','Rs.8,000','','','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('s4','Audit Support')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Service: Audit Support')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="s5"><td class="cell-primary"><i class="bi bi-building me-2" style="color:#22c55e;"></i>Corporate Tax</td><td>Corporate tax planning and filing</td><td>Rs.12,000</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Corporate Tax','Corporate tax planning','Rs.12,000','','','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('s5','Corporate Tax')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Service: Corporate Tax')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="s6"><td class="cell-primary"><i class="bi bi-percent me-2" style="color:#22c55e;"></i>TDS Filing</td><td>TDS deduction and return filing</td><td>Rs.1,800</td><td><span class="status-badge badge-gray">Inactive</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('TDS Filing','TDS deduction and return','Rs.1,800','','','Inactive')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('s6','TDS Filing')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Service: TDS Filing')"><i class="bi bi-trash"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING PLANS ===== -->
+<section id="section-plans" class="dash-section">
+  <div class="section-heading"><h2><i class="bi bi-tags-fill me-2" style="color:#22c55e;"></i>Pricing Plans</h2><button type="button" class="btn-primary-brand" onclick="openModal('addPlanModal')"><i class="bi bi-plus-lg"></i> Add Plan</button></div>
+  <div class="dash-card">
+    <div class="dash-card-body no-pad">
+      <div class="dash-table-wrapper">
+        <table class="dash-table" id="plansTable">
+          <thead><tr><th>Plan</th><th>Price</th><th>Billing</th><th>Features</th><th>Subscribers</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr data-id="pl1"><td class="cell-primary">Basic</td><td>Rs.2,999</td><td>Monthly</td><td>3 Services</td><td>248</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Basic','Rs.2,999','Monthly','3 Services','248','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('pl1','Basic Plan')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Plan: Basic')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="pl2"><td class="cell-primary">Professional</td><td>Rs.6,999</td><td>Monthly</td><td>7 Services</td><td>342</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Professional','Rs.6,999','Monthly','7 Services','342','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('pl2','Professional Plan')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Plan: Professional')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="pl3"><td class="cell-primary">Business</td><td>Rs.14,999</td><td>Annual</td><td>All Services</td><td>189</td><td><span class="status-badge badge-success">Active</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Business','Rs.14,999','Annual','All Services','189','Active')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('pl3','Business Plan')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Plan: Business')"><i class="bi bi-trash"></i></button></td></tr>
+            <tr data-id="pl4"><td class="cell-primary">Enterprise</td><td>Custom</td><td>Annual</td><td>Custom + Priority</td><td>69</td><td><span class="status-badge badge-primary">On Request</span></td><td class="action-btns"><button type="button" class="btn-action btn-view" onclick="openViewModal('Enterprise','Custom','Annual','All + Priority','69','On Request')"><i class="bi bi-eye"></i></button><button type="button" class="btn-action btn-edit" onclick="openEditModal('pl4','Enterprise Plan')"><i class="bi bi-pencil"></i></button><button type="button" class="btn-action btn-delete" onclick="openDeleteModal(this,'Plan: Enterprise')"><i class="bi bi-trash"></i></button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TAX CALENDAR ===== -->
+<section id="section-calendar" class="dash-section">
+  <div class="section-heading">
+    <h2><i class="bi bi-calendar3 me-2" style="color:#22c55e;"></i>Tax Calendar</h2>
+    <div class="flex-gap-8">
+      <button type="button" class="btn-secondary-dash" id="calListViewBtn" style="font-size:0.8rem;padding:6px 14px;"><i class="bi bi-list-ul"></i> List</button>
+      <button type="button" class="btn-secondary-dash active" id="calMonthViewBtn" style="font-size:0.8rem;padding:6px 14px;"><i class="bi bi-grid-3x3-gap"></i> Month</button>
+    </div>
+  </div>
+  <div class="dash-card">
+    <div class="dash-card-header">
+      <button type="button" class="btn-secondary-dash" id="prevMonthBtn"><i class="bi bi-chevron-left"></i> Prev</button>
+      <h5 id="calendarTitle" style="margin:0;font-weight:700;">September 2026</h5>
+      <div class="flex-gap-8">
+        <button type="button" class="btn-secondary-dash" id="todayBtn">Today</button>
+        <button type="button" class="btn-secondary-dash" id="nextMonthBtn">Next <i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="dash-card-body" id="calendarView"></div>
+  </div>
+</section>
+
+<!-- ===== MESSAGES ===== -->
+<section id="section-messages" class="dash-section">
+  <div class="section-heading"><h2><i class="bi bi-chat-dots-fill me-2" style="color:#22c55e;"></i>Messages</h2></div>
+  <div class="messages-layout">
+    <div class="convo-list">
+      <div class="convo-search">
+        <div class="convo-search-bar">
+          <button type="button" class="convo-search-btn" id="convoSearchBtn" aria-label="Search conversations" title="Search">
+            <i class="bi bi-search"></i>
+          </button>
+          <input type="text" id="convoSearchInput" placeholder="Search conversations..." aria-label="Search conversations" autocomplete="off">
+          <button type="button" class="convo-search-clear-btn" id="convoSearchClearBtn" aria-label="Clear search" title="Clear" style="display:none;">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </div>
+      <div id="convoNoResults" class="convo-no-results" style="display:none;">
+        <i class="bi bi-chat-left-dots"></i>
+        <div class="no-results-text">No conversations found</div>
+        <div class="no-results-subtext">No matches for "<span id="convoQueryDisplay"></span>"</div>
+        <button type="button" class="btn-clear-convo-search" onclick="clearConvoSearch()">Clear search</button>
+      </div>
+      <div class="convo-item active" onclick="openConvo(this,'Raj Kumar','10:42 AM')"><div class="flex-between"><div class="c-name">Raj Kumar</div><div class="c-time">10:42 AM</div></div><div class="c-preview">Hi, I need to upload my bank statements...</div></div>
+      <div class="convo-item" onclick="openConvo(this,'Priya Sharma','Yesterday')"><div class="flex-between"><div class="c-name">Priya Sharma</div><div class="c-time">Yesterday</div></div><div class="c-preview">Thanks for the quick update!</div></div>
+      <div class="convo-item" onclick="openConvo(this,'Arun Kumar','2 days ago')"><div class="flex-between"><div class="c-name">Arun Kumar</div><div class="c-time">2 days ago</div></div><div class="c-preview">When will my ITR be filed?</div></div>
+      <div class="convo-item" onclick="openConvo(this,'Meena Patel','3 days ago')"><div class="flex-between"><div class="c-name">Meena Patel</div><div class="c-time">3 days ago</div></div><div class="c-preview">Please check the documents I sent.</div></div>
+    </div>
+    <div class="chat-area">
+      <div class="chat-header"><div><div style="font-weight:700;font-size:0.95rem;" id="chatClientName">Raj Kumar</div><div style="font-size:0.78rem;color:#22c55e;">Online</div></div></div>
+      <div class="chat-messages" id="chatMessages">
+        <div><div class="msg-bubble msg-incoming">Hi, I need to upload my bank statements. Where do I send them?<div class="msg-time">10:30 AM</div></div></div>
+        <div><div class="msg-bubble msg-outgoing">Hello! You can upload them securely in the Documents section of your portal.<div class="msg-time">10:35 AM</div></div></div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Type your message..." aria-label="Message input">
+        <button type="button" class="btn-primary-brand" onclick="sendMessage()" aria-label="Send message"><i class="bi bi-send-fill"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REPORTS ===== -->
+<section id="section-reports" class="dash-section">
+  <div class="section-heading"><h2><i class="bi bi-bar-chart-fill me-2" style="color:#22c55e;"></i>Reports</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:20px;">
+    <div class="dash-card"><div class="dash-card-body" style="text-align:center;padding:28px 20px;"><div style="font-size:2.5rem;color:#22c55e;margin-bottom:12px;"><i class="bi bi-graph-up-arrow"></i></div><h6 style="font-weight:700;margin-bottom:6px;">Revenue Report</h6><p style="font-size:0.82rem;color:#64748b;margin-bottom:16px;">Summary of all revenue and payments.</p><div class="flex-gap-8" style="justify-content:center;flex-wrap:wrap;"><button type="button" class="btn-primary-brand" onclick="generateReport('Revenue')"><i class="bi bi-eye"></i> Generate</button><button type="button" class="btn-secondary-dash" onclick="exportCSV('revenue')"><i class="bi bi-filetype-csv"></i> CSV</button><button type="button" class="btn-secondary-dash" onclick="window.print()"><i class="bi bi-printer"></i> Print</button></div></div></div>
+    <div class="dash-card"><div class="dash-card-body" style="text-align:center;padding:28px 20px;"><div style="font-size:2.5rem;color:#3b82f6;margin-bottom:12px;"><i class="bi bi-people-fill"></i></div><h6 style="font-weight:700;margin-bottom:6px;">Client Report</h6><p style="font-size:0.82rem;color:#64748b;margin-bottom:16px;">Client acquisition, churn, and growth.</p><div class="flex-gap-8" style="justify-content:center;flex-wrap:wrap;"><button type="button" class="btn-primary-brand" onclick="generateReport('Client')"><i class="bi bi-eye"></i> Generate</button><button type="button" class="btn-secondary-dash" onclick="exportCSV('clients')"><i class="bi bi-filetype-csv"></i> CSV</button><button type="button" class="btn-secondary-dash" onclick="window.print()"><i class="bi bi-printer"></i> Print</button></div></div></div>
+    <div class="dash-card"><div class="dash-card-body" style="text-align:center;padding:28px 20px;"><div style="font-size:2.5rem;color:#f97316;margin-bottom:12px;"><i class="bi bi-file-earmark-text-fill"></i></div><h6 style="font-weight:700;margin-bottom:6px;">Tax Filing Report</h6><p style="font-size:0.82rem;color:#64748b;margin-bottom:16px;">Status of all tax filings by type.</p><div class="flex-gap-8" style="justify-content:center;flex-wrap:wrap;"><button type="button" class="btn-primary-brand" onclick="generateReport('Tax Filing')"><i class="bi bi-eye"></i> Generate</button><button type="button" class="btn-secondary-dash" onclick="exportCSV('filings')"><i class="bi bi-filetype-csv"></i> CSV</button><button type="button" class="btn-secondary-dash" onclick="window.print()"><i class="bi bi-printer"></i> Print</button></div></div></div>
+    <div class="dash-card"><div class="dash-card-body" style="text-align:center;padding:28px 20px;"><div style="font-size:2.5rem;color:#8b5cf6;margin-bottom:12px;"><i class="bi bi-credit-card-fill"></i></div><h6 style="font-weight:700;margin-bottom:6px;">Payment Report</h6><p style="font-size:0.82rem;color:#64748b;margin-bottom:16px;">Transaction history and payment status.</p><div class="flex-gap-8" style="justify-content:center;flex-wrap:wrap;"><button type="button" class="btn-primary-brand" onclick="generateReport('Payment')"><i class="bi bi-eye"></i> Generate</button><button type="button" class="btn-secondary-dash" onclick="exportCSV('payments')"><i class="bi bi-filetype-csv"></i> CSV</button><button type="button" class="btn-secondary-dash" onclick="window.print()"><i class="bi bi-printer"></i> Print</button></div></div></div>
+    <div class="dash-card"><div class="dash-card-body" style="text-align:center;padding:28px 20px;"><div style="font-size:2.5rem;color:#ef4444;margin-bottom:12px;"><i class="bi bi-exclamation-triangle-fill"></i></div><h6 style="font-weight:700;margin-bottom:6px;">Tax Notice Report</h6><p style="font-size:0.82rem;color:#64748b;margin-bottom:16px;">Summary of all tax notices and responses.</p><div class="flex-gap-8" style="justify-content:center;flex-wrap:wrap;"><button type="button" class="btn-primary-brand" onclick="generateReport('Tax Notice')"><i class="bi bi-eye"></i> Generate</button><button type="button" class="btn-secondary-dash" onclick="exportCSV('notices')"><i class="bi bi-filetype-csv"></i> CSV</button><button type="button" class="btn-secondary-dash" onclick="window.print()"><i class="bi bi-printer"></i> Print</button></div></div></div>
+  </div>
+  <div id="reportOutput" style="display:none;" class="dash-card">
+    <div class="dash-card-header"><h5 id="reportOutputTitle">Report Output</h5></div>
+    <div class="dash-card-body" id="reportOutputBody"></div>
+  </div>
+</section>
+
+<!-- ===== SETTINGS ===== -->
+<section id="section-settings" class="dash-section">
+  <div class="section-heading"><h2><i class="bi bi-gear-fill me-2" style="color:#22c55e;"></i>Settings</h2></div>
+  <div class="settings-tabs">
+    <button type="button" class="settings-tab-btn active" data-tab="tab-general">General</button>
+    <button type="button" class="settings-tab-btn" data-tab="tab-profile">Profile</button>
+    <button type="button" class="settings-tab-btn" data-tab="tab-security">Security</button>
+    <button type="button" class="settings-tab-btn" data-tab="tab-notifications">Notifications</button>
+    <button type="button" class="settings-tab-btn" data-tab="tab-appearance">Appearance</button>
+  </div>
+
+  <div class="settings-tab-content active" id="tab-general">
+    <div class="dash-card" style="max-width:600px;">
+      <div class="dash-card-header"><h5>General Settings</h5></div>
+      <div class="dash-card-body">
+        <div class="form-group"><label class="form-label">Company Name</label><input type="text" class="dash-form-control" value="TaxCore Solutions"></div>
+        <div class="form-group"><label class="form-label">Business Email</label><input type="email" class="dash-form-control" value="contact@taxcore.com"></div>
+        <div class="form-group"><label class="form-label">Phone</label><input type="tel" class="dash-form-control" value="+91 98765 43210"></div>
+        <div class="form-group"><label class="form-label">Timezone</label><select class="dash-form-control"><option>Asia/Kolkata (IST)</option><option>UTC</option></select></div>
+        <button type="button" class="btn-primary-brand" onclick="saveSettings()"><i class="bi bi-check-lg"></i> Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-tab-content" id="tab-profile">
+    <div class="dash-card" style="max-width:600px;">
+      <div class="dash-card-header"><h5>Admin Profile</h5></div>
+      <div class="dash-card-body">
+        <form id="adminProfileForm" onsubmit="saveAdminProfile(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name <span style="color:#ef4444">*</span></label>
+              <input type="text" class="dash-form-control" id="adminProfFullName" required placeholder="Full Name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number <span style="color:#ef4444">*</span></label>
+              <input type="tel" class="dash-form-control" id="adminProfPhone" placeholder="10-digit number" maxlength="10">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="dash-form-control" id="adminProfEmail" readonly placeholder="Email Address">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Account Type</label>
+              <input type="text" class="dash-form-control" id="adminProfRole" value="Administrator" readonly>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary-brand"><i class="bi bi-person-check"></i> Update Profile</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-tab-content" id="tab-security">
+    <div class="dash-card" style="max-width:600px;">
+      <div class="dash-card-header"><h5>Security</h5></div>
+      <div class="dash-card-body">
+        <div class="form-group"><label class="form-label">Current Password</label><input type="password" class="dash-form-control" placeholder="Enter current password"></div>
+        <div class="form-group"><label class="form-label">New Password</label><input type="password" class="dash-form-control" placeholder="Min 8 characters"></div>
+        <div class="form-group"><label class="form-label">Confirm New Password</label><input type="password" class="dash-form-control" placeholder="Repeat new password"></div>
+        <button type="button" class="btn-primary-brand" onclick="saveSettings('Password updated successfully!')"><i class="bi bi-shield-lock"></i> Update Password</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-tab-content" id="tab-notifications">
+    <div class="dash-card" style="max-width:600px;">
+      <div class="dash-card-header"><h5>Notification Preferences</h5></div>
+      <div class="dash-card-body">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="flex-between"><div><div style="font-weight:600;font-size:0.9rem;">Email Notifications</div><div style="font-size:0.8rem;color:#64748b;">Receive email alerts for all activity</div></div><button type="button" class="toggle-switch on" onclick="toggleSwitch(this)"></button></div>
+          <div class="flex-between"><div><div style="font-weight:600;font-size:0.9rem;">Tax Deadline Alerts</div><div style="font-size:0.8rem;color:#64748b;">Get notified 7 days before deadlines</div></div><button type="button" class="toggle-switch on" onclick="toggleSwitch(this)"></button></div>
+          <div class="flex-between"><div><div style="font-weight:600;font-size:0.9rem;">Payment Alerts</div><div style="font-size:0.8rem;color:#64748b;">Notify when payment is received or due</div></div><button type="button" class="toggle-switch on" onclick="toggleSwitch(this)"></button></div>
+          <div class="flex-between"><div><div style="font-weight:600;font-size:0.9rem;">New Client Alerts</div><div style="font-size:0.8rem;color:#64748b;">Alert when a new client registers</div></div><button type="button" class="toggle-switch" onclick="toggleSwitch(this)"></button></div>
+        </div>
+        <button type="button" class="btn-primary-brand" style="margin-top:20px;" onclick="saveSettings()"><i class="bi bi-check-lg"></i> Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-tab-content" id="tab-appearance">
+    <div class="dash-card" style="max-width:600px;">
+      <div class="dash-card-header"><h5>Appearance</h5></div>
+      <div class="dash-card-body">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div class="flex-between"><div><div style="font-weight:600;font-size:0.9rem;">Dark Mode</div><div style="font-size:0.8rem;color:#64748b;">Switch to dark theme</div></div><button type="button" class="toggle-switch" id="appearanceDarkToggle" onclick="toggleDarkFromSettings()"></button></div>
+          <div class="flex-between"><div><div style="font-weight:600;font-size:0.9rem;">RTL Direction</div><div style="font-size:0.8rem;color:#64748b;">Enable right-to-left layout</div></div><button type="button" class="toggle-switch" id="appearanceRtlToggle" onclick="toggleRtlFromSettings()"></button></div>
+        </div>
+        <button type="button" class="btn-primary-brand" style="margin-top:20px;" onclick="saveSettings()"><i class="bi bi-palette"></i> Save Appearance</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+    </div><!-- end dash-content -->
+  </div><!-- end dash-main -->
+</div><!-- end admin-wrapper -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

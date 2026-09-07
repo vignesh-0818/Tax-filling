@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calendar - TaxCore</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <link rel="stylesheet" href="css/rtl.css">
+</head>
+<body>
+
+    <!-- ==============================================
+    Header / Navbar
+    =============================================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-theme fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <i class="bi bi-calculator text-primary-brand"></i>
+                    TaxCore
+                </a>
+                
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <i class="bi bi-list fs-1 text-primary-brand"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="index.html" role="button" data-bs-toggle="dropdown">Home</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="index.html">Home 1</a></li>
+                                <li><a class="dropdown-item" href="index-2.html">Home 2</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="tax-calendar.html">Tax Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                    
+                    <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
+                        <button class="theme-toggle-btn" aria-label="Toggle Theme"><i class="bi bi-moon-stars"></i></button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
+                        <a href="dashboard.html" class="nav-link fw-semibold text-primary-brand" id="navDashboardBtn" style="display: none;"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a>
+                        <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get Started</a>
+                        <a href="login.html" class="btn btn-primary-brand btn-sm px-3" id="navLogoutBtn" style="display: none;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==============================================
+    Breadcrumb & Hero
+    =============================================== -->
+    <section class="page-hero calendar-hero">
+        <div class="page-hero-overlay"></div>
+        <div class="container page-hero-content text-center">
+            <h1>Tax Calendar 2026</h1>
+            <div class="breadcrumb justify-content-center">
+                <a href="index.html">Home</a>
+                <span class="mx-2">/</span>
+                <span>Tax Calendar</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Calendar Interface
+    =============================================== -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="card card-theme p-4 p-md-5">
+                
+                <!-- Filters -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-text border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                            <input type="text" class="form-control border-start-0 form-control-theme" id="calendar-search" placeholder="Search deadlines, forms...">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select form-control-theme" id="calendar-filter">
+                            <option value="all">All Categories</option>
+                            <option value="income">Income Tax</option>
+                            <option value="gst">GST</option>
+                            <option value="tds">TDS</option>
+                            <option value="advance">Advance Tax</option>
+                            <option value="annual">Annual Returns</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Calendar Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle border">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Filing Type</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="calendar-row" data-category="tds">
+                                <td class="fw-bold text-nowrap"><i class="bi bi-calendar-event text-primary-brand me-2"></i> Jan 07, 2026</td>
+                                <td><span class="badge bg-secondary">TDS</span></td>
+                                <td class="fw-semibold">TDS Monthly Deposit</td>
+                                <td class="text-secondary small">Due date for deposit of Tax deducted/collected for the month of December.</td>
+                                <td><span class="badge bg-danger rounded-pill">Urgent</span></td>
+                            </tr>
+                            <tr class="calendar-row" data-category="gst">
+                                <td class="fw-bold text-nowrap"><i class="bi bi-calendar-event text-primary-brand me-2"></i> Jan 20, 2026</td>
+                                <td><span class="badge bg-info text-dark">GST</span></td>
+                                <td class="fw-semibold">GSTR-3B</td>
+                                <td class="text-secondary small">Summary of outward supplies, ITC declared, and tax paid for December.</td>
+                                <td><span class="badge bg-warning text-dark rounded-pill">Upcoming</span></td>
+                            </tr>
+                            <tr class="calendar-row" data-category="advance">
+                                <td class="fw-bold text-nowrap"><i class="bi bi-calendar-event text-primary-brand me-2"></i> Mar 15, 2026</td>
+                                <td><span class="badge bg-primary">Advance Tax</span></td>
+                                <td class="fw-semibold">4th Installment</td>
+                                <td class="text-secondary small">Payment of 4th installment of advance tax for the year.</td>
+                                <td><span class="badge bg-light text-dark border rounded-pill">Scheduled</span></td>
+                            </tr>
+                            <tr class="calendar-row" data-category="income">
+                                <td class="fw-bold text-nowrap"><i class="bi bi-calendar-event text-primary-brand me-2"></i> Apr 15, 2026</td>
+                                <td><span class="badge bg-success">Income Tax</span></td>
+                                <td class="fw-semibold">Individual Returns (Form 1040)</td>
+                                <td class="text-secondary small">Deadline to file individual tax returns or file for automatic 6-month extension.</td>
+                                <td><span class="badge bg-light text-dark border rounded-pill">Scheduled</span></td>
+                            </tr>
+                            <tr class="calendar-row table-warning bg-opacity-25" data-category="income advance" id="deadline-oct-15">
+                                <td class="fw-bold text-nowrap"><i class="bi bi-calendar-check-fill text-warning me-2"></i> Oct 15, 2026</td>
+                                <td><span class="badge bg-success">Income Tax</span></td>
+                                <td class="fw-semibold">
+                                    <span>Form 1040 (Extended) &bull; Q3 Est.</span>
+                                    <span class="badge bg-warning text-dark ms-1" style="font-size: 0.72rem;"><i class="bi bi-star-fill me-1"></i>Active Return Deadline</span>
+                                </td>
+                                <td class="text-secondary small">Final statutory due date for extended Individual Form 1040 (including Schedule C) &amp; Q3 estimated quarterly tax payment.</td>
+                                <td><span class="badge bg-warning text-dark rounded-pill fw-bold"><i class="bi bi-clock-history me-1"></i> 40 Days Left</span></td>
+                            </tr>
+                            <tr class="calendar-row" data-category="annual">
+                                <td class="fw-bold text-nowrap"><i class="bi bi-calendar-event text-primary-brand me-2"></i> Oct 31, 2026</td>
+                                <td><span class="badge bg-dark">Annual Returns</span></td>
+                                <td class="fw-semibold">Audit Report</td>
+                                <td class="text-secondary small">Due date to furnish audit report for corporate accounts.</td>
+                                <td><span class="badge bg-light text-dark border rounded-pill">Scheduled</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="alert alert-info mt-4 d-flex align-items-center gap-3" role="alert">
+                    <i class="bi bi-info-circle-fill fs-3"></i>
+                    <div>
+                        <h6 class="alert-heading fw-bold mb-1">Stay updated automatically</h6>
+                        <p class="mb-0 small">Log in to your client dashboard to sync these deadlines with your Google or Outlook calendar.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==============================================
+    Footer
+    =============================================== -->
+    <footer class="footer-theme">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <a class="navbar-brand d-flex align-items-center gap-2 mb-3 text-white fs-4 fw-bold" href="index.html">
+                        <i class="bi bi-calculator text-success"></i>
+                        TaxCore
+                    </a>
+                    <p class="text-muted mb-4 pe-lg-4">Professional tax filing, bookkeeping, and accounting solutions designed to help individuals and businesses thrive financially.</p>
+                    <div class="social-icons">
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="index.html" class="text-decoration-none">Home</a></li>
+                        <li><a href="about.html" class="text-decoration-none">About Us</a></li>
+                        <li><a href="pricing.html" class="text-decoration-none">Pricing</a></li>
+                        <li><a href="tax-calendar.html" class="text-decoration-none text-white fw-bold">Tax Calendar</a></li>
+                        <li><a href="contact.html" class="text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-title">Services</h5>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a href="income-tax.html" class="text-decoration-none">Income Tax</a></li>
+                        <li><a href="gst-returns.html" class="text-decoration-none">GST Returns</a></li>
+                        <li><a href="bookkeeping.html" class="text-decoration-none">Bookkeeping</a></li>
+                        <li><a href="payroll-accounting.html" class="text-decoration-none">Payroll</a></li>
+                        <li><a href="audit-support.html" class="text-decoration-none">Audit Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-title">Subscribe to Newsletter</h5>
+                    <p class="text-muted mb-3">Get the latest tax tips and updates directly in your inbox.</p>
+                    <form class="newsletter-form d-flex gap-2">
+                        <input type="email" class="form-control bg-dark border-secondary text-white" placeholder="Email Address" required>
+                        <button type="submit" class="btn btn-primary-brand">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="row border-top border-secondary mt-5 pt-4">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2026 TaxCore. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="privacy-policy.html" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                    <a href="terms.html" class="text-muted text-decoration-none">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+</html>
+
