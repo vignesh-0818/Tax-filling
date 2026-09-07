@@ -17,16 +17,20 @@ function updateThemeIcons() {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Theme setup
-    const currentTheme = localStorage.getItem('theme') || localStorage.getItem('taxcoreTheme') || 'light';
-    if (currentTheme === 'dark') {
+    const isDarkStored = localStorage.getItem('tcDarkMode') === 'true' || 
+                         localStorage.getItem('theme') === 'dark' || 
+                         localStorage.getItem('taxcoreTheme') === 'dark';
+    if (isDarkStored) {
         document.body.classList.add('dark-mode');
+        document.documentElement.classList.add('dark-mode');
     } else {
         document.body.classList.remove('dark-mode');
+        document.documentElement.classList.remove('dark-mode');
     }
     updateThemeIcons();
     
     // RTL setup
-    const currentDir = localStorage.getItem('dir') || 'ltr';
+    const currentDir = localStorage.getItem('dir') || (localStorage.getItem('tcRtl') === 'true' ? 'rtl' : 'ltr');
     if (currentDir === 'rtl') {
         document.documentElement.setAttribute('dir', 'rtl');
         document.documentElement.setAttribute('lang', 'ar');
@@ -39,6 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            localStorage.setItem('tcDarkMode', isDark ? 'true' : 'false');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             localStorage.setItem('taxcoreTheme', isDark ? 'dark' : 'light');
             updateThemeIcons();

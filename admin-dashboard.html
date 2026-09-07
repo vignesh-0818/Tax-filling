@@ -15,6 +15,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <link rel="stylesheet" href="css/admin-dashboard.css">
+<script>
+  (function() {
+    if (localStorage.getItem('tcDarkMode') === 'true' || localStorage.getItem('theme') === 'dark' || localStorage.getItem('taxcoreTheme') === 'dark') {
+      document.documentElement.classList.add('dark-mode');
+    }
+  })();
+</script>
 </head>
 <body class="admin-page">
 
@@ -458,7 +465,7 @@
         <div class="user-avatar-circle" style="width:36px;height:36px;font-size:0.85rem;">VR</div>
         <div class="user-info"><div class="name p-name nav-user-name">Admin</div><div class="role p-role">Administrator</div></div>
       </div>
-      <a class="sidebar-nav-link" style="color:#ef4444;" onclick="openModal('logoutModal')" tabindex="0"><i class="bi bi-box-arrow-left"></i> Logout</a>
+      <a class="sidebar-nav-link sidebar-logout-link" onclick="openModal('logoutModal')" tabindex="0"><i class="bi bi-box-arrow-left"></i> Logout</a>
     </div>
   </aside>
 

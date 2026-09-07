@@ -354,6 +354,26 @@
 .dark-mode .stat-content p { color: #94a3b8; }
 .dark-mode .dashboard-section .card { background-color: #1e293b; border-color: rgba(255,255,255,0.08); }
 
+.dark-mode .sidebar {
+    background-color: #1e293b !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.dark-mode .sidebar .border-bottom,
+.dark-mode .sidebar .border-top {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.dark-mode .sidebar .logo-text,
+.dark-mode .sidebar .text-dark {
+    color: #ffffff !important;
+}
+.dark-mode .sidebar .nav-link:not(.active) {
+    color: #94a3b8 !important;
+}
+.dark-mode .sidebar .nav-link:not(.active):hover {
+    color: #f1f5f9 !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
 /* Blog Cards Dark Mode */
 .dark-mode .blog-card {
     background-color: var(--card-bg, #1f2937);

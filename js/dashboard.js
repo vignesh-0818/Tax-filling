@@ -17,11 +17,15 @@ if (window.TaxCoreAuth) {
 
 // ---- THEME & RTL ON LOAD ----
 (function initThemeRtl() {
-  if (localStorage.getItem('tcDarkMode') === 'true') {
+  var isDark = localStorage.getItem('tcDarkMode') === 'true' || localStorage.getItem('theme') === 'dark' || localStorage.getItem('taxcoreTheme') === 'dark';
+  if (isDark) {
     document.body.classList.add('dark-mode');
     document.documentElement.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+    document.documentElement.classList.remove('dark-mode');
   }
-  if (localStorage.getItem('tcRtl') === 'true') {
+  if (localStorage.getItem('tcRtl') === 'true' || localStorage.getItem('dir') === 'rtl') {
     document.documentElement.setAttribute('dir', 'rtl');
   }
 })();
@@ -1428,11 +1432,15 @@ document.addEventListener('DOMContentLoaded', function () {
       document.documentElement.classList.add('dark-mode');
       if (themeIcon) { themeIcon.classList.remove('bi-moon-stars-fill'); themeIcon.classList.add('bi-sun-fill'); }
       localStorage.setItem('tcDarkMode', 'true');
+      localStorage.setItem('theme', 'dark');
+      localStorage.setItem('taxcoreTheme', 'dark');
     } else {
       document.body.classList.remove('dark-mode');
       document.documentElement.classList.remove('dark-mode');
       if (themeIcon) { themeIcon.classList.remove('bi-sun-fill'); themeIcon.classList.add('bi-moon-stars-fill'); }
       localStorage.setItem('tcDarkMode', 'false');
+      localStorage.setItem('theme', 'light');
+      localStorage.setItem('taxcoreTheme', 'light');
     }
     var appearDark = document.getElementById('appearanceDarkToggle');
     if (appearDark) appearDark.classList.toggle('on', dark);
@@ -1441,10 +1449,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Init icon
-  if (localStorage.getItem('tcDarkMode') === 'true') {
+  if (document.body.classList.contains('dark-mode')) {
     if (themeIcon) { themeIcon.classList.remove('bi-moon-stars-fill'); themeIcon.classList.add('bi-sun-fill'); }
     var ad = document.getElementById('appearanceDarkToggle');
     if (ad) ad.classList.add('on');
+  } else {
+    if (themeIcon) { themeIcon.classList.remove('bi-sun-fill'); themeIcon.classList.add('bi-moon-stars-fill'); }
+    var ad = document.getElementById('appearanceDarkToggle');
+    if (ad) ad.classList.remove('on');
   }
 
   if (themeBtn) themeBtn.addEventListener('click', function () {

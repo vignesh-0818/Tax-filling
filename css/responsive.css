@@ -71,8 +71,16 @@ img {
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar .nav-link {
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link:not(.active):hover {
+    color: #0f172a !important;
+    background-color: #f1f5f9;
 }
 
 .main-content {

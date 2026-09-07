@@ -36,51 +36,44 @@
     <!-- ==============================================
     Sidebar
     =============================================== -->
-    <aside class="sidebar bg-dark text-white border-0" id="sidebar">
-        <div class="p-4 d-flex justify-content-between align-items-center border-bottom border-secondary">
+    <aside class="sidebar" id="sidebar">
+        <div class="p-4 d-flex justify-content-between align-items-center border-bottom">
             <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
                 <i class="bi bi-calculator text-primary-brand fs-4"></i>
-                <span class="fs-5 fw-bold text-white">TaxCore Admin</span>
+                <span class="fs-5 fw-bold text-dark logo-text">TaxCore Admin</span>
             </a>
-            <button class="btn btn-link text-white d-lg-none p-0" id="sidebarClose"><i class="bi bi-x-lg"></i></button>
+            <button class="btn btn-link text-dark d-lg-none p-0" id="sidebarClose" aria-label="Close sidebar"><i class="bi bi-x-lg"></i></button>
         </div>
         
         <div class="p-3">
             <p class="text-uppercase text-muted small fw-bold mb-2 px-2">Main Menu</p>
             <ul class="nav flex-column gap-1 mb-4">
                 <li class="nav-item">
-                    <a class="nav-link text-secondary fw-semibold rounded hover-white" href="admin-dashboard.html"><i class="bi bi-speedometer2 me-2"></i> Overview</a>
+                    <a class="nav-link text-secondary fw-semibold rounded" href="admin-dashboard.html"><i class="bi bi-speedometer2 me-2"></i> Overview</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary fw-semibold rounded hover-white" href="users.html"><i class="bi bi-people me-2"></i> Users</a>
+                    <a class="nav-link text-secondary fw-semibold rounded" href="users.html"><i class="bi bi-people me-2"></i> Users</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active fw-semibold text-white bg-primary-brand rounded" href="orders.html"><i class="bi bi-cart me-2"></i> Orders & Filings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary fw-semibold rounded hover-white" href="messages.html"><i class="bi bi-chat-dots me-2"></i> Messages <span class="badge bg-danger ms-auto rounded-pill">5</span></a>
+                    <a class="nav-link text-secondary fw-semibold rounded" href="messages.html"><i class="bi bi-chat-dots me-2"></i> Messages <span class="badge bg-danger ms-auto rounded-pill">5</span></a>
                 </li>
             </ul>
             
             <p class="text-uppercase text-muted small fw-bold mb-2 px-2">Management</p>
             <ul class="nav flex-column gap-1">
                 <li class="nav-item">
-                    <a class="nav-link text-secondary fw-semibold rounded hover-white" href="#"><i class="bi bi-file-earmark-bar-graph me-2"></i> Reports</a>
+                    <a class="nav-link text-secondary fw-semibold rounded" href="#"><i class="bi bi-file-earmark-bar-graph me-2"></i> Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-secondary fw-semibold rounded hover-white" href="#"><i class="bi bi-gear me-2"></i> Settings</a>
+                    <a class="nav-link text-secondary fw-semibold rounded" href="#"><i class="bi bi-gear me-2"></i> Settings</a>
                 </li>
-                <li class="nav-item mt-4 pt-4 border-top border-secondary">
-                    <a class="nav-link text-danger fw-semibold rounded hover-white" href="login.html"><i class="bi bi-box-arrow-left me-2"></i> Logout</a>
+                <li class="nav-item mt-4 pt-4 border-top">
+                    <a class="nav-link text-danger fw-semibold rounded" href="login.html"><i class="bi bi-box-arrow-left me-2"></i> Logout</a>
                 </li>
             </ul>
-            
-            <style>
-                .hover-white:hover {
-                    color: white !important;
-                    background-color: rgba(255,255,255,0.05);
-                }
-            </style>
         </div>
     </aside>
 
