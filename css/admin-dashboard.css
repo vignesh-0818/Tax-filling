@@ -1844,17 +1844,356 @@ body.dark-mode .topbar-rtl-btn { background: #0f172a; border-color: #334155; col
     .convo-list { border-right: none; border-bottom: 1px solid #e2e8f0; }
 }
 
-@media (max-width: 768px) {
-    .dash-content { padding: 16px; }
-    .stat-cards-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .topbar-search { display: none; }
-    .form-row { grid-template-columns: 1fr; }
+@media (max-width: 767.98px) {
+    body.admin-page {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    .admin-wrapper {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    .dash-main {
+        overflow-x: hidden;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* Clean 2-Row Mobile Header */
+    .dash-topbar {
+        height: auto;
+        min-height: auto;
+        padding: 10px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        box-sizing: border-box;
+        width: 100%;
+        position: relative;
+    }
+
+    /* Row 1: Hamburger (left) + Title + Back to Website (right) */
+    .topbar-left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .sidebar-toggle-btn {
+        display: flex;
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #adminPageTitle {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-shrink: 1;
+    }
+
+    .topbar-left .back-to-website-btn {
+        margin-left: auto !important;
+        flex-shrink: 0;
+        padding: 6px 12px !important;
+        font-size: 0.78rem !important;
+        border-radius: 20px;
+        white-space: nowrap;
+        line-height: 1.2;
+    }
+
+    /* Row 2: Actions (Notifications, Theme, RTL) on left, Profile on right */
+    .topbar-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+
+    .topbar-search {
+        display: none !important;
+    }
+
+    .topbar-icon-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.88rem;
+        flex-shrink: 0;
+    }
+
+    .topbar-rtl-btn {
+        width: auto;
+        padding: 0 10px;
+        height: 36px;
+        font-size: 0.74rem;
+        font-weight: 700;
+        border-radius: 18px;
+    }
+
+    .notif-badge {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 16px;
+        height: 16px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #fff;
+        z-index: 5;
+    }
+
+    /* Profile Container */
+    .topbar-right > div:last-child {
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+
+    .admin-profile-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 2px 6px 2px 2px;
+        border-radius: 24px;
+        max-width: 170px;
+        cursor: pointer;
+        box-sizing: border-box;
+    }
+
+    .profile-avatar.user-avatar-circle {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        font-size: 0.78rem;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .admin-nav-meta {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        flex: 1;
+        overflow: hidden;
+        text-align: left;
+    }
+
+    .admin-nav-meta .p-name {
+        font-size: 0.82rem;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 115px;
+        line-height: 1.2;
+    }
+
+    .admin-nav-meta .p-role {
+        font-size: 0.68rem;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .admin-profile-btn .arrow-icon {
+        font-size: 0.7rem;
+        flex-shrink: 0;
+        margin-left: 2px;
+    }
+
+    /* Mobile Dropdown Positioning */
+    .notif-dropdown {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: auto;
+        width: 290px;
+        max-width: calc(100vw - 28px);
+        z-index: 1000;
+    }
+
+    .profile-dropdown {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        left: auto;
+        width: 230px;
+        max-width: calc(100vw - 28px);
+        z-index: 1000;
+    }
+
+    /* Content & Stat Cards */
+    .dash-content {
+        padding: 16px 14px;
+        overflow-x: hidden;
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    .stat-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 18px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .stat-card-new {
+        padding: 16px 18px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .stat-card-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        border-radius: 12px;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+    }
+
+    .stat-card-body {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .stat-card-body .stat-value {
+        font-size: 1.45rem;
+        font-weight: 800;
+        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .stat-card-body .stat-label {
+        font-size: 0.82rem;
+        color: #64748b;
+        margin-top: 2px;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .stat-card-body .stat-trend {
+        font-size: 0.75rem;
+        margin-top: 3px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
 }
 
-@media (max-width: 480px) {
-    .stat-cards-grid { grid-template-columns: 1fr; }
-    .dash-topbar { padding: 0 12px; gap: 8px; }
-    .section-heading { flex-direction: column; align-items: flex-start; }
+@media (max-width: 575.98px) {
+    .dash-topbar {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+    .dash-content {
+        padding: 14px 12px;
+    }
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .stat-card-new {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 340px) {
+    .dash-topbar {
+        padding: 8px 8px;
+        gap: 6px;
+    }
+    .topbar-left {
+        gap: 6px;
+    }
+    .topbar-left .back-to-website-btn {
+        padding: 5px 8px !important;
+        font-size: 0.72rem !important;
+        gap: 4px !important;
+    }
+    #adminPageTitle {
+        font-size: 0.95rem;
+    }
+    .topbar-right {
+        gap: 4px;
+    }
+    .topbar-icon-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 0.8rem;
+    }
+    .topbar-rtl-btn {
+        padding: 0 6px;
+        height: 34px;
+        font-size: 0.68rem;
+    }
+    .admin-nav-meta .p-name {
+        max-width: 72px;
+        font-size: 0.76rem;
+    }
+    .admin-nav-meta .p-role {
+        font-size: 0.64rem;
+    }
+    .admin-profile-btn {
+        gap: 4px;
+        max-width: 140px;
+    }
+}
+
+/* Mobile RTL adjustments */
+@media (max-width: 767.98px) {
+    [dir="rtl"] .topbar-left .back-to-website-btn {
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+    [dir="rtl"] .topbar-right > div:last-child {
+        margin-left: 0;
+        margin-right: auto;
+    }
+    [dir="rtl"] .notif-dropdown {
+        left: auto;
+        right: 0;
+    }
+    [dir="rtl"] .profile-dropdown {
+        right: auto;
+        left: 0;
+    }
+    [dir="rtl"] .admin-nav-meta {
+        text-align: right;
+    }
 }
 
 /* RTL Support */

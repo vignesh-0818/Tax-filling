@@ -83,6 +83,15 @@
     // 3. Current user session management
     getCurrentUser: function () {
       try {
+        if (typeof window !== 'undefined' && window.location && window.location.search) {
+          var params = new URLSearchParams(window.location.search);
+          if (params.get('mockUser') === 'admin') {
+            return { name: 'Vignesh Vicky', role: 'admin', email: 'admin@taxcore.com' };
+          }
+          if (params.get('mockUser') === 'customer') {
+            return { name: 'Vignesh Vicky', role: 'customer', email: 'customer@taxcore.com' };
+          }
+        }
         var raw = localStorage.getItem('currentUser');
         if (raw) return JSON.parse(raw);
         var prof = localStorage.getItem('taxcore_customer_profile');
