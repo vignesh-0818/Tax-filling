@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Services | AegisLock 24/7 Professional Locksmith</title>
+  <meta name="description" content="Explore our full catalog of 12 certified locksmith services: 24/7 emergency lockout, laser key duplication, lock rekeying, car keys, smart locks, and commercial security.">
+  
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="alternate icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">AEGIS<span>LOCK</span></span>
+            <span class="brand-tagline">24/7 Lock &amp; Key Solutions</span>
+          </div>
+        </a>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></a>
+            <div class="nav-dropdown">
+              <a href="index.html" class="dropdown-link"><span>Home 1 - General Services</span></a>
+              <a href="home-2.html" class="dropdown-link"><span>Home 2 - Emergency Security</span></a>
+            </div>
+          </li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+          <li class="nav-item"><a href="services.html" class="nav-link active">Services</a></li>
+          <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
+          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="header-actions">
+          <button type="button" class="control-btn js-theme-toggle" aria-label="Toggle Theme">
+            <svg class="icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <svg class="icon-moon" style="display: none;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          </button>
+          <button type="button" class="control-btn js-rtl-toggle" aria-label="Toggle RTL"><span class="rtl-label font-bold text-xs">RTL</span></button>
+          <a href="contact.html" class="btn btn-emergency btn-emergency-pulse">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span>Emergency Service</span>
+          </a>
+          <button type="button" class="mobile-nav-toggle" aria-label="Open Mobile Menu">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="mobile-nav-backdrop" aria-hidden="true">
+    <div class="mobile-nav-drawer" role="dialog" aria-modal="true">
+      <div class="mobile-drawer-header">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+          <span class="brand-name">AEGIS<span>LOCK</span></span>
+        </a>
+        <button type="button" class="modal-close-btn mobile-drawer-close" aria-label="Close"><svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <nav class="mobile-nav-links">
+        <a href="index.html" class="mobile-nav-link">Home 1 (General Services)</a>
+        <a href="home-2.html" class="mobile-nav-link">Home 2 (Emergency Security)</a>
+        <a href="about.html" class="mobile-nav-link">About Us</a>
+        <a href="services.html" class="mobile-nav-link active">All Services</a>
+        <a href="pricing.html" class="mobile-nav-link">Pricing</a>
+        <a href="blog.html" class="mobile-nav-link">Blog</a>
+        <a href="contact.html" class="mobile-nav-link">Contact Us</a>
+      </nav>
+      <div class="mt-auto pt-6 border-t border-subtle">
+        <a href="contact.html" class="btn btn-emergency btn-block">Request Emergency Locksmith</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+    <!-- INNER PAGE HERO -->
+    <section class="inner-page-hero" style="background-image: url('assets/images/heroes/services.jpg');">
+      <div class="inner-page-hero-overlay" aria-hidden="true"></div>
+      <div class="container inner-page-hero-content">
+        <h1 class="inner-page-hero-title">Our Services</h1>
+        <nav class="inner-hero-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><span class="crumb-sep">/</span></li>
+            <li><span class="crumb-current">Services</span></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- SEARCH & FILTER BAR -->
+    <section class="filter-toolbar-section">
+      <div class="container">
+        <div class="services-filter-toolbar">
+          <!-- Search Input Form -->
+          <form id="service-search-form" class="service-filter-search" onsubmit="return false;">
+            <div class="search-input-wrap">
+              <span class="search-input-icon" aria-hidden="true">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </span>
+              <input type="text" id="service-search-input" class="form-control" placeholder="Search services (e.g. rekey, car key, safe)..." aria-label="Search services">
+              <button type="button" id="service-search-clear" class="search-clear-btn" aria-label="Clear search" title="Clear search" style="display: none;">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+            <button type="submit" id="service-search-btn" class="btn btn-outline-amber btn-sm">Search</button>
+          </form>
+
+          <!-- Category Filter Tabs -->
+          <div class="services-filter-categories">
+            <button type="button" class="btn btn-sm btn-outline-amber js-service-filter-btn active" data-filter="all">All Services (12)</button>
+            <button type="button" class="btn btn-sm btn-secondary js-service-filter-btn" data-filter="Emergency Locksmith">Emergency</button>
+            <button type="button" class="btn btn-sm btn-secondary js-service-filter-btn" data-filter="Residential & Commercial">Residential</button>
+            <button type="button" class="btn btn-sm btn-secondary js-service-filter-btn" data-filter="Commercial Locksmith">Commercial</button>
+            <button type="button" class="btn btn-sm btn-secondary js-service-filter-btn" data-filter="Automotive Locksmith">Automotive</button>
+            <button type="button" class="btn btn-sm btn-secondary js-service-filter-btn" data-filter="Smart Security">Smart Locks</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 COMPLETE SERVICES GRID -->
+    <section class="section-py">
+      <div class="container">
+        <div class="grid grid-3 gap-4" id="services-grid-container">
+          
+          <!-- 1. Emergency Lockout -->
+          <article class="service-card js-service-item" data-category="Emergency Locksmith">
+            <div class="service-card-media">
+              <img src="assets/images/services/emergency-lockout-new.jpg" alt="Locksmith Technician Performing Emergency Door Lockout Rescue" loading="lazy">
+              <span class="service-card-badge">Emergency Locksmith</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Emergency Lockout Service</h2>
+              <p class="service-card-desc">Rapid 15-20 min arrival for residential, vehicle, and commercial lockouts. Non-destructive entry priority to preserve your existing lock hardware.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$65</span>
+                </div>
+                <a href="service-details.html?service=emergency-lockout" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. Precision Key Duplication -->
+          <article class="service-card js-service-item" data-category="Key Cutting & Duplication">
+            <div class="service-card-media">
+              <img src="assets/images/services/key-cutting-new.jpg" alt="Professional Locksmith Operating High Precision Key Cutting Machine" loading="lazy">
+              <span class="service-card-badge">Key Cutting</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Precision Key Duplication</h2>
+              <p class="service-card-desc">High-precision laser and rotary key cutting calibrated to 0.01mm for residential, commercial, tubular, and restricted high-security blanks.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$4.99</span>
+                </div>
+                <a href="service-details.html?service=key-duplication" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Lock Repair & Rekeying -->
+          <article class="service-card js-service-item" data-category="Residential & Commercial">
+            <div class="service-card-media">
+              <img src="assets/images/services/lock-rekeying-new.jpg" alt="Master Locksmith Rekeying Residential Lock Cylinder Tumblers" loading="lazy">
+              <span class="service-card-badge">Residential &amp; Commercial</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Lock Repair &amp; Rekeying</h2>
+              <p class="service-card-desc">Reset cylinder tumblers so former keys no longer open your doors. Fix sticky latches and consolidate house locks onto one single master key.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$29 / cyl</span>
+                </div>
+                <a href="service-details.html?service=lock-repair-rekeying" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Lock Replacement & Deadbolts -->
+          <article class="service-card js-service-item" data-category="Security Upgrades">
+            <div class="service-card-media">
+              <img src="assets/images/services/deadbolt-installation-new.jpg" alt="Heavy Duty High Security Deadbolt Installation on Front Door" loading="lazy">
+              <span class="service-card-badge">Security Upgrades</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Deadbolt &amp; Lock Replacement</h2>
+              <p class="service-card-desc">Upgrade builder-grade locks to heavy-duty ANSI Grade 1 deadbolts featuring pick-resistant pins and 3-inch reinforced wall framing strike plates.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$85</span>
+                </div>
+                <a href="service-details.html?service=lock-replacement" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Automotive Car Keys -->
+          <article class="service-card js-service-item" data-category="Automotive Locksmith">
+            <div class="service-card-media">
+              <img src="assets/images/services/automotive-key-programming-new.jpg" alt="Automotive Locksmith Programming Transponder Car Key Fob" loading="lazy">
+              <span class="service-card-badge">Automotive Locksmith</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Automotive Key Programming</h2>
+              <p class="service-card-desc">Mobile vehicle key replacement, CNC laser sidewinder key cutting, chip transponder coding, and push-to-start smart fob pairing at your vehicle.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$79</span>
+                </div>
+                <a href="service-details.html?service=automotive-keys" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. Smart Lock Installation -->
+          <article class="service-card js-service-item" data-category="Smart Security">
+            <div class="service-card-media">
+              <img src="assets/images/services/smart-lock-installation-new.jpg" alt="Technician Installing Modern Digital Keyless Smart Door Lock" loading="lazy">
+              <span class="service-card-badge">Smart Security</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Smart Lock Installation</h2>
+              <p class="service-card-desc">Professional keyless entry installation, Wi-Fi pairing, biometric fingerprint enrollment, and integration with Apple Home, Alexa, and Google.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$99</span>
+                </div>
+                <a href="service-details.html?service=smart-lock-installation" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7. Commercial Master Key -->
+          <article class="service-card js-service-item" data-category="Commercial Locksmith">
+            <div class="service-card-media">
+              <img src="assets/images/services/commercial-master-key-new.jpg" alt="Commercial Master Key Hierarchy System with Multiple Brass Keys" loading="lazy">
+              <span class="service-card-badge">Commercial Locksmith</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Commercial Master Key Systems</h2>
+              <p class="service-card-desc">Hierarchical key systems granting managers master access while restricting staff to specific areas. Full documentation and bitting registry included.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$125</span>
+                </div>
+                <a href="service-details.html?service=commercial-master-key" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8. High-Security Commercial Locksmith -->
+          <article class="service-card js-service-item" data-category="Commercial Locksmith">
+            <div class="service-card-media">
+              <img src="assets/images/services/commercial-security-new.jpg" alt="Commercial Grade Heavy Duty Storefront Security Door Hardware" loading="lazy">
+              <span class="service-card-badge">Commercial Locksmith</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">High-Security Commercial Locksmith</h2>
+              <p class="service-card-desc">Storefront mortise cylinders, Adams Rite swing bolts, panic exit crash bars, and heavy-duty latch guards for code compliance and theft defense.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$140</span>
+                </div>
+                <a href="service-details.html?service=high-security-commercial" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 9. Safe Opening Services -->
+          <article class="service-card js-service-item" data-category="Safe & Vault">
+            <div class="service-card-media">
+              <img src="assets/images/services/safe-opening-new.jpg" alt="Professional Safe Technician Resetting High Security Dial Combination" loading="lazy">
+              <span class="service-card-badge">Safe &amp; Vault</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Safe Opening &amp; Combinations</h2>
+              <p class="service-card-desc">Certified non-destructive safe manipulation, mechanical dial combination resets, and electronic keypad upgrades for gun, document, and commercial safes.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$150</span>
+                </div>
+                <a href="service-details.html?service=safe-opening-services" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 10. Broken Key Extraction -->
+          <article class="service-card js-service-item" data-category="Emergency Locksmith">
+            <div class="service-card-media">
+              <img src="assets/images/services/broken-key-extraction-new.jpg" alt="Locksmith Extracting Snapped Key Piece with Precision Micro Tools" loading="lazy">
+              <span class="service-card-badge">Emergency Locksmith</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Broken Key Extraction</h2>
+              <p class="service-card-desc">Specialized micro-extractor removal of snapped keys from door cylinders, padlocks, or vehicle ignitions without damaging internal tumbler pins.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$55</span>
+                </div>
+                <a href="service-details.html?service=broken-key-extraction" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 11. Access Control Systems -->
+          <article class="service-card js-service-item" data-category="Smart Security">
+            <div class="service-card-media">
+              <img src="assets/images/services/access-control-new.jpg" alt="Electronic Access Control Keycard Reader and Electric Door Strike" loading="lazy">
+              <span class="service-card-badge">Smart Security</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Access Control &amp; Electronic Strikes</h2>
+              <p class="service-card-desc">Keycard and RFID fob readers, electric strikes, maglocks, and cloud-managed door controllers with instant user credential revocation.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$299 / door</span>
+                </div>
+                <a href="service-details.html?service=access-control-systems" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 12. Door Closers & Hardware -->
+          <article class="service-card js-service-item" data-category="Residential & Commercial">
+            <div class="service-card-media">
+              <img src="assets/images/services/door-hardware-repair-new.jpg" alt="Commercial Grade Overhead Hydraulic Door Closer Installation and Adjustment" loading="lazy">
+              <span class="service-card-badge">Residential &amp; Commercial</span>
+            </div>
+            <div class="service-card-body">
+              <h2 class="service-card-title text-xl">Door Closers &amp; Hardware Repair</h2>
+              <p class="service-card-desc">Hydraulic commercial door closer installation, adjustment of sweep and latch valves, leaking arm replacement, and ADA opening compliance tuning.</p>
+              <div class="service-card-meta">
+                <div class="service-price">
+                  <span class="service-price-label">Starting Rate</span>
+                  <span class="service-price-val">$75</span>
+                </div>
+                <a href="service-details.html?service=door-closers-hardware" class="btn btn-outline-amber btn-sm">View Details &amp; Specs</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EMERGENCY DISPATCH CTA -->
+    <section class="section-py relative" style="background: var(--bg-surface); border-top: 1px solid var(--border-subtle);">
+      <div class="container text-center">
+        <h2 class="text-2xl md:text-3xl font-bold mb-3">Unsure Which Service You Need?</h2>
+        <p class="text-secondary max-w-xl mx-auto mb-6">Our senior dispatch technicians diagnose lock issues and provide exact upfront quotes.</p>
+        <div class="flex items-center justify-center gap-4 flex-wrap">
+          <a href="contact.html" class="btn btn-emergency">Request Emergency Locksmith</a>
+          <a href="pricing.html" class="btn btn-outline">Check Pricing Guide</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="grid grid-4 gap-4">
+          <div class="footer-brand-col">
+            <a href="index.html" class="brand-logo">
+              <div class="brand-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+              <span class="brand-name">AEGIS<span>LOCK</span></span>
+            </a>
+            <p class="footer-desc">Professional front-end locksmith service catalog. 12 divisions dedicated to total physical security.</p>
+            <div class="footer-emergency-callout">
+              <span class="emergency-dot"></span>
+              <div class="footer-emergency-text">
+                <span class="footer-emergency-label">24/7 Emergency Dispatch</span>
+                <a href="contact.html" class="footer-emergency-number">Mobile Units On Duty</a>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer-heading">Company &amp; Pages</h4>
+            <ul class="footer-links">
+              <li><a href="index.html" class="footer-link">Home (General Services)</a></li>
+              <li><a href="home-2.html" class="footer-link">Home 2 (Emergency Security)</a></li>
+              <li><a href="about.html" class="footer-link">About Our Master Locksmiths</a></li>
+              <li><a href="pricing.html" class="footer-link">Locksmith Pricing Guide</a></li>
+              <li><a href="service-area.html" class="footer-link">Coverage Map &amp; ETA</a></li>
+              <li><a href="blog.html" class="footer-link">Security Articles &amp; Tips</a></li>
+              <li><a href="contact.html" class="footer-link">Contact &amp; Request Service</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-heading">Core Locksmith Services</h4>
+            <ul class="footer-links">
+              <li><a href="service-details.html?service=emergency-lockout" class="footer-link">Emergency Door Lockout</a></li>
+              <li><a href="service-details.html?service=key-duplication" class="footer-link">Precision Key Duplication</a></li>
+              <li><a href="service-details.html?service=lock-repair-rekeying" class="footer-link">Lock Repair &amp; Rekeying</a></li>
+              <li><a href="service-details.html?service=smart-lock-installation" class="footer-link">Smart Lock Installation</a></li>
+              <li><a href="service-details.html?service=automotive-keys" class="footer-link">Automotive Transponder Keys</a></li>
+              <li><a href="service-details.html?service=commercial-master-key" class="footer-link">Commercial Master Keys</a></li>
+              <li><a href="service-details.html?service=safe-opening-services" class="footer-link">Safe Opening &amp; Vaults</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer-heading">Service Hours &amp; HQ</h4>
+            <div class="flex flex-col gap-3 text-sm">
+              <div>
+                <span class="text-muted block text-xs uppercase font-bold">Hours of Operation:</span>
+                <span class="text-main font-bold">24 Hours / 7 Days a Week / 365 Days</span>
+              </div>
+              <div>
+                <span class="text-muted block text-xs uppercase font-bold">Metro Dispatch Office:</span>
+                <span class="text-secondary">420 Security Way, Metro City, ST 90210</span>
+              </div>
+              <div>
+                <span class="text-muted block text-xs uppercase font-bold">Direct Email:</span>
+                <a href="mailto:dispatch@aegislock247.com" class="text-amber font-semibold">dispatch@aegislock247.com</a>
+              </div>
+              <div class="pt-2">
+                <a href="coming-soon.html" class="text-xs text-muted hover:text-amber">System Status / Portal Updates &rarr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">&copy; 2026 AegisLock 24/7 Security Solutions. All rights reserved.</div>
+        <div class="flex items-center gap-3">
+          <span class="footer-licensing-badge">State License #LK-84920</span>
+          <span class="footer-licensing-badge">Bonded &amp; Insured</span>
+          <span class="footer-licensing-badge">ALOA Certified</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="emergency-modal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div class="modal-title"><span class="emergency-dot"></span><span>Emergency Locksmith Dispatch</span></div>
+        <button type="button" class="modal-close-btn js-modal-close" aria-label="Close"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <form id="emergency-dispatch-form">
+          <div class="form-group"><label for="modal-phone" class="form-label">Phone Number (Required for Technician):</label><input type="tel" id="modal-phone" name="phone" class="form-control" placeholder="(555) 000-0000" required></div>
+          <div class="grid grid-2 gap-3 mb-3">
+            <div class="form-group"><label for="modal-name" class="form-label">Your Name:</label><input type="text" id="modal-name" name="name" class="form-control" placeholder="Jane Doe" required></div>
+            <div class="form-group"><label for="modal-service-type" class="form-label">Service Type:</label><select id="modal-service-type" name="service_type" class="form-select"><option value="residential-lockout">House / Apartment Lockout</option><option value="car-lockout">Car / Vehicle Lockout</option><option value="broken-key">Broken Key Extraction</option><option value="urgent-rekey">Urgent Lock Rekey</option><option value="commercial">Commercial Building Lock</option><option value="key-duplication">Key Duplication</option></select></div>
+          </div>
+          <div class="form-group"><label for="modal-location" class="form-label">Location / Address:</label><input type="text" id="modal-location" name="location" class="form-control" placeholder="Street Address, City or Landmark" required></div>
+          <div class="form-group"><label for="modal-notes" class="form-label">Situation Notes:</label><textarea id="modal-notes" name="notes" class="form-textarea" placeholder="Describe the lock or situation" rows="2"></textarea></div>
+          <button type="submit" class="btn btn-emergency btn-block mt-3">Dispatch Emergency Van</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <aside class="floating-emergency-bar">
+    <button type="button" class="back-to-top-btn" aria-label="Back to top"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg></button>
+  </aside>
+
+  <nav class="mobile-bottom-bar">
+    <a href="contact.html" class="btn btn-emergency btn-sm">
+      <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+      Emergency Service
+    </a>
+    <button type="button" class="btn btn-primary btn-sm js-open-emergency-modal">Request Locksmith</button>
+  </nav>
+
+  <script src="assets/js/services-data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

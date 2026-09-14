@@ -1,0 +1,1017 @@
+/**
+ * AegisLock 24/7 - Core Application Logic
+ * Theme Switcher, RTL Controller, Mobile Nav, Modals, Dynamic Detail Handlers & Form Validation
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initRTL();
+  initStickyHeader();
+  initMobileNav();
+  initEmergencyModal();
+  initAccordions();
+  initTabs();
+  initBackToTop();
+  initForms();
+  initDynamicServiceDetails();
+  initDynamicBlogDetails();
+  initServiceListingFilter();
+  initBlogListingFilter();
+});
+
+/* ==========================================================================
+   1. Theme Management (Dark / Light)
+   ========================================================================== */
+function initTheme() {
+  const savedTheme = localStorage.getItem('aegislock-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  updateThemeIcons(savedTheme);
+
+  const themeToggles = document.querySelectorAll('.js-theme-toggle');
+  themeToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const nextTheme = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('aegislock-theme', nextTheme);
+      updateThemeIcons(nextTheme);
+    });
+  });
+}
+
+function updateThemeIcons(theme) {
+  const themeToggles = document.querySelectorAll('.js-theme-toggle');
+  themeToggles.forEach(toggle => {
+    const sunIcon = toggle.querySelector('.icon-sun');
+    const moonIcon = toggle.querySelector('.icon-moon');
+    if (sunIcon && moonIcon) {
+      if (theme === 'dark') {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      } else {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      }
+    }
+  });
+}
+
+/* ==========================================================================
+   2. RTL Management (LTR / RTL)
+   ========================================================================== */
+function initRTL() {
+  const savedDir = localStorage.getItem('aegislock-dir') || 'ltr';
+  document.documentElement.setAttribute('dir', savedDir);
+  updateRTLButtons(savedDir);
+
+  const rtlToggles = document.querySelectorAll('.js-rtl-toggle');
+  rtlToggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('dir') || 'ltr';
+      const nextDir = current === 'ltr' ? 'rtl' : 'ltr';
+      document.documentElement.setAttribute('dir', nextDir);
+      localStorage.setItem('aegislock-dir', nextDir);
+      updateRTLButtons(nextDir);
+    });
+  });
+}
+
+function updateRTLButtons(dir) {
+  const rtlToggles = document.querySelectorAll('.js-rtl-toggle');
+  rtlToggles.forEach(toggle => {
+    const label = toggle.querySelector('.rtl-label');
+    if (label) {
+      label.textContent = dir === 'rtl' ? 'LTR' : 'RTL';
+    }
+  });
+}
+
+/* ==========================================================================
+   3. Sticky Header
+   ========================================================================== */
+function initStickyHeader() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header.classList.add('is-scrolled');
+    } else {
+      header.classList.remove('is-scrolled');
+    }
+  });
+}
+
+/* ==========================================================================
+   4. Mobile Navigation Drawer
+   ========================================================================== */
+function initMobileNav() {
+  const toggleBtn = document.querySelector('.mobile-nav-toggle');
+  const backdrop = document.querySelector('.mobile-nav-backdrop');
+  const closeBtn = document.querySelector('.mobile-drawer-close');
+  const drawerLinks = document.querySelectorAll('.mobile-nav-link');
+
+  if (!toggleBtn || !backdrop) return;
+
+  function openDrawer() {
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  toggleBtn.addEventListener('click', openDrawer);
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeDrawer();
+  });
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+}
+
+/* ==========================================================================
+   5. Global Emergency Dispatch Modal
+   ========================================================================== */
+function initEmergencyModal() {
+  const modal = document.getElementById('emergency-modal');
+  if (!modal) return;
+
+  const closeBtns = modal.querySelectorAll('.js-modal-close');
+  const form = document.getElementById('emergency-dispatch-form');
+
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      closeEmergencyModal();
+    });
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeEmergencyModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeEmergencyModal();
+    }
+  });
+
+  // Attach to all trigger buttons
+  const triggers = document.querySelectorAll('.js-open-emergency-modal');
+  triggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const serviceContext = btn.getAttribute('data-service-context') || '';
+      openEmergencyModal(serviceContext);
+    });
+  });
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const phoneInput = form.querySelector('[name="phone"]');
+      const nameInput = form.querySelector('[name="name"]');
+      const locationInput = form.querySelector('[name="location"]');
+
+      if (!phoneInput || !phoneInput.value.trim()) {
+        showToast('Please enter your contact phone number.', 'error');
+        return;
+      }
+
+      // Generate simulated emergency ticket
+      const ticketNum = 'EMG-' + Math.floor(100000 + Math.random() * 900000);
+      const modalBody = modal.querySelector('.modal-body');
+      
+      modalBody.innerHTML = `
+        <div class="text-center py-6">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-soft border border-amber text-amber mb-4">
+            <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Emergency Dispatch Initiated!</h3>
+          <p class="text-secondary mb-4 text-sm">Ticket ID: <strong class="text-amber font-mono">${ticketNum}</strong></p>
+          <div class="p-4 rounded-lg bg-surface border border-card text-start mb-6 text-sm">
+            <div class="flex justify-between py-1 border-b border-subtle">
+              <span class="text-muted">Assigned Mobile Unit:</span>
+              <span class="font-bold text-main">Unit #4 (Master Tech James)</span>
+            </div>
+            <div class="flex justify-between py-1 border-b border-subtle">
+              <span class="text-muted">Estimated Arrival:</span>
+              <span class="font-bold text-success">14 - 18 minutes</span>
+            </div>
+            <div class="flex justify-between py-1">
+              <span class="text-muted">Contact Phone:</span>
+              <span class="font-bold text-main">${phoneInput.value.trim()}</span>
+            </div>
+          </div>
+          <p class="text-xs text-muted mb-6">Our mobile technician has received your coordinates and is currently in transit. Keep your phone line clear.</p>
+          <div class="flex flex-col gap-2">
+            <button type="button" class="btn btn-emergency btn-block js-modal-close" onclick="closeEmergencyModal()">Priority Dispatch Confirmed - Close</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+}
+
+window.openEmergencyModal = function(serviceContext = '') {
+  const modal = document.getElementById('emergency-modal');
+  if (!modal) return;
+
+  const notesField = modal.querySelector('[name="notes"]');
+  const serviceSelect = modal.querySelector('[name="service_type"]');
+
+  if (serviceContext && notesField) {
+    notesField.value = serviceContext;
+  }
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeEmergencyModal = function() {
+  const modal = document.getElementById('emergency-modal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+};
+
+/* ==========================================================================
+   6. Accordions & Tabs
+   ========================================================================== */
+function initAccordions() {
+  const accordionItems = document.querySelectorAll('.accordion-item');
+  accordionItems.forEach(item => {
+    const header = item.querySelector('.accordion-header');
+    if (!header) return;
+
+    header.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      
+      // Close peers in same accordion
+      const parent = item.closest('.accordion');
+      if (parent) {
+        parent.querySelectorAll('.accordion-item').forEach(peer => peer.classList.remove('open'));
+      }
+
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    });
+  });
+}
+
+function initTabs() {
+  const tabContainers = document.querySelectorAll('.js-tabs-container');
+  tabContainers.forEach(container => {
+    const buttons = container.querySelectorAll('.tab-btn');
+    const panels = container.querySelectorAll('.tab-content-panel');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab-target');
+
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const targetPanel = container.querySelector(targetId);
+        if (targetPanel) targetPanel.classList.add('active');
+      });
+    });
+  });
+}
+
+/* ==========================================================================
+   7. Back to Top Button
+   ========================================================================== */
+function initBackToTop() {
+  const backToTopBtn = document.querySelector('.back-to-top-btn');
+  if (!backToTopBtn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ==========================================================================
+   8. Form Validation & Submissions
+   ========================================================================== */
+function initForms() {
+  // General Contact and Booking Forms
+  const forms = document.querySelectorAll('.js-validate-form');
+  forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+      const requiredInputs = form.querySelectorAll('[required]');
+
+      requiredInputs.forEach(input => {
+        const group = input.closest('.form-group');
+        if (!input.value.trim()) {
+          isValid = false;
+          if (group) group.classList.add('has-error');
+        } else {
+          if (group) group.classList.remove('has-error');
+        }
+      });
+
+      if (!isValid) {
+        showToast('Please fill out all required fields.', 'error');
+        return;
+      }
+
+      // Success
+      const formCard = form.closest('.card') || form.parentElement;
+      const submitBtn = form.querySelector('[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `Submitting...`;
+      }
+
+      setTimeout(() => {
+        showToast('Message transmitted successfully! A dispatcher will contact you shortly.', 'success');
+        form.reset();
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `Submitted Successfully!`;
+        }
+      }, 750);
+    });
+  });
+}
+
+/* ==========================================================================
+   9. Toast Notifications
+   ========================================================================== */
+window.showToast = function(message, type = 'info') {
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type === 'success' ? 'toast-success' : type === 'error' ? 'toast-emergency' : ''}`;
+  
+  let iconHtml = `<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+  if (type === 'success') {
+    iconHtml = `<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`;
+  } else if (type === 'error') {
+    iconHtml = `<svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>`;
+  }
+
+  toast.innerHTML = `
+    <span class="toast-icon text-amber">${iconHtml}</span>
+    <span class="toast-text">${message}</span>
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-10px)';
+    toast.style.transition = 'all 0.3s ease';
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+};
+
+/* ==========================================================================
+   10. Dynamic Service Details Handler (service-details.html)
+   ========================================================================== */
+function initDynamicServiceDetails() {
+  const container = document.getElementById('service-detail-container');
+  if (!container || typeof SERVICES_DATA === 'undefined') return;
+
+  // Get slug from URL
+  const params = new URLSearchParams(window.location.search);
+  let slug = params.get('service') || 'emergency-lockout';
+  
+  if (!SERVICES_DATA[slug]) {
+    slug = 'emergency-lockout';
+  }
+
+  const s = SERVICES_DATA[slug];
+
+  // Update Page Title
+  document.title = `${s.title} | AegisLock 24/7 Locksmith`;
+
+  // Render Breadcrumb (Home / Service Details)
+  const breadcrumbCurrent = document.getElementById('breadcrumb-service-title');
+  if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Service Details';
+
+  // Render Hero Title
+  const serviceHeroTitle = document.getElementById('service-hero-title');
+  if (serviceHeroTitle) serviceHeroTitle.textContent = 'Service Details';
+
+  // Render Service Content
+  container.innerHTML = `
+    <div class="service-detail-hero">
+      <div class="inline-flex items-center gap-2 mb-3">
+        <span class="section-eyebrow mb-0">${s.category}</span>
+        <span class="badge py-1 px-3 rounded-full text-xs font-bold bg-amber-soft text-amber border border-amber">${s.badge}</span>
+      </div>
+      <h1 class="service-detail-title">${s.title}</h1>
+      <p class="service-detail-lead max-w-3xl">${s.summary}</p>
+
+      <div class="service-meta-strip">
+        <div class="service-meta-group">
+          <div class="service-meta-item">
+            <span class="text-xs text-muted uppercase font-bold block">Starting Price</span>
+            <span class="text-2xl font-extrabold text-amber font-heading">${s.priceStart}</span>
+          </div>
+          <div class="service-meta-divider"></div>
+          <div class="service-meta-item">
+            <span class="text-xs text-muted uppercase font-bold block">Average Time</span>
+            <span class="font-bold text-main">${s.avgTime}</span>
+          </div>
+          <div class="service-meta-divider"></div>
+          <div class="service-meta-item">
+            <span class="text-xs text-muted uppercase font-bold block">Customer Rating</span>
+            <span class="font-bold text-amber">${s.rating}</span>
+          </div>
+        </div>
+        <div class="service-meta-action">
+          <a href="contact.html" class="btn btn-emergency btn-sm">Emergency Service</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-detail-media">
+      <img src="${s.image}" alt="${s.title}" loading="eager">
+    </div>
+
+    <div class="service-detail-content">
+      <h2 class="text-2xl font-bold mb-4">Service Overview &amp; Execution</h2>
+      <p class="text-secondary text-lg leading-relaxed mb-8">${s.overview}</p>
+
+      <h3 class="text-xl font-bold mb-4">Key Benefits &amp; Security Assurances</h3>
+      <div class="service-benefits-grid">
+        ${s.benefits.map(b => `
+          <div class="service-benefit-card">
+            <span class="service-benefit-icon">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </span>
+            <span class="service-benefit-text">${b}</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <h3 class="text-xl font-bold mb-5">Our 4-Step Professional Process</h3>
+      <div class="service-process-grid">
+        ${s.process.map(p => `
+          <div class="service-process-card">
+            <div class="service-process-header">
+              <span class="service-process-badge">0${p.step}</span>
+              <span class="service-process-phase">Phase ${p.step}</span>
+            </div>
+            <h4 class="service-process-title">${p.title}</h4>
+            <p class="service-process-desc">${p.desc}</p>
+          </div>
+        `).join('')}
+      </div>
+
+      <h3 class="text-xl font-bold mb-5">Transparent Pricing &amp; Options</h3>
+      <div class="service-pricing-grid">
+        ${s.pricingPackages.map(pkg => `
+          <div class="service-pricing-card">
+            <h4 class="service-pricing-card-title">${pkg.name}</h4>
+            <div class="service-pricing-card-price">${pkg.price}</div>
+            <ul class="service-pricing-features">
+              ${pkg.features.map(f => `
+                <li class="service-pricing-feature-item">
+                  <svg width="15" height="15" class="service-pricing-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                  <span>${f}</span>
+                </li>
+              `).join('')}
+            </ul>
+            <button type="button" class="btn btn-outline-amber btn-sm service-pricing-btn js-open-emergency-modal" data-service-context="${s.title}: ${pkg.name}">Book This Service</button>
+          </div>
+        `).join('')}
+      </div>
+
+      <h3 class="text-xl font-bold mb-5">Frequently Asked Questions</h3>
+      <div class="accordion">
+        ${s.faqs.map((faq, idx) => `
+          <div class="accordion-item ${idx === 0 ? 'open' : ''}">
+            <button type="button" class="accordion-header">
+              <span>${faq.q}</span>
+              <svg class="accordion-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div class="accordion-body">
+              <p>${faq.a}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  // Update sidebar active link
+  const sidebarLinks = document.querySelectorAll('.js-sidebar-service-link');
+  sidebarLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.includes(slug)) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+
+  // Rebind modals and accordions
+  initAccordions();
+  initEmergencyModal();
+}
+
+/* ==========================================================================
+   11. Dynamic Blog Details Handler (blog-details.html)
+   ========================================================================== */
+function initDynamicBlogDetails() {
+  const container = document.getElementById('blog-detail-container');
+  if (!container || typeof BLOG_ARTICLES === 'undefined') return;
+
+  const params = new URLSearchParams(window.location.search);
+  const articleId = parseInt(params.get('id'), 10) || 1;
+
+  const article = BLOG_ARTICLES.find(a => a.id === articleId) || BLOG_ARTICLES[0];
+
+  document.title = `${article.title} | AegisLock Security Blog`;
+
+  // Render Breadcrumb (Home / Blog / Article)
+  const breadcrumbCurrent = document.getElementById('breadcrumb-blog-title');
+  if (breadcrumbCurrent) breadcrumbCurrent.textContent = 'Article';
+
+  const blogHeroTitle = document.getElementById('blog-hero-title');
+  if (blogHeroTitle) blogHeroTitle.textContent = 'Blog Details';
+
+  container.innerHTML = `
+    <article class="blog-article-full">
+      <div class="mb-4">
+        <span class="section-eyebrow mb-3">${article.category}</span>
+        <h1 class="blog-article-title">${article.title}</h1>
+        <div class="blog-meta-row">
+          <span class="blog-meta-item meta-author">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <span>${article.author}</span>
+          </span>
+          <span class="blog-meta-sep">•</span>
+          <span class="blog-meta-item">
+            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span>${article.date}</span>
+          </span>
+          <span class="blog-meta-sep">•</span>
+          <span class="blog-meta-item">
+            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>${article.readTime}</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="blog-article-hero-media">
+        <img src="${article.image}" alt="${article.title}" class="blog-article-hero-img">
+      </div>
+
+      <div class="article-body">
+        ${article.content}
+      </div>
+
+      <!-- Share Guide Card -->
+      <div class="blog-share-card">
+        <div>
+          <span class="font-heading font-bold text-main block mb-1">Share this security guide:</span>
+          <span class="text-xs text-muted">Help friends &amp; neighbors protect their property</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="copyArticleLink()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            Copy Link
+          </button>
+          <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Share on X</a>
+        </div>
+      </div>
+
+      <!-- Master Locksmith Author Bio -->
+      <div class="blog-author-bio-card">
+        <img src="assets/images/technician-1.jpg" alt="Master Locksmith" class="blog-author-avatar">
+        <div>
+          <h4 class="text-base font-bold text-main mb-1">${article.author}</h4>
+          <p class="text-xs text-secondary mb-0">Master Locksmith and physical security specialist with over 15 years of field experience in residential high-security reinforcement, electronic access control, and emergency lock opening.</p>
+        </div>
+      </div>
+
+      <!-- Bottom Actions -->
+      <div class="blog-bottom-actions">
+        <a href="blog.html" class="btn btn-outline btn-sm">
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          Back to All Articles
+        </a>
+        <a href="contact.html" class="btn btn-emergency btn-sm">Emergency Locksmith Help</a>
+      </div>
+    </article>
+  `;
+
+  // Dynamically update Related Security Articles (3 other articles)
+  const relatedContainer = document.getElementById('related-articles-grid');
+  if (relatedContainer) {
+    const relatedArticles = BLOG_ARTICLES.filter(a => a.id !== article.id).slice(0, 3);
+    relatedContainer.innerHTML = relatedArticles.map(rel => `
+      <div class="related-article-card">
+        <div class="related-article-media">
+          <img src="${rel.image}" alt="${rel.title}" class="related-article-img" loading="lazy">
+        </div>
+        <span class="related-article-category">${rel.category}</span>
+        <h3 class="related-article-title"><a href="blog-details.html?id=${rel.id}">${rel.title}</a></h3>
+        <p class="related-article-desc">${rel.excerpt}</p>
+        <a href="blog-details.html?id=${rel.id}" class="related-article-link">Read Article &rarr;</a>
+      </div>
+    `).join('');
+  }
+
+  // Dynamically update Recent Articles in sidebar (3 recent excluding or listing top)
+  const sidebarRecent = document.getElementById('sidebar-recent-articles');
+  if (sidebarRecent) {
+    const recentList = BLOG_ARTICLES.filter(a => a.id !== article.id).slice(0, 3);
+    sidebarRecent.innerHTML = recentList.map(rec => `
+      <a href="blog-details.html?id=${rec.id}" class="recent-article-item">
+        <div class="recent-article-thumb-wrap">
+          <img src="${rec.image}" alt="${rec.title}" class="recent-article-thumb">
+        </div>
+        <div class="recent-article-info">
+          <h4 class="recent-article-title">${rec.title}</h4>
+          <span class="recent-article-date">${rec.date}</span>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  // Sidebar Search Widget Handler
+  const sidebarSearchForm = document.getElementById('sidebar-search-form');
+  const sidebarSearchInput = document.getElementById('sidebar-search-input');
+  const sidebarSearchBtn = document.getElementById('sidebar-search-btn');
+
+  function handleSidebarSearch(e) {
+    if (e) e.preventDefault();
+    const q = sidebarSearchInput ? sidebarSearchInput.value.trim() : '';
+    if (q) {
+      window.location.href = `blog.html?q=${encodeURIComponent(q)}`;
+    } else if (sidebarSearchInput) {
+      sidebarSearchInput.focus();
+    }
+  }
+
+  if (sidebarSearchForm) {
+    sidebarSearchForm.addEventListener('submit', handleSidebarSearch);
+  }
+  if (sidebarSearchBtn) {
+    sidebarSearchBtn.addEventListener('click', handleSidebarSearch);
+  }
+
+  // Sidebar Categories Widget - dynamically populate counts and links matching BLOG_ARTICLES
+  const categoriesList = document.getElementById('sidebar-categories-list');
+  if (categoriesList && typeof BLOG_ARTICLES !== 'undefined') {
+    const catMap = new Map();
+    BLOG_ARTICLES.forEach(a => {
+      const cat = a.category.trim();
+      catMap.set(cat, (catMap.get(cat) || 0) + 1);
+    });
+
+    categoriesList.innerHTML = Array.from(catMap.entries()).map(([cat, count]) => `
+      <li>
+        <a href="blog.html?category=${encodeURIComponent(cat)}" class="blog-category-link">
+          <span>${cat}</span>
+          <span class="text-xs text-muted font-mono">(${count})</span>
+        </a>
+      </li>
+    `).join('');
+  }
+}
+
+window.copyArticleLink = function() {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(window.location.href);
+    showToast('Article link copied to clipboard!', 'success');
+  } else {
+    showToast('URL: ' + window.location.href, 'info');
+  }
+};
+
+/* ==========================================================================
+   12. Listing Page Filters (services.html & blog.html)
+   ========================================================================== */
+function initServiceListingFilter() {
+  const searchInput = document.getElementById('service-search-input');
+  const searchForm = document.getElementById('service-search-form');
+  const searchClearBtn = document.getElementById('service-search-clear');
+  const filterBtns = document.querySelectorAll('.js-service-filter-btn');
+  const serviceCards = document.querySelectorAll('.js-service-item');
+  const gridContainer = document.getElementById('services-grid-container');
+
+  if (!serviceCards.length) return;
+
+  // Create "No services found" message element if not present
+  let noResultsEl = document.getElementById('services-no-results');
+  if (!noResultsEl && gridContainer) {
+    noResultsEl = document.createElement('div');
+    noResultsEl.id = 'services-no-results';
+    noResultsEl.className = 'card p-8 text-center col-span-full';
+    noResultsEl.style.display = 'none';
+    noResultsEl.style.gridColumn = '1 / -1';
+    noResultsEl.innerHTML = `
+      <div class="w-16 h-16 rounded-full bg-amber-soft text-amber mx-auto flex items-center justify-center mb-4">
+        <svg width="30" height="30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
+      <h3 class="text-xl font-bold mb-2">No Locksmith Services Found</h3>
+      <p class="text-secondary text-sm mb-5 max-w-md mx-auto">No services matched your search query. Try searching for "rekey", "car key", "deadbolt", or "commercial".</p>
+      <button type="button" id="service-reset-filter-btn" class="btn btn-outline-amber btn-sm">Reset Filters &amp; View All Services</button>
+    `;
+    gridContainer.appendChild(noResultsEl);
+
+    document.getElementById('service-reset-filter-btn')?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (searchClearBtn) searchClearBtn.style.display = 'none';
+      filterBtns.forEach(b => {
+        if (b.getAttribute('data-filter') === 'all') {
+          b.classList.add('active', 'btn-outline-amber');
+          b.classList.remove('btn-secondary');
+        } else {
+          b.classList.remove('active', 'btn-outline-amber');
+          b.classList.add('btn-secondary');
+        }
+      });
+      filterServices();
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  function filterServices() {
+    const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    if (searchClearBtn) {
+      searchClearBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
+    }
+
+    const activeBtn = document.querySelector('.js-service-filter-btn.active');
+    const category = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+
+    let visibleCount = 0;
+
+    serviceCards.forEach(card => {
+      const cardCategory = (card.getAttribute('data-category') || '').toLowerCase();
+      const cardTitle = (card.querySelector('.service-card-title')?.textContent || '').toLowerCase();
+      const cardDesc = (card.querySelector('.service-card-desc')?.textContent || '').toLowerCase();
+
+      const matchesCat = category === 'all' || cardCategory.includes(category.toLowerCase());
+      const matchesQuery = !query || cardTitle.includes(query) || cardDesc.includes(query) || cardCategory.includes(query);
+
+      if (matchesCat && matchesQuery) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (noResultsEl) {
+      noResultsEl.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterServices);
+    searchInput.addEventListener('keyup', filterServices);
+  }
+
+  if (searchForm) {
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      filterServices();
+    });
+  }
+
+  if (searchClearBtn) {
+    searchClearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchClearBtn.style.display = 'none';
+      filterServices();
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'btn-outline-amber');
+        b.classList.add('btn-secondary');
+      });
+      btn.classList.add('active', 'btn-outline-amber');
+      btn.classList.remove('btn-secondary');
+      filterServices();
+    });
+  });
+
+  filterServices();
+}
+
+function initBlogListingFilter() {
+  const searchInput = document.getElementById('blog-search-input');
+  const searchForm = document.getElementById('blog-search-form');
+  const searchBtn = document.getElementById('blog-search-btn');
+  const searchClearBtn = document.getElementById('blog-search-clear');
+  const filterBtns = document.querySelectorAll('.js-blog-filter-btn');
+  const blogCards = document.querySelectorAll('.js-blog-item');
+  const gridContainer = document.getElementById('blog-grid-container');
+
+  if (!blogCards.length || !gridContainer) return;
+
+  // Create "No articles found" element if not present
+  let noResultsEl = document.getElementById('blog-no-results');
+  if (!noResultsEl) {
+    noResultsEl = document.createElement('div');
+    noResultsEl.id = 'blog-no-results';
+    noResultsEl.className = 'card p-8 text-center col-span-full';
+    noResultsEl.style.display = 'none';
+    noResultsEl.style.gridColumn = '1 / -1';
+    noResultsEl.innerHTML = `
+      <div class="w-16 h-16 rounded-full bg-amber-soft text-amber mx-auto flex items-center justify-center mb-4">
+        <svg width="30" height="30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </div>
+      <h3 class="text-xl font-bold mb-2">No Articles Found</h3>
+      <p class="text-secondary text-sm mb-5 max-w-md mx-auto">We couldn't find any security guides or tips matching your query. Try different keywords or reset your search.</p>
+      <button type="button" id="blog-reset-filter-btn" class="btn btn-outline-amber btn-sm">Reset Search &amp; View All Articles</button>
+    `;
+    gridContainer.appendChild(noResultsEl);
+
+    document.getElementById('blog-reset-filter-btn')?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      if (searchClearBtn) searchClearBtn.style.display = 'none';
+      filterBtns.forEach(b => {
+        if (b.getAttribute('data-filter') === 'all') {
+          b.classList.add('active', 'btn-outline-amber');
+          b.classList.remove('btn-secondary');
+        } else {
+          b.classList.remove('active', 'btn-outline-amber');
+          b.classList.add('btn-secondary');
+        }
+      });
+      filterBlog(false);
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  function filterBlog(isSearchAction = false) {
+    const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    if (searchClearBtn) {
+      searchClearBtn.style.display = query.length > 0 ? 'inline-flex' : 'none';
+    }
+
+    let activeBtn = document.querySelector('.js-blog-filter-btn.active');
+    let category = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+
+    // If an explicit search was triggered and the currently active category produces 0 results,
+    // automatically fall back to 'all' so users find articles across other categories
+    if (isSearchAction && query && category !== 'all') {
+      let matchesInCat = 0;
+      blogCards.forEach(card => {
+        const cardCategory = (card.getAttribute('data-category') || '').toLowerCase();
+        const cardTitle = (card.querySelector('.blog-title')?.textContent || '').toLowerCase();
+        const cardSnippet = (card.querySelector('.blog-snippet')?.textContent || '').toLowerCase();
+        if (cardCategory.includes(category.toLowerCase())) {
+          if (cardTitle.includes(query) || cardCategory.includes(query) || cardSnippet.includes(query)) {
+            matchesInCat++;
+          }
+        }
+      });
+      if (matchesInCat === 0) {
+        filterBtns.forEach(b => {
+          if (b.getAttribute('data-filter') === 'all') {
+            b.classList.add('active', 'btn-outline-amber');
+            b.classList.remove('btn-secondary');
+          } else {
+            b.classList.remove('active', 'btn-outline-amber');
+            b.classList.add('btn-secondary');
+          }
+        });
+        category = 'all';
+      }
+    }
+
+    let visibleCount = 0;
+
+    blogCards.forEach(card => {
+      const cardCategory = (card.getAttribute('data-category') || '').toLowerCase();
+      const cardTitle = (card.querySelector('.blog-title')?.textContent || '').toLowerCase();
+      const cardSnippet = (card.querySelector('.blog-snippet')?.textContent || '').toLowerCase();
+
+      // Check rich article content from BLOG_ARTICLES database if available
+      const cardLink = card.querySelector('a[href*="id="]')?.getAttribute('href') || '';
+      const articleIdMatch = cardLink.match(/id=(\d+)/);
+      let fullContent = '';
+      if (articleIdMatch && typeof BLOG_ARTICLES !== 'undefined') {
+        const art = BLOG_ARTICLES.find(a => a.id === parseInt(articleIdMatch[1], 10));
+        if (art) fullContent = (art.content || '').replace(/<[^>]*>/g, ' ').toLowerCase();
+      }
+
+      const matchesCat = category === 'all' || cardCategory.includes(category.toLowerCase());
+      const matchesQuery = !query ||
+        cardTitle.includes(query) ||
+        cardCategory.includes(query) ||
+        cardSnippet.includes(query) ||
+        fullContent.includes(query);
+
+      if (matchesCat && matchesQuery) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (noResultsEl) {
+      noResultsEl.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
+
+  // Pre-fill query or category if present in URL (e.g. blog.html?q=deadbolt or blog.html?category=Smart%20Tech)
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQ = urlParams.get('q') || urlParams.get('search');
+  const initialCat = urlParams.get('category') || urlParams.get('cat');
+
+  if (initialCat) {
+    const targetCat = initialCat.toLowerCase().trim();
+    filterBtns.forEach(btn => {
+      const filterVal = (btn.getAttribute('data-filter') || '').toLowerCase().trim();
+      if (filterVal === targetCat || filterVal.includes(targetCat) || targetCat.includes(filterVal)) {
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'btn-outline-amber');
+          b.classList.add('btn-secondary');
+        });
+        btn.classList.add('active', 'btn-outline-amber');
+        btn.classList.remove('btn-secondary');
+      }
+    });
+  }
+
+  if (initialQ && searchInput) {
+    searchInput.value = initialQ;
+    if (searchClearBtn) searchClearBtn.style.display = 'inline-flex';
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => filterBlog(false));
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        filterBlog(true);
+      }
+    });
+  }
+
+  if (searchForm) {
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      filterBlog(true);
+    });
+  }
+
+  if (searchBtn) {
+    searchBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      filterBlog(true);
+    });
+  }
+
+  if (searchClearBtn) {
+    searchClearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchClearBtn.style.display = 'none';
+      filterBlog(false);
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'btn-outline-amber');
+        b.classList.add('btn-secondary');
+      });
+      btn.classList.add('active', 'btn-outline-amber');
+      btn.classList.remove('btn-secondary');
+      filterBlog(false);
+    });
+  });
+
+  filterBlog(!!initialQ);
+}

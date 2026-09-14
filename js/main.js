@@ -146,8 +146,10 @@ function updatePublicNavbarAuth() {
     if (!navDashboardBtn && navLoginBtn && navLoginBtn.parentElement) {
         navDashboardBtn = document.createElement('a');
         navDashboardBtn.id = 'navDashboardBtn';
-        navDashboardBtn.className = 'nav-link fw-semibold text-primary-brand';
-        navLoginBtn.parentElement.insertBefore(navDashboardBtn, navLoginBtn.nextSibling);
+        navDashboardBtn.className = 'nav-link fw-semibold';
+        navDashboardBtn.textContent = 'Dashboard';
+        navDashboardBtn.href = 'dashboard.html';
+        navLoginBtn.parentElement.insertBefore(navDashboardBtn, navLoginBtn);
     }
 
     // Dynamic creation of Logout button if missing
@@ -166,33 +168,33 @@ function updatePublicNavbarAuth() {
         navLogoutBtn.addEventListener('click', handleNavLogout);
     }
 
+    // Dashboard ALWAYS points to the customer dashboard (dashboard.html) and remains visible
+    if (navDashboardBtn) {
+        navDashboardBtn.setAttribute('href', 'dashboard.html');
+        if (!navDashboardBtn.textContent.trim()) {
+            navDashboardBtn.textContent = 'Dashboard';
+        }
+        navDashboardBtn.style.display = '';
+        navDashboardBtn.classList.remove('d-none');
+    }
+
     const isLoggedIn = Boolean(user && (user.role || user.name || user.email));
 
     if (isLoggedIn) {
-        // User is logged in: Determine correct dashboard based on role
-        const targetUrl = (user.role === 'admin') ? 'admin-dashboard.html' : 'dashboard.html';
-
+        // User is logged in:
         // 1. Hide Login button
         if (navLoginBtn) {
             navLoginBtn.style.display = 'none';
             navLoginBtn.classList.add('d-none');
         }
 
-        // 2. Show Dashboard button
-        if (navDashboardBtn) {
-            navDashboardBtn.setAttribute('href', targetUrl);
-            navDashboardBtn.innerHTML = '<i class="bi bi-speedometer2 me-1"></i> Dashboard';
-            navDashboardBtn.style.display = '';
-            navDashboardBtn.classList.remove('d-none');
-        }
-
-        // 3. Hide Get Started button
+        // 2. Hide Get Started button
         if (navGetStartedBtn) {
             navGetStartedBtn.style.display = 'none';
             navGetStartedBtn.classList.add('d-none');
         }
 
-        // 4. Show green Logout button in the same position
+        // 3. Show Logout button beside Dashboard
         if (navLogoutBtn) {
             navLogoutBtn.style.display = '';
             navLogoutBtn.classList.remove('d-none');
@@ -205,20 +207,14 @@ function updatePublicNavbarAuth() {
             navLoginBtn.classList.remove('d-none');
         }
 
-        // 2. Hide Dashboard button
-        if (navDashboardBtn) {
-            navDashboardBtn.style.display = 'none';
-            navDashboardBtn.classList.add('d-none');
-        }
-
-        // 3. Show Get Started button (pointing to register.html)
+        // 2. Show Get Started button (pointing to register.html)
         if (navGetStartedBtn) {
             navGetStartedBtn.setAttribute('href', 'register.html');
             navGetStartedBtn.style.display = '';
             navGetStartedBtn.classList.remove('d-none');
         }
 
-        // 4. Hide Logout button
+        // 3. Hide Logout button
         if (navLogoutBtn) {
             navLogoutBtn.style.display = 'none';
             navLogoutBtn.classList.add('d-none');
