@@ -43,12 +43,12 @@ window.showCustomerTab = function (tabId) {
 
 // ---- THEME & RTL ON LOAD ----
 (function initThemeRtl() {
-  if (localStorage.getItem('tcDarkMode') === 'true' || localStorage.getItem('taxcoreTheme') === 'dark') {
+  if (localStorage.getItem('tcDarkMode') === 'true' || localStorage.getItem('taxcoreTheme') === 'dark' || localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-mode');
   }
-  if (localStorage.getItem('tcRtl') === 'true') {
-    document.documentElement.setAttribute('dir', 'rtl');
-  }
+  var isRtl = localStorage.getItem('tcRtl') === 'true' || localStorage.getItem('dir') === 'rtl';
+  document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', isRtl ? 'ar' : 'en');
 })();
 
 document.addEventListener('DOMContentLoaded', function () {

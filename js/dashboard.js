@@ -25,9 +25,9 @@ if (window.TaxCoreAuth) {
     document.body.classList.remove('dark-mode');
     document.documentElement.classList.remove('dark-mode');
   }
-  if (localStorage.getItem('tcRtl') === 'true' || localStorage.getItem('dir') === 'rtl') {
-    document.documentElement.setAttribute('dir', 'rtl');
-  }
+  var isRtl = localStorage.getItem('tcRtl') === 'true' || localStorage.getItem('dir') === 'rtl';
+  document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', isRtl ? 'ar' : 'en');
 })();
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -1470,26 +1470,45 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---- RTL TOGGLE ----
   var rtlBtn = document.getElementById('rtlToggleBtn');
 
-  function applyRtl(rtl) {
-    if (rtl) {
-      document.documentElement.setAttribute('dir', 'rtl');
-      localStorage.setItem('tcRtl', 'true');
-    } else {
-      document.documentElement.setAttribute('dir', 'ltr');
-      localStorage.setItem('tcRtl', 'false');
+  function updateDashboardRtlButtons(isRtl) {
+    var label = isRtl ? 'LTR' : 'RTL';
+    var ariaLabel = isRtl ? 'Switch to LTR layout' : 'Switch to RTL layout';
+    var title = isRtl ? 'Switch to LTR direction' : 'Switch to RTL direction';
+    if (rtlBtn) {
+      rtlBtn.textContent = label;
+      rtlBtn.setAttribute('aria-label', ariaLabel);
+      if (rtlBtn.hasAttribute('title')) rtlBtn.setAttribute('title', title);
     }
+    document.querySelectorAll('.rtl-toggle-btn, .topbar-rtl-btn').forEach(function (btn) {
+      btn.textContent = label;
+      btn.setAttribute('aria-label', ariaLabel);
+      if (btn.hasAttribute('title')) btn.setAttribute('title', title);
+    });
+  }
+
+  function applyRtl(rtl) {
+    var dir = rtl ? 'rtl' : 'ltr';
+    document.documentElement.setAttribute('dir', dir);
+    document.documentElement.setAttribute('lang', rtl ? 'ar' : 'en');
+    localStorage.setItem('tcRtl', rtl ? 'true' : 'false');
+    localStorage.setItem('dir', dir);
     var appearRtl = document.getElementById('appearanceRtlToggle');
     if (appearRtl) appearRtl.classList.toggle('on', rtl);
+    updateDashboardRtlButtons(rtl);
   }
 
-  if (localStorage.getItem('tcRtl') === 'true') {
-    var ar = document.getElementById('appearanceRtlToggle');
-    if (ar) ar.classList.add('on');
-  }
+  var isRtlInit = localStorage.getItem('tcRtl') === 'true' || localStorage.getItem('dir') === 'rtl';
+  updateDashboardRtlButtons(isRtlInit);
 
-  if (rtlBtn) rtlBtn.addEventListener('click', function () {
-    applyRtl(document.documentElement.getAttribute('dir') !== 'rtl');
-  });
+  var ar = document.getElementById('appearanceRtlToggle');
+  if (ar) ar.classList.toggle('on', isRtlInit);
+
+  if (rtlBtn && !rtlBtn.dataset.rtlBound) {
+    rtlBtn.dataset.rtlBound = 'true';
+    rtlBtn.addEventListener('click', function () {
+      applyRtl(document.documentElement.getAttribute('dir') !== 'rtl');
+    });
+  }
 
   window.toggleRtlFromSettings = function () {
     applyRtl(document.documentElement.getAttribute('dir') !== 'rtl');
