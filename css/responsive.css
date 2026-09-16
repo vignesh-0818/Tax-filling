@@ -408,3 +408,133 @@ img {
         left: 0 !important;
     }
 }
+
+/* ==================================================
+   FAQ Responsive Styles (Issue 8)
+================================================== */
+@media (max-width: 575.98px) {
+    .accordion-button {
+        padding: 0.85rem 0.95rem !important;
+        gap: 0.75rem !important;
+        font-size: 0.92rem !important;
+        line-height: 1.4 !important;
+    }
+
+    .accordion-button::after {
+        width: 1rem !important;
+        height: 1rem !important;
+        background-size: 1rem !important;
+    }
+
+    .accordion-body {
+        padding: 0.85rem 0.95rem !important;
+        font-size: 0.88rem !important;
+    }
+}
+
+@media (max-width: 390px) {
+    .accordion-button {
+        padding: 0.8rem 0.85rem !important;
+        gap: 0.7rem !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .accordion-button {
+        padding: 0.75rem 0.75rem !important;
+        gap: 0.65rem !important;
+        font-size: 0.86rem !important;
+    }
+    .accordion-button::after {
+        width: 0.95rem !important;
+        height: 0.95rem !important;
+        background-size: 0.95rem !important;
+    }
+}
+
+/* ==================================================
+   About Us & History Responsive (Issue 9)
+================================================== */
+@media (max-width: 767.98px) {
+    .about-story-img {
+        height: 320px !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .about-story-img {
+        height: 250px !important;
+    }
+
+    .history-timeline {
+        margin-left: 0.75rem !important;
+        padding-left: 1.25rem !important;
+    }
+
+    .history-marker {
+        width: 18px !important;
+        height: 18px !important;
+        left: calc(-1.25rem - 7.5px) !important;
+        top: 2px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .about-story-img {
+        height: 220px !important;
+    }
+
+    .history-timeline {
+        margin-left: 0.5rem !important;
+        padding-left: 1rem !important;
+    }
+
+    .history-marker {
+        width: 16px !important;
+        height: 16px !important;
+        left: calc(-1rem - 6.5px) !important;
+        top: 2px !important;
+    }
+}
+
+/* RTL Support for Timeline */
+html[dir="rtl"] .history-timeline {
+    border-left: none !important;
+    border-right: 3px solid var(--primary-brand, #10b981) !important;
+    margin-right: 1rem !important;
+    margin-left: 0 !important;
+    padding-right: 1.5rem !important;
+    padding-left: 0 !important;
+}
+
+html[dir="rtl"] .history-marker {
+    left: auto !important;
+    right: calc(-1.5rem - 8.5px) !important;
+}
+
+@media (max-width: 575.98px) {
+    html[dir="rtl"] .history-timeline {
+        margin-right: 0.75rem !important;
+        margin-left: 0 !important;
+        padding-right: 1.25rem !important;
+        padding-left: 0 !important;
+    }
+    html[dir="rtl"] .history-marker {
+        right: calc(-1.25rem - 7.5px) !important;
+        left: auto !important;
+    }
+}
+
+@media (max-width: 360px) {
+    html[dir="rtl"] .history-timeline {
+        margin-right: 0.5rem !important;
+        margin-left: 0 !important;
+        padding-right: 1rem !important;
+        padding-left: 0 !important;
+    }
+    html[dir="rtl"] .history-marker {
+        right: calc(-1rem - 6.5px) !important;
+        left: auto !important;
+    }
+}

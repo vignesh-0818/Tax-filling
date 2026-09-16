@@ -168,7 +168,7 @@ function updatePublicNavbarAuth() {
         navLogoutBtn.addEventListener('click', handleNavLogout);
     }
 
-    // Dashboard ALWAYS points to the customer dashboard (dashboard.html) and remains visible
+    // Dashboard points to the customer/student dashboard (dashboard.html) and remains visible
     if (navDashboardBtn) {
         navDashboardBtn.setAttribute('href', 'dashboard.html');
         if (!navDashboardBtn.textContent.trim()) {
@@ -252,8 +252,8 @@ function showToast(message) {
     }, 5000);
 }
 
-// Simple email validation helper
+// Strict email validation helper
 function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
+    const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])*(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])*)*\.[a-zA-Z]{2,}$/;
+    return re.test(String(email).trim());
 }

@@ -68,7 +68,7 @@
                     
                     <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
                         <button class="theme-toggle-btn" aria-label="Toggle Theme"><i class="bi bi-moon-stars"></i></button>
-                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL"><span class="rtl-text">RTL</span></button>
                         <a href="dashboard.html" class="nav-link fw-semibold" id="navDashboardBtn">Dashboard</a>
                         <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
                         <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get Started</a>
@@ -101,7 +101,7 @@
         <div class="container">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
-                    <img src="assets/images/team-1.jpg" alt="Our Story" class="img-fluid rounded-4 shadow-lg w-100 object-fit-cover" style="height: 500px;">
+                    <img src="assets/images/team-1.jpg" alt="Our Story" class="img-fluid rounded-4 shadow-lg w-100 object-fit-cover about-story-img" style="height: 500px;">
                 </div>
                 <div class="col-lg-6">
                     <span class="text-primary-brand fw-bold text-uppercase tracking-wider">Our Story</span>
@@ -165,19 +165,19 @@
             <div class="row g-4">
                 <!-- Founder -->
                 <div class="col-md-4">
-                    <div class="card card-theme text-center h-100">
+                    <div class="card card-theme text-center leadership-card h-100">
                         <div class="p-4 pb-0">
                             <img src="assets/images/team-sarah.jpg" alt="Sarah Jenkins" class="rounded-circle object-fit-cover shadow" width="150" height="150" style="object-position: top;">
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 d-flex flex-column">
                             <h5 class="fw-bold mb-1">Sarah Jenkins</h5>
                             <p class="text-primary-brand small fw-bold mb-3">Founder & CEO</p>
                             <p class="text-secondary small mb-4">Sarah has over 15 years of experience in corporate taxation and founded TaxCore to make accounting seamless.</p>
                             
-                            <div class="d-flex justify-content-center gap-2 social-icons">
-                                <a href="https://linkedin.com" target="_blank" class="text-secondary bg-light text-dark"><i class="bi bi-linkedin"></i></a>
-                                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" class="text-secondary bg-light text-dark"><i class="fa-brands fa-x-twitter"></i></a>
-                                <a href="mailto:sarah@example.com" class="text-secondary bg-light text-dark"><i class="bi bi-envelope-fill"></i></a>
+                            <div class="d-flex justify-content-center gap-2 social-icons mt-auto pt-2">
+                                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" class="text-secondary bg-light text-dark"><i class="bi bi-linkedin"></i></a>
+                                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="text-secondary bg-light text-dark"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a href="mailto:sarah@example.com" aria-label="Email" class="text-secondary bg-light text-dark"><i class="bi bi-envelope-fill"></i></a>
                             </div>
                         </div>
                     </div>
@@ -185,19 +185,19 @@
                 
                 <!-- Member 2 -->
                 <div class="col-md-4">
-                    <div class="card card-theme text-center h-100">
+                    <div class="card card-theme text-center leadership-card h-100">
                         <div class="p-4 pb-0">
                             <img src="assets/images/team-michael.jpg" alt="Michael Chang" class="rounded-circle object-fit-cover shadow" width="150" height="150" style="object-position: top;">
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 d-flex flex-column">
                             <h5 class="fw-bold mb-1">Michael Chang</h5>
                             <p class="text-primary-brand small fw-bold mb-3">Head of Audit</p>
                             <p class="text-secondary small mb-4">A former IRS auditor, Michael ensures all client filings are 100% compliant and fully optimized.</p>
                             
-                            <div class="d-flex justify-content-center gap-2 social-icons">
-                                <a href="https://linkedin.com" target="_blank" class="text-secondary bg-light text-dark"><i class="bi bi-linkedin"></i></a>
-                                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" class="text-secondary bg-light text-dark"><i class="fa-brands fa-x-twitter"></i></a>
-                                <a href="mailto:michael@example.com" class="text-secondary bg-light text-dark"><i class="bi bi-envelope-fill"></i></a>
+                            <div class="d-flex justify-content-center gap-2 social-icons mt-auto pt-2">
+                                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" class="text-secondary bg-light text-dark"><i class="bi bi-linkedin"></i></a>
+                                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="text-secondary bg-light text-dark"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a href="mailto:michael@example.com" aria-label="Email" class="text-secondary bg-light text-dark"><i class="bi bi-envelope-fill"></i></a>
                             </div>
                         </div>
                     </div>
@@ -205,19 +205,19 @@
 
                 <!-- Member 3 -->
                 <div class="col-md-4">
-                    <div class="card card-theme text-center h-100">
+                    <div class="card card-theme text-center leadership-card h-100">
                         <div class="p-4 pb-0">
                             <img src="assets/images/team-elena.jpg" alt="Elena Rodriguez" class="rounded-circle object-fit-cover shadow" width="150" height="150" style="object-position: top;">
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 d-flex flex-column">
                             <h5 class="fw-bold mb-1">Elena Rodriguez</h5>
                             <p class="text-primary-brand small fw-bold mb-3">VP of Client Success</p>
                             <p class="text-secondary small mb-4">Elena leads our support teams, ensuring every client receives rapid, personalized assistance.</p>
                             
-                            <div class="d-flex justify-content-center gap-2 social-icons">
-                                <a href="https://linkedin.com" target="_blank" class="text-secondary bg-light text-dark"><i class="bi bi-linkedin"></i></a>
-                                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" class="text-secondary bg-light text-dark"><i class="fa-brands fa-x-twitter"></i></a>
-                                <a href="mailto:elena@example.com" class="text-secondary bg-light text-dark"><i class="bi bi-envelope-fill"></i></a>
+                            <div class="d-flex justify-content-center gap-2 social-icons mt-auto pt-2">
+                                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn" class="text-secondary bg-light text-dark"><i class="bi bi-linkedin"></i></a>
+                                <a href="https://www.x.com" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="text-secondary bg-light text-dark"><i class="fa-brands fa-x-twitter"></i></a>
+                                <a href="mailto:elena@example.com" aria-label="Email" class="text-secondary bg-light text-dark"><i class="bi bi-envelope-fill"></i></a>
                             </div>
                         </div>
                     </div>
@@ -237,29 +237,29 @@
             
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="border-start border-primary border-3 ms-3 ps-4 position-relative">
+                    <div class="border-start border-primary border-3 ms-3 ps-4 position-relative history-timeline">
                         
-                        <div class="mb-5 position-relative">
-                            <div class="position-absolute bg-primary-brand rounded-circle" style="width: 20px; height: 20px; left: -1.7rem; top: 0;"></div>
+                        <div class="mb-5 position-relative history-item">
+                            <div class="position-absolute bg-primary-brand rounded-circle history-marker"></div>
                             <h5 class="fw-bold mb-1 text-primary-brand">2016</h5>
                             <h6 class="fw-bold">The Beginning</h6>
                             <p class="text-secondary">TaxCore was founded in a small office with just 3 dedicated accountants aiming to simplify taxes.</p>
                         </div>
                         
-                        <div class="mb-5 position-relative">
-                            <div class="position-absolute bg-primary-brand rounded-circle" style="width: 20px; height: 20px; left: -1.7rem; top: 0;"></div>
+                        <div class="mb-5 position-relative history-item">
+                            <div class="position-absolute bg-primary-brand rounded-circle history-marker"></div>
                             <h5 class="fw-bold mb-1 text-primary-brand">2019</h5>
                             <h6 class="fw-bold">Digital Transformation</h6>
                             <p class="text-secondary">Launched our secure client portal, allowing seamless document uploads and remote tax preparation.</p>
                         </div>
                         
-                        <div class="position-relative">
-                            <div class="position-absolute bg-primary-brand rounded-circle" style="width: 20px; height: 20px; left: -1.7rem; top: 0;"></div>
+                        <div class="position-relative history-item">
+                            <div class="position-absolute bg-primary-brand rounded-circle history-marker"></div>
                             <h5 class="fw-bold mb-1 text-primary-brand">2023</h5>
                             <h6 class="fw-bold">National Expansion</h6>
                             <p class="text-secondary">Expanded operations nationwide, serving over 5,000 clients with a team of 50+ professionals.</p>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

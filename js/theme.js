@@ -29,7 +29,7 @@ function updateRtlButtons(dir) {
 
     const rtlBtns = document.querySelectorAll('.rtl-toggle-btn, #rtlToggleBtn, .topbar-rtl-btn');
     rtlBtns.forEach(btn => {
-        btn.textContent = nextActionLabel;
+        btn.innerHTML = `<span class="rtl-text">${nextActionLabel}</span>`;
         btn.setAttribute('aria-label', nextActionAria);
         if (btn.hasAttribute('title')) {
             btn.setAttribute('title', nextActionTitle);

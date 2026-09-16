@@ -119,3 +119,29 @@ html[dir="rtl"] .start-0 {
     right: 0 !important;
     left: auto !important;
 }
+
+/* Hero Floating Card in RTL */
+html[dir="rtl"] .hero-floating-card {
+    left: auto !important;
+    right: 2rem !important;
+}
+@media (max-width: 991.98px) {
+    html[dir="rtl"] .hero-floating-card {
+        right: 1.5rem !important;
+    }
+}
+@media (max-width: 768px) {
+    html[dir="rtl"] .hero-floating-card {
+        right: 1.25rem !important;
+    }
+}
+
+/* Related service link in RTL */
+html[dir="rtl"] .related-service-link:hover,
+html[dir="rtl"] .related-service-link.active {
+    transform: translateX(-4px);
+}
+html[dir="rtl"] .related-service-link:hover .related-service-arrow {
+    transform: translateX(-3px);
+}
+

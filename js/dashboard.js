@@ -1474,13 +1474,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var label = isRtl ? 'LTR' : 'RTL';
     var ariaLabel = isRtl ? 'Switch to LTR layout' : 'Switch to RTL layout';
     var title = isRtl ? 'Switch to LTR direction' : 'Switch to RTL direction';
+    var inner = '<span class="rtl-text">' + label + '</span>';
     if (rtlBtn) {
-      rtlBtn.textContent = label;
+      rtlBtn.innerHTML = inner;
       rtlBtn.setAttribute('aria-label', ariaLabel);
       if (rtlBtn.hasAttribute('title')) rtlBtn.setAttribute('title', title);
     }
     document.querySelectorAll('.rtl-toggle-btn, .topbar-rtl-btn').forEach(function (btn) {
-      btn.textContent = label;
+      btn.innerHTML = inner;
       btn.setAttribute('aria-label', ariaLabel);
       if (btn.hasAttribute('title')) btn.setAttribute('title', title);
     });

@@ -37,7 +37,7 @@
             position: relative;
             padding: 10rem 0 8rem;
             min-height: 720px;
-            background-image: url('assets/images/hero.jpg');
+            background-image: url('assets/images/hero-business-tax-planning.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -71,6 +71,46 @@
             background-color: var(--primary-color);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Talk to an Expert button contrast in Home 2 Light Mode */
+        .hero-section-2 .btn-outline-brand {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff !important;
+            border: 2px solid #ffffff;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+            transition: all var(--transition-speed, 0.3s) ease;
+        }
+
+        .hero-section-2 .btn-outline-brand:hover {
+            background-color: #ffffff !important;
+            color: var(--primary-dark, #0d5c46) !important;
+            border-color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-section-2 .btn-outline-brand:focus-visible,
+        .hero-section-2 .btn-outline-brand:focus {
+            outline: 3px solid rgba(255, 255, 255, 0.6);
+            outline-offset: 2px;
+        }
+
+        /* Preserve Dark Mode appearance */
+        body.dark-mode .hero-section-2 .btn-outline-brand,
+        html.dark-mode .hero-section-2 .btn-outline-brand {
+            background-color: transparent;
+            color: #34d399 !important;
+            border: 1px solid #10b981 !important;
+            backdrop-filter: none;
+        }
+
+        body.dark-mode .hero-section-2 .btn-outline-brand:hover,
+        html.dark-mode .hero-section-2 .btn-outline-brand:hover {
+            background-color: #10b981 !important;
+            color: #ffffff !important;
+            border-color: #10b981 !important;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
         }
     </style>
 </head>
@@ -112,7 +152,7 @@
                     
                     <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
                         <button class="theme-toggle-btn" aria-label="Toggle Theme"><i class="bi bi-moon-stars"></i></button>
-                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL"><span class="rtl-text">RTL</span></button>
                         <a href="dashboard.html" class="nav-link fw-semibold" id="navDashboardBtn">Dashboard</a>
                         <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
                         <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get Started</a>

@@ -271,13 +271,28 @@ body.dark-mode .customer-toast {
     background: transparent;
     border: none;
     color: var(--text-primary);
-    font-size: 1.25rem;
-    display: flex;
+    font-size: 1.15rem;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    padding: 0.45rem 0.75rem;
+    border-radius: var(--border-radius-pill, 50px);
+    transition: background-color var(--transition-speed);
+    gap: 0.35rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.theme-toggle-btn {
     padding: 0.5rem;
     border-radius: 50%;
-    transition: background-color var(--transition-speed);
+}
+
+.rtl-toggle-btn i {
+    font-size: 1.15rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
 }
 
 .theme-toggle-btn:hover, .rtl-toggle-btn:hover {
@@ -334,15 +349,71 @@ body.dark-mode .customer-toast {
     justify-content: center;
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
     border-radius: 50%;
     margin-right: 0.5rem;
     transition: all var(--transition-speed);
+    text-decoration: none;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.social-icons.gap-2 a,
+.d-flex.gap-2.social-icons a {
+    margin-right: 0;
+}
+
+.social-icons a i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    line-height: 1;
+    width: 1em;
+    height: 1em;
+    margin: 0;
+    vertical-align: middle;
 }
 
 .social-icons a:hover {
     background-color: var(--primary-color);
+    color: #ffffff !important;
+}
+
+/* Leadership Card Social Alignment */
+.leadership-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.leadership-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+.leadership-card .social-icons {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.leadership-card .social-icons a {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    margin: 0 !important;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Sections */
@@ -469,6 +540,31 @@ body.dark-mode .customer-toast {
     border-radius: 1rem;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
     display: block;
+}
+
+/* Hero Floating Trust Card */
+.hero-floating-card {
+    bottom: 2rem;
+    left: 2rem;
+    transform: none !important;
+    z-index: 5;
+    max-width: calc(100% - 4rem);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15) !important;
+}
+
+@media (max-width: 991.98px) {
+    .hero-floating-card {
+        bottom: 1.5rem;
+        left: 1.5rem;
+        max-width: calc(100% - 3rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-floating-card {
+        bottom: 1.25rem;
+        left: 1.25rem;
+    }
 }
 
 /* Badge */
@@ -1296,6 +1392,44 @@ body.dark-mode .search-result-item:hover {
 
 .related-service-link:hover .related-service-arrow {
     transform: translateX(3px);
+}
+
+/* FAQ Accordion Styling */
+.accordion-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    padding: 1.1rem 1.25rem !important;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.accordion-button::after {
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+    width: 1.15rem;
+    height: 1.15rem;
+    background-size: 1.15rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Timeline / History Styling */
+.history-timeline {
+    position: relative;
+}
+
+.history-item {
+    position: relative;
+}
+
+.history-marker {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    left: calc(-1.5rem - 8.5px);
+    top: 2px;
 }
 
 /* FAQ within Service Detail */

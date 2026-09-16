@@ -66,7 +66,7 @@
                     
                     <div class="d-flex align-items-center gap-3 nav-buttons-mobile">
                         <button class="theme-toggle-btn" aria-label="Toggle Theme"><i class="bi bi-moon-stars"></i></button>
-                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL">RTL</button>
+                        <button class="rtl-toggle-btn fs-6 fw-bold" aria-label="Toggle RTL"><span class="rtl-text">RTL</span></button>
                         <a href="dashboard.html" class="nav-link fw-semibold" id="navDashboardBtn">Dashboard</a>
                         <a href="login.html" class="nav-link fw-semibold" id="navLoginBtn">Login</a>
                         <a href="register.html" class="btn btn-primary-brand btn-sm px-3" id="navGetStartedBtn">Get Started</a>
@@ -150,14 +150,14 @@
                         <form class="needs-validation" novalidate>
                             <div class="row g-3">
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-theme" required placeholder="John Doe">
-                                    <div class="invalid-feedback">Please provide your name.</div>
+                                    <label class="form-label fw-semibold" for="contactName">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-theme" id="contactName" name="name" required placeholder="John Doe" minlength="2">
+                                    <div class="invalid-feedback" id="nameFeedback">Please provide a valid name (at least 2 letters, no numbers or special characters).</div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control form-control-theme" required placeholder="john@example.com">
-                                    <div class="invalid-feedback">Please provide a valid email.</div>
+                                    <label class="form-label fw-semibold" for="contactEmail">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control form-control-theme" id="contactEmail" name="email" required placeholder="john@example.com">
+                                    <div class="invalid-feedback" id="emailFeedback">Please provide a valid email address with a complete domain (e.g. name@example.com).</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">Phone <span class="text-danger">*</span></label>

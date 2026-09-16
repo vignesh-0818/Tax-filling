@@ -100,7 +100,7 @@ const blogPosts = [
         date: "Oct 3, 2026",
         dateISO: "2026-10-03",
         readTime: "7 min read",
-        image: "assets/images/hero.jpg",
+        image: "assets/images/service-bookkeeping.jpg",
         imageAlt: "Organized bookkeeping records, spreadsheets, ledger, and financial reports",
         description: "Learn how organized bookkeeping can improve financial visibility, simplify tax preparation, and help business owners make better decisions.",
         content: `
