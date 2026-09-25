@@ -432,6 +432,33 @@
     to { opacity: 1; transform: translateX(0); }
 }
 
+/* Success Message Alert */
+.auth-success-alert {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background-color: #ecfdf5;
+    border: 1.5px solid #86efac;
+    color: #15803d;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    animation: authAlertFade 0.25s ease;
+}
+
+@keyframes authAlertFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body.dark-mode .auth-success-alert {
+    background-color: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #4ade80;
+}
+
 /* Top controls handled by .auth-top-controls in style.css */
 
 /* DARK MODE OVERRIDES FOR LOGIN */
@@ -518,6 +545,12 @@ body.dark-mode .lf-modal p { color: #94a3b8; }
     <h1 class="login-title" id="loginTitle">Customer Login</h1>
     <p class="login-subtitle" id="loginSubtitle">Access your account dashboard</p>
 
+    <!-- Success Message Alert -->
+    <div id="loginSuccessMessage" class="auth-success-alert alert alert-success align-items-center gap-2 mb-3" role="alert" style="display: none;">
+      <i class="bi bi-check-circle-fill fs-5 text-success"></i>
+      <span id="loginSuccessText">Thanks for logging in!</span>
+    </div>
+
     <!-- Tabs -->
     <div class="auth-tab-row">
       <button type="button" class="auth-tab-btn active" id="customerTab" aria-label="Customer Login tab">Customer Login</button>
@@ -525,7 +558,7 @@ body.dark-mode .lf-modal p { color: #94a3b8; }
     </div>
 
     <!-- Form -->
-    <form id="loginForm" novalidate autocomplete="off">
+    <form id="loginForm" novalidate autocomplete="off" onsubmit="event.preventDefault();">
 
       <!-- Email -->
       <label class="login-label" for="emailInput">Email Address <span style="color:#ef4444;">*</span></label>
@@ -587,8 +620,8 @@ body.dark-mode .lf-modal p { color: #94a3b8; }
 <script src="js/theme.js"></script>
 <script>
 (function () {
-  // ---- DOM READY ----
-  document.addEventListener('DOMContentLoaded', function () {
+  // ---- INITIALIZE LOGIN ----
+  function initLogin() {
     var currentMode = 'customer';
     var customerTab = document.getElementById('customerTab');
     var adminTab = document.getElementById('adminTab');
@@ -661,11 +694,33 @@ body.dark-mode .lf-modal p { color: #94a3b8; }
       passwordError.classList.remove('show');
     });
 
-    // ---- SHOW REGISTRATION SUCCESS TOAST IF REDIRECTED FROM REGISTER ----
-    var regMsg = sessionStorage.getItem('regSuccessMsg');
-    if (regMsg) {
-      showToast(regMsg);
-      sessionStorage.removeItem('regSuccessMsg');
+    // ---- SUCCESS MESSAGE TIMER & DISPLAY ----
+    var loginSuccessTimer = null;
+
+    function showLoginSuccess(message) {
+      var successEl = document.getElementById('loginSuccessMessage');
+      var successText = document.getElementById('loginSuccessText');
+      if (!successEl) return;
+
+      if (loginSuccessTimer) {
+        clearTimeout(loginSuccessTimer);
+        loginSuccessTimer = null;
+      }
+
+      if (successText) {
+        successText.textContent = message;
+      } else {
+        successEl.textContent = message;
+      }
+
+      successEl.style.display = 'flex';
+      successEl.classList.remove('d-none');
+
+      loginSuccessTimer = setTimeout(function () {
+        successEl.style.display = 'none';
+        successEl.classList.add('d-none');
+        loginSuccessTimer = null;
+      }, 5000);
     }
 
     // ---- FORM SUBMIT ----
@@ -702,7 +757,7 @@ body.dark-mode .lf-modal p { color: #94a3b8; }
       }
 
       if (ok) {
-        // Authenticate against registered accounts
+        // Authenticate against registered accounts or dummy login
         var users = window.TaxCoreAuth ? TaxCoreAuth.getUsers() : JSON.parse(localStorage.getItem('taxcoreUsers') || '[]');
         var normalizedEmail = emailVal.toLowerCase();
 
@@ -710,78 +765,92 @@ body.dark-mode .lf-modal p { color: #94a3b8; }
           return u.email && u.email.trim().toLowerCase() === normalizedEmail;
         });
 
-        if (!matchedUser) {
-          emailInput.classList.add('is-invalid');
-          emailError.textContent = 'No registered account found with this email. Please register first.';
-          emailError.classList.add('show');
-          return;
-        }
-
-        // Verify password
-        if (matchedUser.password && matchedUser.password !== passwordVal) {
+        // Verify password if matched user has registered password
+        if (matchedUser && matchedUser.password && matchedUser.password !== passwordVal) {
           passwordInput.classList.add('is-invalid');
           passwordError.textContent = 'Incorrect password. Please try again.';
           passwordError.classList.add('show');
           return;
         }
 
-        // Verify role match
-        if (currentMode === 'customer' && matchedUser.role === 'admin') {
-          emailInput.classList.add('is-invalid');
-          emailError.textContent = 'This email is registered as an Admin. Please select the Admin Login tab.';
-          emailError.classList.add('show');
-          return;
-        }
-
-        if (currentMode === 'admin' && matchedUser.role !== 'admin') {
-          emailInput.classList.add('is-invalid');
-          emailError.textContent = 'This email is registered as a Customer. Please select the Customer Login tab.';
-          emailError.classList.add('show');
-          return;
-        }
-
-        // Remember Me option
-        if (document.getElementById('rememberMe').checked) {
-          localStorage.setItem('tcRememberEmail', emailVal);
-        } else {
-          localStorage.removeItem('tcRememberEmail');
-        }
-
-        // Save authenticated session in currentUser
-        if (window.TaxCoreAuth) {
-          TaxCoreAuth.setCurrentUser(matchedUser);
-        } else {
-          localStorage.setItem('currentUser', JSON.stringify({
-            name: matchedUser.name,
-            email: matchedUser.email,
-            phone: matchedUser.phone || '',
-            role: matchedUser.role
-          }));
-          if (matchedUser.role === 'admin') {
-            localStorage.setItem('taxcoreAdminLoggedIn', 'true');
-            localStorage.removeItem('customerLoggedIn');
-          } else {
-            localStorage.setItem('customerLoggedIn', 'true');
-            localStorage.removeItem('taxcoreAdminLoggedIn');
+        // Verify role match if matched user has registered role
+        if (matchedUser) {
+          if (currentMode === 'customer' && matchedUser.role === 'admin') {
+            emailInput.classList.add('is-invalid');
+            emailError.textContent = 'This email is registered as an Admin. Please select the Admin Login tab.';
+            emailError.classList.add('show');
+            return;
+          }
+          if (currentMode === 'admin' && matchedUser.role !== 'admin') {
+            emailInput.classList.add('is-invalid');
+            emailError.textContent = 'This email is registered as a Customer. Please select the Customer Login tab.';
+            emailError.classList.add('show');
+            return;
           }
         }
 
-        // Redirect to appropriate dashboard
-        if (matchedUser.role === 'admin') {
-          window.location.href = 'admin-dashboard.html';
-        } else {
-          window.location.href = 'dashboard.html';
+        if (!matchedUser) {
+          matchedUser = {
+            name: emailVal.split('@')[0],
+            email: normalizedEmail,
+            phone: '',
+            password: passwordVal,
+            role: currentMode
+          };
+          if (window.TaxCoreAuth) {
+            TaxCoreAuth.saveUser(matchedUser);
+          } else {
+            users.push(matchedUser);
+            localStorage.setItem('taxcoreUsers', JSON.stringify(users));
+          }
         }
+
+        // Save session if TaxCoreAuth is present
+        if (window.TaxCoreAuth) {
+          TaxCoreAuth.setCurrentUser(matchedUser);
+        }
+
+        // REQUIRED LOGIN BEHAVIOR:
+        // 1. Stay on SAME login page. Do NOT redirect.
+        // 2. Show: "Thanks for logging in!" for exactly 5 seconds.
+        showLoginSuccess('Thanks for logging in!');
+
+        // 3. Clear email, password, and remember me checkbox
+        emailInput.value = '';
+        passwordInput.value = '';
+        var remMe = document.getElementById('rememberMe');
+        if (remMe) remMe.checked = false;
+        localStorage.removeItem('tcRememberEmail');
+        clearErrors();
       }
     });
 
     // Ensure inputs are completely empty on load/logout so only the placeholder is displayed
     function clearLoginInputs() {
       if (loginForm) loginForm.reset();
-      if (emailInput) emailInput.value = '';
-      if (passwordInput) passwordInput.value = '';
+      if (emailInput) {
+        emailInput.value = '';
+        emailInput.classList.remove('is-invalid');
+      }
+      if (passwordInput) {
+        passwordInput.value = '';
+        passwordInput.type = 'password';
+        passwordInput.classList.remove('is-invalid');
+      }
+      var eyeIcon = document.getElementById('eyeIcon');
+      if (eyeIcon) eyeIcon.className = 'bi bi-eye';
       var remMe = document.getElementById('rememberMe');
       if (remMe) remMe.checked = false;
+      var successEl = document.getElementById('loginSuccessMessage');
+      if (successEl) {
+        successEl.style.display = 'none';
+        successEl.classList.add('d-none');
+      }
+      if (loginSuccessTimer) {
+        clearTimeout(loginSuccessTimer);
+        loginSuccessTimer = null;
+      }
+      clearErrors();
     }
 
     clearLoginInputs();
@@ -796,7 +865,13 @@ body.dark-mode .lf-modal p { color: #94a3b8; }
       showToast('Apple sign-in is not configured yet.');
     });
 
-  }); // end DOMContentLoaded
+  } // end initLogin
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLogin);
+  } else {
+    initLogin();
+  }
 
   // ---- FORGOT MODAL FUNCTIONS (global) ----
   window.closeForgotModal = function () {

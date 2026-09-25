@@ -27,6 +27,34 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/dark-mode.css">
     <link rel="stylesheet" href="css/rtl.css">
+    <style>
+        /* Success Message Alert */
+        .auth-success-alert {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background-color: #ecfdf5;
+            border: 1.5px solid #86efac;
+            color: #15803d;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            animation: authAlertFade 0.25s ease;
+        }
+
+        @keyframes authAlertFade {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body.dark-mode .auth-success-alert {
+            background-color: rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.4);
+            color: #4ade80;
+        }
+    </style>
 </head>
 <body class="bg-secondary-theme full-height-page py-4 py-md-0 position-relative">
 
@@ -50,8 +78,14 @@
         <div class="card card-theme p-4 p-md-5 border-0 shadow-lg w-100" style="max-width: 550px;">
             <h4 class="fw-bold text-center mb-1">Create an Account</h4>
             <p class="text-secondary text-center small mb-4">Start your stress-free tax journey today.</p>
+
+            <!-- Success Message Alert -->
+            <div id="signupSuccessMessage" class="auth-success-alert alert alert-success align-items-center gap-2 mb-3" role="alert" style="display: none;">
+                <i class="bi bi-check-circle-fill fs-5 text-success"></i>
+                <span id="signupSuccessText">Thanks for signing up!</span>
+            </div>
             
-            <form class="needs-validation" id="registerForm" novalidate>
+            <form class="needs-validation" id="registerForm" novalidate autocomplete="off" onsubmit="event.preventDefault();">
                 <div class="row g-3">
                     <div class="col-12">
                         <label class="form-label fw-semibold" for="regFullName">Full Name <span class="text-danger">*</span></label>
@@ -170,19 +204,109 @@
             }
         }
 
-        function showRegToast(message) {
-            const toastEl = document.getElementById('regToast');
-            const bodyEl = document.getElementById('regToastBody');
-            if (toastEl && bodyEl) {
-                bodyEl.textContent = message;
-                const bsToast = new bootstrap.Toast(toastEl, { delay: 3500 });
-                bsToast.show();
+        // Success message timer & display (exactly 5000ms)
+        var signupSuccessTimer = null;
+
+        function showSignupSuccess(message) {
+            var successEl = document.getElementById('signupSuccessMessage');
+            var successText = document.getElementById('signupSuccessText');
+            if (!successEl) return;
+
+            if (signupSuccessTimer) {
+                clearTimeout(signupSuccessTimer);
+                signupSuccessTimer = null;
+            }
+
+            if (successText) {
+                successText.textContent = message;
             } else {
-                alert(message);
+                successEl.textContent = message;
+            }
+
+            successEl.style.display = 'flex';
+            successEl.classList.remove('d-none');
+
+            signupSuccessTimer = setTimeout(function() {
+                successEl.style.display = 'none';
+                successEl.classList.add('d-none');
+                signupSuccessTimer = null;
+            }, 5000);
+        }
+
+        function showRegToast(message) {
+            var toastEl = document.getElementById('regToast');
+            var bodyEl = document.getElementById('regToastBody');
+            if (toastEl && bodyEl && window.bootstrap && bootstrap.Toast) {
+                bodyEl.textContent = message;
+                var bsToast = new bootstrap.Toast(toastEl, { delay: 3500 });
+                bsToast.show();
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        // Form fields cleaner
+        function clearRegisterInputs() {
+            var form = document.getElementById('registerForm');
+            var fullName = document.getElementById('regFullName');
+            var email = document.getElementById('regEmail');
+            var phone = document.getElementById('regPhone');
+            var regRole = document.getElementById('regRole');
+            var password = document.getElementById('regPassword');
+            var confirmPassword = document.getElementById('regConfirmPassword');
+            var terms = document.getElementById('terms');
+
+            if (form) form.reset();
+            if (fullName) fullName.value = '';
+            if (email) email.value = '';
+            if (phone) phone.value = '';
+            if (regRole) regRole.value = 'customer';
+            if (password) {
+                password.value = '';
+                password.type = 'password';
+            }
+            if (confirmPassword) {
+                confirmPassword.value = '';
+                confirmPassword.type = 'password';
+            }
+            if (terms) terms.checked = false;
+
+            // Reset password toggle icons to eye
+            document.querySelectorAll('.auth-password-wrap .bi-eye-slash').forEach(function(icon) {
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            });
+
+            // Clear validation indicators
+            if (form) {
+                form.classList.remove('was-validated');
+                form.querySelectorAll('.is-invalid, .is-valid').forEach(function(el) {
+                    el.classList.remove('is-invalid', 'is-valid');
+                });
+            }
+
+            var cf = document.getElementById('confirmFeedback');
+            if (cf) cf.style.display = 'none';
+            var pf = document.getElementById('passFeedback');
+            if (pf) pf.style.display = 'none';
+        }
+
+        function resetRegisterPage() {
+            clearRegisterInputs();
+            var successEl = document.getElementById('signupSuccessMessage');
+            if (successEl) {
+                successEl.style.display = 'none';
+                successEl.classList.add('d-none');
+            }
+            if (signupSuccessTimer) {
+                clearTimeout(signupSuccessTimer);
+                signupSuccessTimer = null;
+            }
+        }
+
+        // Reset immediately on load and pageshow
+        resetRegisterPage();
+        window.addEventListener('pageshow', resetRegisterPage);
+
+        function initRegister() {
             const form = document.getElementById('registerForm');
             const fullName = document.getElementById('regFullName');
             const email = document.getElementById('regEmail');
@@ -320,23 +444,32 @@
                     TaxCoreAuth.clearCurrentUser();
                 } else {
                     var users = JSON.parse(localStorage.getItem('taxcoreUsers') || '[]');
-                    users.push(newUser);
+                    var existingIdx = users.findIndex(function(u) {
+                        return u.email && u.email.trim().toLowerCase() === newUser.email;
+                    });
+                    if (existingIdx >= 0) {
+                        users[existingIdx] = newUser;
+                    } else {
+                        users.push(newUser);
+                    }
                     localStorage.setItem('taxcoreUsers', JSON.stringify(users));
-                    localStorage.removeItem('currentUser');
-                    localStorage.removeItem('customerLoggedIn');
-                    localStorage.removeItem('taxcoreAdminLoggedIn');
                 }
 
-                // Set success message for login page
-                sessionStorage.setItem('regSuccessMsg', 'Account created successfully! Please log in with your credentials.');
+                // REQUIRED SIGN UP BEHAVIOR:
+                // 1. Stay on SAME signup page. Do NOT redirect.
+                // 2. Show: "Thanks for signing up!" for exactly 5 seconds.
+                showSignupSuccess('Thanks for signing up!');
 
-                // Show quick toast and redirect to login.html
-                showRegToast('Account created successfully. Redirecting to login...');
-                setTimeout(function() {
-                    window.location.href = 'login.html';
-                }, 800);
+                // 3. Clear all form fields
+                clearRegisterInputs();
             });
-        });
+        } // end initRegister
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initRegister);
+        } else {
+            initRegister();
+        }
     </script>
 </body>
 </html>
