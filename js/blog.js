@@ -258,6 +258,19 @@ function initBlogPage() {
     // Search input handlers
     if (blogSearch) {
         blogSearch.addEventListener('input', filterBlogs);
+        blogSearch.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                filterBlogs();
+            }
+        });
+    }
+    const blogSearchBtn = document.getElementById('blog-search-btn');
+    if (blogSearchBtn) {
+        blogSearchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            filterBlogs();
+        });
     }
     const sidebarSearch = document.getElementById('sidebar-blog-search');
     const sidebarSearchBtn = document.getElementById('sidebar-blog-search-btn');

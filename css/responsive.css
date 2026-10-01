@@ -46,6 +46,103 @@
     }
 }
 
+/* ==================================================
+   Navbar Adjustments for 992px to 1199.98px
+   (Tablet / Medium Desktop such as 1024px & 1100px)
+   Prevents line wrapping on 'Tax Calendar', keeps all
+   nav links evenly spaced, aligned, and right buttons visible.
+================================================== */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .navbar-theme.navbar-expand-lg .container {
+        max-width: 100% !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    .navbar-theme.navbar-expand-lg .navbar-brand {
+        font-size: 1.2rem !important;
+        gap: 0.35rem !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    .brand-logo-img {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    
+    .navbar-theme.navbar-expand-lg .navbar-nav {
+        gap: 0.05rem !important;
+        align-items: center !important;
+    }
+    
+    .navbar-theme.navbar-expand-lg .nav-link {
+        padding: 0.35rem 0.4rem !important;
+        font-size: 0.82rem !important;
+        white-space: nowrap !important;
+        line-height: 1.2 !important;
+    }
+    
+    .navbar-theme.navbar-expand-lg .nav-buttons-mobile {
+        gap: 0.3rem !important;
+        align-items: center !important;
+    }
+    
+    .navbar-theme.navbar-expand-lg .nav-buttons-mobile .nav-link {
+        padding: 0.25rem 0.35rem !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap !important;
+    }
+    
+    .navbar-theme.navbar-expand-lg .nav-buttons-mobile .btn {
+        padding: 0.25rem 0.55rem !important;
+        font-size: 0.78rem !important;
+        white-space: nowrap !important;
+    }
+    
+    .theme-toggle-btn, 
+    .rtl-toggle-btn {
+        padding: 0.25rem 0.35rem !important;
+        font-size: 0.95rem !important;
+    }
+}
+
+/* Mobile Blog Search Box */
+.blog-search-mobile {
+    width: 100%;
+}
+.blog-search-mobile .card {
+    border-radius: 12px;
+    padding: 0.85rem !important;
+}
+.blog-search-mobile .input-group {
+    display: flex !important;
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+}
+.blog-search-mobile .form-control {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    height: 46px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+.blog-search-mobile .search-button {
+    flex: 0 0 46px !important;
+    width: 46px !important;
+    height: 46px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+@media (max-width: 991.98px) {
+    .blog-search-mobile {
+        margin-bottom: 1.25rem;
+    }
+}
+
 /* Mobile specific fixes (no horizontal scroll, etc) */
 html, body {
     overflow-x: hidden;

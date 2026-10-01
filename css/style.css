@@ -242,16 +242,55 @@ body.dark-mode .customer-toast {
     transition: background-color var(--transition-speed);
 }
 
+.navbar-brand,
 .navbar-theme .navbar-brand {
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    line-height: 1;
+}
+
+body.dark-mode .navbar-brand,
+html.dark-mode .navbar-brand {
+    color: #f8fafc;
+}
+
+body.dark-mode .sidebar .navbar-brand span.text-dark,
+html.dark-mode .sidebar .navbar-brand span.text-dark {
+    color: #f8fafc !important;
+}
+
+footer .navbar-brand,
+footer a.navbar-brand {
+    color: #ffffff !important;
+}
+
+.brand-logo-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(16, 185, 129, 0.25));
+    transition: transform 0.2s ease;
+    vertical-align: middle;
+}
+
+.navbar-brand:hover .brand-logo-img,
+.sidebar-logo:hover .brand-logo-img,
+.login-logo-link:hover .brand-logo-img {
+    transform: scale(1.06);
 }
 
 .navbar-theme .nav-link {
     color: var(--text-primary);
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.85rem;
+    white-space: nowrap;
     transition: color var(--transition-speed);
 }
 
@@ -264,6 +303,67 @@ body.dark-mode .customer-toast {
     .navbar-theme .dropdown:hover > .dropdown-menu {
         display: block;
         margin-top: 0;
+    }
+}
+
+/* ==================================================
+   Desktop Navbar Centered Navigation Layout
+   Ensures the main navigation group is visually centered
+   with balanced equal space between the TaxCore brand logo
+   on the left and the right-side controls on the right.
+================================================== */
+@media (min-width: 992px) {
+    .navbar-theme.navbar-expand-lg .container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        max-width: 1440px !important;
+        width: 100% !important;
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+    }
+
+    .navbar-theme.navbar-expand-lg .navbar-collapse {
+        display: contents !important;
+    }
+
+    .navbar-theme.navbar-expand-lg .navbar-brand {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        flex-shrink: 0 !important;
+    }
+
+    .navbar-theme.navbar-expand-lg .navbar-nav {
+        margin: 0 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        white-space: nowrap !important;
+        gap: 0.15rem !important;
+        flex-shrink: 0 !important;
+    }
+
+    .navbar-theme.navbar-expand-lg .nav-link {
+        padding: 0.45rem 0.65rem !important;
+        font-size: 0.95rem !important;
+        white-space: nowrap !important;
+    }
+
+    .navbar-theme.navbar-expand-lg .nav-buttons-mobile {
+        margin: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.55rem !important;
+        flex-shrink: 0 !important;
+    }
+
+    .navbar-theme.navbar-expand-lg .nav-buttons-mobile .nav-link {
+        padding: 0.4rem 0.55rem !important;
+    }
+
+    .navbar-theme.navbar-expand-lg .nav-buttons-mobile .btn {
+        padding: 0.35rem 0.85rem !important;
+        font-size: 0.85rem !important;
     }
 }
 
@@ -514,7 +614,7 @@ body.dark-mode .customer-toast {
 .pricing-hero { background-image: url("../assets/images/pricing-hero.jpg"); }
 .calendar-hero { background-image: url("../assets/images/calendar-hero.jpg"); }
 .blog-hero { background-image: url("../assets/images/blog-hero.jpg"); }
-.contact-hero { background-image: url("../assets/images/contact-hero.jpg"); }
+.contact-hero { background-image: url("../assets/images/contact-tax-consultation.jpg"); }
 .service-details-hero { background-image: url("../assets/images/service-details-hero.jpg"); }
 .blog-details-hero { background-image: url("../assets/images/blog-details-hero.jpg"); }
 .policy-hero { background-image: url("../assets/images/inner-hero.jpg"); }
@@ -540,6 +640,83 @@ body.dark-mode .customer-toast {
     border-radius: 1rem;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
     display: block;
+}
+
+/* Service Cards with Images (Home 1 & Services Page) */
+.service-card-with-img {
+    overflow: hidden;
+    border-radius: var(--border-radius, 16px);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-card-with-img:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md, 0 10px 25px -5px rgba(0, 0, 0, 0.1));
+}
+
+.service-card-img-wrapper {
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--bg-secondary, #f1f5f9);
+    flex-shrink: 0;
+}
+
+.service-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.35s ease;
+    display: block;
+}
+
+.service-card-with-img:hover .service-card-img {
+    transform: scale(1.05);
+}
+
+/* Service Card Body & Content Spacing */
+.service-card-body {
+    padding: 1.75rem 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.service-card-with-img .icon-box {
+    width: 50px;
+    height: 50px;
+    font-size: 1.35rem;
+    margin-bottom: 1.15rem;
+    border-radius: var(--border-radius, 12px);
+    background-color: var(--primary-light, rgba(16, 185, 129, 0.12));
+    color: var(--primary-color, #10b981);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.service-card-with-img h5 {
+    margin-bottom: 0.85rem;
+    font-size: 1.25rem;
+    line-height: 1.35;
+}
+
+.icon-box-sm {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background-color: var(--primary-light, rgba(16, 185, 129, 0.12));
+    color: var(--primary-color, #10b981);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
 }
 
 /* Hero Floating Trust Card */
@@ -810,6 +987,12 @@ body.dark-mode .auth-password-wrap .auth-eye-btn:hover {
     grid-template-columns: minmax(0, 1fr) 360px;
     gap: 32px;
     align-items: start;
+}
+
+.blog-main-content {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
 }
 
 @media (max-width: 1200px) {

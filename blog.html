@@ -39,7 +39,7 @@
         <nav class="navbar navbar-expand-lg navbar-theme fixed-top">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-                    <i class="bi bi-calculator text-primary-brand"></i>
+                    <img src="assets/icons/taxcore-logo.svg" alt="TaxCore Logo" class="brand-logo-img">
                     TaxCore
                 </a>
                 
@@ -101,6 +101,20 @@
             <div class="blog-layout">
                 <!-- Main Blog Content -->
                 <div class="blog-main-content">
+                    <!-- Mobile Top Search Box (Aligned near top of page on mobile/tablet) -->
+                    <div class="blog-search-mobile d-block d-lg-none mb-4">
+                        <div class="card card-theme p-3 border-0 shadow-sm">
+                            <form class="d-flex w-100 m-0 p-0" onsubmit="event.preventDefault();">
+                                <div class="input-group w-100">
+                                    <input type="text" id="blog-search" class="form-control form-control-theme" placeholder="Search blog articles..." aria-label="Search blog articles" style="border-radius: 8px 0 0 8px; border-right: none; height: 46px;">
+                                    <button class="btn btn-primary-brand" id="blog-search-btn" type="button" aria-label="Search" style="border-radius: 0 8px 8px 0; min-width: 48px; height: 46px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="bi bi-search"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                     <!-- Category Filters -->
                     <div class="d-flex flex-wrap gap-2 mb-4">
                         <button class="btn btn-primary-brand active category-filter-btn rounded-pill px-4" data-category="all">All</button>
@@ -300,8 +314,8 @@
 
         <!-- Right: Blog Sidebar (Natural height, no vertical stretch) -->
         <aside class="blog-sidebar">
-            <!-- 1. Search Box -->
-            <div class="card card-theme blog-sidebar-card search-widget">
+            <!-- 1. Search Box (Desktop Sidebar) -->
+            <div class="card card-theme blog-sidebar-card search-widget d-none d-lg-block">
                 <h5 class="fw-bold mb-3">Search</h5>
                 <form class="d-flex w-100" onsubmit="event.preventDefault();">
                     <div class="input-group">
@@ -417,7 +431,7 @@
             <div class="row g-5">
                 <div class="col-lg-4 col-md-6">
                     <a class="navbar-brand d-flex align-items-center gap-2 mb-3 text-white fs-4 fw-bold" href="index.html">
-                        <i class="bi bi-calculator text-success"></i>
+                        <img src="assets/icons/taxcore-logo.svg" alt="TaxCore Logo" class="brand-logo-img">
                         TaxCore
                     </a>
                     <p class="text-muted mb-4 pe-lg-4">Professional tax filing, bookkeeping, and accounting solutions designed to help individuals and businesses thrive financially.</p>
