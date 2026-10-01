@@ -182,7 +182,7 @@ const servicesData = {
         slug: 'notice',
         page: 'tax-notice-assistance.html',
         heroClass: 'hero-tax-notice-assistance',
-        heroImage: 'assets/images/hero-tax-notice-assistance.jpg',
+        heroImage: 'assets/images/hero-tax-notice-assistance.png',
         image: 'assets/images/service-tax-notice-assistance.jpg',
         title: 'Tax Notice Assistance',
         titleFull: 'Expert Tax Notice Review & Resolution',

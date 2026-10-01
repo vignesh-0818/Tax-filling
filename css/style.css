@@ -627,7 +627,32 @@ footer a.navbar-brand {
 .hero-audit-support { background-image: url("../assets/images/hero-audit-support.jpg"); }
 .hero-business-tax-planning { background-image: url("../assets/images/hero-business-tax-planning.jpg"); }
 .hero-financial-reporting { background-image: url("../assets/images/hero-financial-reporting.jpg"); }
-.hero-tax-notice-assistance { background-image: url("../assets/images/hero-tax-notice-assistance.jpg"); }
+.hero-tax-notice-assistance { 
+    background-image: url("../assets/images/hero-tax-notice-assistance.png"); 
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hero-tax-notice-assistance .page-hero-overlay {
+    background: linear-gradient(180deg, rgba(5, 18, 30, 0.42) 0%, rgba(5, 18, 30, 0.54) 100%);
+}
+.hero-tax-notice-assistance h1 {
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+}
+.hero-tax-notice-assistance .breadcrumb {
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
+}
+@media (max-width: 575.98px) {
+    .hero-tax-notice-assistance h1 {
+        font-size: 25px;
+        overflow-wrap: break-word;
+        padding: 0 10px;
+    }
+    .hero-tax-notice-assistance .breadcrumb {
+        font-size: 13px;
+        padding: 0 10px;
+    }
+}
 .hero-virtual-cfo-services { background-image: url("../assets/images/hero-virtual-cfo-services.jpg"); }
 
 /* Service Detail Images */
